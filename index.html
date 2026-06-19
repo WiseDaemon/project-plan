@@ -433,7 +433,7 @@ function ensureSchema(d){
     if(!it.start)it.start=iso(addDays(base,s*7+st)); if(!it.end)it.end=iso(addDays(base,e*7+st));}));
   return d;
 }
-function persist(silent){ db.collection("app").doc("plan_v2").set(data).then(() => flashSaved(silent ? "" : "Saved remotely")).catch((e) => { console.error("Error saving:", e); try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved("Saved locally (offline)"); } catch(err){} }); }catch(e){flashSaved('In-memory only — use Export to save');}}
+function persist(silent){ db.collection("app").doc("plan_v2").set(data).then(() => flashSaved(silent ? "" : "Saved remotely")).catch((e) => { console.error("Error saving:", e); try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved("Saved locally (offline)"); } catch(err){} }); }
 let savedTimer;
 function flashSaved(msg){const el=document.getElementById('saved-tag');el.textContent=msg;clearTimeout(savedTimer);if(msg==='Saved')savedTimer=setTimeout(()=>el.textContent='',1800);}
 const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -666,6 +666,8 @@ rerender();
 </script>
 </body>
 </html>
+
+
 
 
 
