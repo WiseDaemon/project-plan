@@ -13,13 +13,11 @@
     --surface:#f7f8fa; --card:#ffffff;
     --line:#e4e8ee; --line-strong:#cfd6e0;
     --muted:#5c6b7e; --muted-2:#8794a4;
-
     --emerald:#1f9d72; --emerald-soft:#e6f4ee;
     --amber:#c4860f;  --amber-soft:#fbf1dd;
     --blue:#2f6db5;   --blue-soft:#e6eef8;
     --rust:#c0563c;   --rust-soft:#f8e8e2;
     --slate:#8794a4;  --slate-soft:#eef1f5;
-
     --shadow:0 1px 2px rgba(10,22,40,.04), 0 8px 24px rgba(10,22,40,.06);
     --radius:14px;
   }
@@ -28,7 +26,6 @@
   body{margin:0;background:var(--surface);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1040px;margin:0 auto;padding:0 22px 96px}
 
-  /* Header */
   header.top{background:var(--ink);color:#fff;position:relative;overflow:hidden;border-bottom:3px solid var(--emerald)}
   header.top .inner{max-width:1040px;margin:0 auto;padding:30px 22px 34px;position:relative;z-index:2}
   .span-motif{position:absolute;inset:0;z-index:1;opacity:.5}
@@ -47,7 +44,6 @@
   .obar{height:9px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
   .obar > span{display:block;height:100%;background:linear-gradient(90deg,var(--emerald),#3fc795);transition:width .6s cubic-bezier(.22,1,.36,1)}
 
-  /* Toolbar */
   .toolbar{position:sticky;top:0;z-index:30;background:rgba(247,248,250,.86);backdrop-filter:saturate(150%) blur(8px);border-bottom:1px solid var(--line)}
   .toolbar .inner{max-width:1040px;margin:0 auto;padding:11px 22px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
   .toolbar .right{margin-left:auto;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
@@ -59,20 +55,16 @@
   button.btn.ghost:hover{background:var(--slate-soft);color:var(--ink)}
   button.btn svg{width:15px;height:15px}
   .saved-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted-2);margin-left:4px}
-
-  /* View switch */
   .vswitch{display:inline-flex;background:var(--slate-soft);border-radius:10px;padding:3px;gap:2px}
   .vswitch button{border:none;background:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--muted);padding:6px 14px;border-radius:8px;transition:.15s}
   .vswitch button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(10,22,40,.08)}
 
-  /* Legend */
   .legend{display:flex;gap:16px;flex-wrap:wrap;padding:18px 0 6px;align-items:center}
   .legend .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
   .dot{width:11px;height:11px;border-radius:50%;flex:none}
   .dot.done{background:var(--emerald)} .dot.review{background:var(--blue)}
   .dot.in-progress{background:var(--amber)} .dot.blocked{background:var(--rust)} .dot.not-started{background:var(--slate)}
 
-  /* Board */
   .ws{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:18px;overflow:hidden}
   .ws-head{display:flex;align-items:flex-start;gap:16px;padding:20px 22px 18px;cursor:pointer}
   .ws-code{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--emerald);background:var(--emerald-soft);padding:5px 10px;border-radius:8px;flex:none;margin-top:2px}
@@ -115,7 +107,7 @@
   .delete-ws{margin-left:auto}
   .add-ws{width:100%;margin-top:18px;justify-content:center;padding:16px}
 
-  /* ---------- Timeline / trend ---------- */
+  /* Timeline / trend */
   .tl-trend{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:18px;padding:20px 22px}
   .tl-trend-head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
   .tl-trend-head h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0}
@@ -126,7 +118,6 @@
   .tl-now .delta.up{color:var(--emerald)} .tl-now .delta.flat{color:var(--muted-2)} .tl-now .delta.down{color:var(--rust)}
   .trend-svg{width:100%;height:130px;margin-top:14px;display:block}
   .trend-empty{margin-top:16px;padding:26px;border:1px dashed var(--line-strong);border-radius:12px;text-align:center;color:var(--muted);font-size:13.5px}
-
   .gantt-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:18px;overflow:hidden}
   .gantt-cap{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--line)}
   .gantt-cap h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0}
@@ -163,15 +154,69 @@
   .today{position:absolute;top:0;bottom:0;width:2px;background:var(--rust);z-index:2}
   .today::before{content:'TODAY';position:absolute;top:2px;left:4px;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;color:var(--rust);letter-spacing:.1em}
 
+  /* ---------- KPI view ---------- */
+  .kpi-objective{background:var(--ink);color:#fff;border-radius:var(--radius);padding:20px 22px;margin-top:18px;box-shadow:var(--shadow)}
+  .kpi-objective .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#7fd9b6;margin-bottom:7px}
+  .kpi-objective .o{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:500;line-height:1.4;max-width:78ch}
+  .kpi-objective .o[contenteditable]:focus{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px}
+
+  .kpi-tier{margin-top:22px}
+  .kpi-tier-h{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+  .kpi-tier-h h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;margin:0}
+  .kpi-tier-h span{font-size:12.5px;color:var(--muted-2)}
+  .kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:14px}
+  .kpi-card{background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:16px;position:relative;overflow:hidden}
+  .kpi-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--slate)}
+  .kpi-card.g::before{background:var(--emerald)} .kpi-card.a::before{background:var(--amber)} .kpi-card.r::before{background:var(--rust)}
+  .kpi-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .kpi-type{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);background:var(--slate-soft);padding:3px 7px;border-radius:5px}
+  .rag{margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px}
+  .rag.g{background:var(--emerald-soft);color:var(--emerald)} .rag.a{background:var(--amber-soft);color:var(--amber)} .rag.r{background:var(--rust-soft);color:var(--rust)} .rag.na{background:var(--slate-soft);color:var(--muted)}
+  .kpi-val{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:34px;line-height:1;letter-spacing:-.02em}
+  .kpi-val .u{font-size:16px;color:var(--muted-2);font-weight:500;margin-left:2px}
+  .kpi-spark{height:22px;margin-top:6px}
+  .kpi-name{font-weight:600;font-size:14px;margin-top:10px}
+  .kpi-decision{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.45}
+  .kpi-foot{display:flex;gap:10px;margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);flex-wrap:wrap}
+  .kpi-foot label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-2);display:flex;flex-direction:column;gap:3px}
+  .kpi-foot input{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:var(--surface);max-width:120px}
+  .kpi-foot input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+  .kpi-foot .tgt input{width:54px}
+
+  .kpi-matrix{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:22px;overflow:hidden}
+  .kpi-matrix .cap{padding:16px 20px;border-bottom:1px solid var(--line);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px}
+  table.mtx{width:100%;border-collapse:collapse;font-size:13.5px}
+  table.mtx th,table.mtx td{padding:11px 16px;text-align:left;border-bottom:1px solid var(--line)}
+  table.mtx th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);font-weight:600}
+  table.mtx td.num{font-family:'IBM Plex Mono',monospace;text-align:right}
+  table.mtx tr:last-child td{border-bottom:none}
+  table.mtx .wsname{font-weight:600}
+  .pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}
+  .pill.g{background:var(--emerald-soft);color:var(--emerald)} .pill.a{background:var(--amber-soft);color:var(--amber)} .pill.r{background:var(--rust-soft);color:var(--rust)}
+
+  details.framework{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:22px;overflow:hidden}
+  details.framework summary{padding:16px 22px;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;list-style:none;display:flex;align-items:center;gap:10px}
+  details.framework summary::-webkit-details-marker{display:none}
+  details.framework summary .cv{transition:transform .2s;color:var(--muted-2)}
+  details.framework[open] summary .cv{transform:rotate(90deg)}
+  .fw-body{padding:6px 22px 22px;border-top:1px solid var(--line)}
+  .fw-body h4{font-family:'Space Grotesk',sans-serif;font-size:13.5px;margin:18px 0 8px;color:var(--ink)}
+  .fw-body p,.fw-body li{font-size:13.5px;color:var(--muted);line-height:1.55}
+  .fw-body table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+  .fw-body th,.fw-body td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+  .fw-body th{background:var(--surface);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-2)}
+  .fw-tree{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);white-space:pre-wrap;background:var(--surface);border-radius:10px;padding:14px 16px;line-height:1.7;margin-top:6px}
+
   footer.foot{text-align:center;color:var(--muted-2);font-size:12px;font-family:'IBM Plex Mono',monospace;margin-top:38px;letter-spacing:.04em}
   .hidden{display:none!important}
 
   @media print{
-    .toolbar,.ws-actions,.icon-btn,.add-ws,.legend .lg-hint,.gantt-cap .hint,#btn-capture,.lbl-dates{display:none!important}
+    .toolbar,.ws-actions,.icon-btn,.add-ws,.legend .lg-hint,.gantt-cap .hint,#btn-capture,.lbl-dates,.kpi-foot{display:none!important}
     body{background:#fff}
-    .ws,.gantt-card,.tl-trend{break-inside:avoid;box-shadow:none;border-color:#bbb}
+    .ws,.gantt-card,.tl-trend,.kpi-card,.kpi-matrix,.kpi-objective,details.framework{break-inside:avoid;box-shadow:none;border-color:#bbb}
     header.top{border-bottom:3px solid var(--emerald)}
     .ws.collapsed .ws-body{display:block!important}
+    details.framework[open] .fw-body{display:block}
   }
   @media (max-width:640px){
     .item{grid-template-columns:1fr;gap:9px}
@@ -189,13 +234,9 @@
   <svg class="span-motif" viewBox="0 0 1040 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <g stroke="#1f9d72" stroke-width="1" fill="none" opacity="0.55">
       <path d="M-20 150 L120 60 L260 150 L400 60 L540 150 L680 60 L820 150 L960 60 L1100 150"/>
-      <path d="M-20 150 L1100 150" opacity="0.4"/>
-      <path d="M-20 120 L1100 120" opacity="0.25"/>
+      <path d="M-20 150 L1100 150" opacity="0.4"/><path d="M-20 120 L1100 120" opacity="0.25"/>
     </g>
-    <g fill="#1f9d72" opacity="0.8">
-      <circle cx="120" cy="60" r="3"/><circle cx="400" cy="60" r="3"/>
-      <circle cx="680" cy="60" r="3"/><circle cx="960" cy="60" r="3"/>
-    </g>
+    <g fill="#1f9d72" opacity="0.8"><circle cx="120" cy="60" r="3"/><circle cx="400" cy="60" r="3"/><circle cx="680" cy="60" r="3"/><circle cx="960" cy="60" r="3"/></g>
   </svg>
   <div class="inner">
     <p class="eyebrow">Programme Status · Live Plan</p>
@@ -218,26 +259,21 @@
     <div class="vswitch">
       <button id="v-board" class="active">Board</button>
       <button id="v-timeline">Timeline</button>
+      <button id="v-kpi">KPIs</button>
     </div>
-    <button class="btn primary" id="btn-save">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9l3 3v9H4z"/><path d="M7 4v4h6M7 16v-5h6v5"/></svg>
-      Save
-    </button>
+    <button class="btn primary" id="btn-save"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9l3 3v9H4z"/><path d="M7 4v4h6M7 16v-5h6v5"/></svg>Save</button>
     <span class="saved-tag" id="saved-tag"></span>
     <div class="right">
       <button class="btn ghost" id="btn-import">Import JSON</button>
       <button class="btn ghost" id="btn-export">Export JSON</button>
-      <button class="btn ghost" id="btn-print">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8V3h8v5M6 14H4v-4h12v4h-2M7 14h6v4H7z"/></svg>
-        Print / PDF
-      </button>
+      <button class="btn ghost" id="btn-print"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8V3h8v5M6 14H4v-4h12v4h-2M7 14h6v4H7z"/></svg>Print / PDF</button>
     </div>
     <input type="file" id="file-input" accept="application/json" hidden>
   </div>
 </div>
 
 <div class="wrap">
-  <!-- BOARD VIEW -->
+  <!-- BOARD -->
   <div id="board-view">
     <div class="legend">
       <div class="lg"><span class="dot done"></span>Completed</div>
@@ -248,165 +284,164 @@
       <div class="lg lg-hint" style="margin-left:auto;color:var(--muted-2)">Click any text to edit · status drop-downs roll up automatically</div>
     </div>
     <div id="board"></div>
-    <button class="btn ghost add-ws" id="btn-add-ws">
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 4v12M4 10h12"/></svg>
-      Add workstream
-    </button>
+    <button class="btn ghost add-ws" id="btn-add-ws"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 4v12M4 10h12"/></svg>Add workstream</button>
   </div>
 
-  <!-- TIMELINE VIEW -->
+  <!-- TIMELINE -->
   <div id="timeline-view" class="hidden">
     <div class="tl-trend" id="trend"></div>
     <div class="gantt-card">
-      <div class="gantt-cap">
-        <h3>Schedule (Gantt)</h3>
-        <span class="hint">Edit start/end dates per item · bars fill by % complete</span>
-      </div>
+      <div class="gantt-cap"><h3>Schedule (Gantt)</h3><span class="hint">Edit start/end dates per item · bars fill by % complete</span></div>
       <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
     </div>
   </div>
 
+  <!-- KPIs -->
+  <div id="kpi-view" class="hidden"></div>
+
   <footer class="foot">Self-contained file · edits saved to this browser · export JSON to share or back up</footer>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDEoqWzL5Nm_YEmioMRrwxKqPO0LnCOfkQ",
-  authDomain: "project-plan-sync.firebaseapp.com",
-  projectId: "project-plan-sync",
-  storageBucket: "project-plan-sync.firebasestorage.app",
-  messagingSenderId: "965545331409",
-  appId: "1:965545331409:web:5bb1a8123c54d0e27053f0"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-</script>
-<script>
-/* ---------------- Status model ---------------- */
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script>const firebaseConfig = {apiKey: "AIzaSyDEoqWzL5Nm_YEmioMRrwxKqPO0LnCOfkQ",authDomain: "project-plan-sync.firebaseapp.com",projectId: "project-plan-sync",storageBucket: "project-plan-sync.firebasestorage.app",messagingSenderId: "965545331409",appId: "1:965545331409:web:5bb1a8123c54d0e27053f0"};firebase.initializeApp(firebaseConfig);const db = firebase.firestore();</script><script>/* ---------------- Status model ---------------- */
 const STATUS = {
-  'done':        {label:'Completed',      weight:1.00},
-  'review':      {label:'Under Review',   weight:0.75},
-  'in-progress': {label:'In Progress',    weight:0.40},
-  'blocked':     {label:'Awaiting Inputs',weight:0.10},
-  'not-started': {label:'Not Started',    weight:0.00},
+  'done':{label:'Completed',weight:1.00}, 'review':{label:'Under Review',weight:0.75},
+  'in-progress':{label:'In Progress',weight:0.40}, 'blocked':{label:'Awaiting Inputs',weight:0.10},
+  'not-started':{label:'Not Started',weight:0.00},
 };
-const STORAGE_KEY = 'workflow-programme-plan-v1';
-const WK = 64;            /* px per week */
-const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const STORAGE_KEY='workflow-programme-plan-v1';
+const WK=64;
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 /* ---------------- Date helpers ---------------- */
-const pad = n => String(n).padStart(2,'0');
-const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const pd  = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
-const addDays = (d,n)=>{ const x=new Date(d); x.setDate(x.getDate()+n); return x; };
-const diffDays = (a,b)=>Math.round((b - a)/86400000);
-function mondayOf(d){ const x=new Date(d); const k=(x.getDay()+6)%7; x.setDate(x.getDate()-k); x.setHours(0,0,0,0); return x; }
-const shortDate = d => `${d.getDate()} ${MON[d.getMonth()]}`;
-const today = ()=>{ const t=new Date(); t.setHours(0,0,0,0); return t; };
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const pd=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const diffDays=(a,b)=>Math.round((b-a)/86400000);
+function mondayOf(d){const x=new Date(d);const k=(x.getDay()+6)%7;x.setDate(x.getDate()-k);x.setHours(0,0,0,0);return x;}
+const shortDate=d=>`${d.getDate()} ${MON[d.getMonth()]}`;
+const today=()=>{const t=new Date();t.setHours(0,0,0,0);return t;};
 
-/* ---------------- Seed data ---------------- */
-const SEED = {
+/* ---------------- Computation primitives ---------------- */
+const allItems=()=>data.workstreams.flatMap(w=>w.items);
+const byStatus=s=>allItems().filter(i=>i.status===s).length;
+function wsProgress(ws){if(!ws.items.length)return 0;return ws.items.reduce((a,it)=>a+(STATUS[it.status]?.weight??0),0)/ws.items.length;}
+function overallProgress(){const it=allItems();return it.length?it.reduce((a,x)=>a+(STATUS[x.status]?.weight??0),0)/it.length:0;}
+function countDone(ws){return ws.items.filter(i=>i.status==='done').length;}
+function pctDone(){const t=allItems().length;return t?Math.round(byStatus('done')/t*100):0;}
+function overdueItems(){const t=today();return allItems().filter(i=>i.status!=='done'&&pd(i.end)<t);}
+function dueWithin(days){const t=today();return allItems().filter(i=>{if(i.status==='done')return false;const d=diffDays(t,pd(i.end));return d>=0&&d<=days;});}
+function avgCycle(){const it=allItems();if(!it.length)return 0;return Math.round(it.reduce((a,i)=>a+diffDays(pd(i.start),pd(i.end)),0)/it.length);}
+
+/* ---------------- KPI definitions ---------------- */
+/* dir: 'up' higher-better, 'down' lower-better, null informational (no RAG) */
+const KPIS=[
+  {id:'deploy', tier:'Outcome', type:'Lagging', label:'Deployment Rate', unit:'%', dir:'up', target:70, owner:'Programme Lead', spark:'deploy',
+   decision:'Go / no-go on execution-team onboarding — are workflows actually live in production?',
+   calc:()=>pctDone()},
+  {id:'readiness', tier:'Outcome', type:'Lagging', label:'Programme Readiness Index', unit:'%', dir:'up', target:80, owner:'Programme Lead', spark:'readiness',
+   decision:'Overall trajectory toward full deployment; steering-committee headline.',
+   calc:()=>Math.round(overallProgress()*100)},
+
+  {id:'blocked', tier:'Driver', type:'Driver', label:'Business-Input Bottleneck', unit:'%', dir:'down', target:10, owner:'Business SPOC',
+   decision:'Escalate to business stakeholders — share of workflows stalled awaiting inputs.',
+   calc:()=>{const t=allItems().length;return t?Math.round(byStatus('blocked')/t*100):0;}},
+  {id:'approval', tier:'Driver', type:'Driver', label:'In Approval / UAT', unit:'', dir:null, owner:'QA / UAT Lead',
+   decision:'Where to point UAT and sign-off effort — workflows one step from going live.',
+   calc:()=>byStatus('review')},
+  {id:'pipeline', tier:'Driver', type:'Driver', label:'Pipeline Maturity', unit:'%', dir:'up', target:75, owner:'Programme Lead',
+   decision:'How much scope has reached approval-stage or beyond (review + live).',
+   calc:()=>{const t=allItems().length;return t?Math.round((byStatus('review')+byStatus('done'))/t*100):0;}},
+
+  {id:'adherence', tier:'Schedule', type:'Driver', label:'Schedule Adherence', unit:'%', dir:'up', target:90, owner:'PMO',
+   decision:'Replan / recover decision — share of workflows not past their planned end date.',
+   calc:()=>{const t=allItems().length;return t?Math.round((t-overdueItems().length)/t*100):0;}},
+  {id:'overdue', tier:'Schedule', type:'Lagging', label:'Overdue Workflows', unit:'', dir:'down', target:0, owner:'PMO',
+   decision:'Immediate escalation list — workflows past planned end and not yet live.',
+   calc:()=>overdueItems().length},
+  {id:'cycle', tier:'Schedule', type:'Driver', label:'Avg Planned Cycle', unit:'d', dir:null, owner:'PMO',
+   decision:'Capacity planning — average planned build-to-deploy duration per workflow.',
+   calc:()=>avgCycle()},
+
+  {id:'building', tier:'Leading', type:'Leading', label:'In Active Build', unit:'', dir:null, owner:'Delivery Lead',
+   decision:'Throughput signal — workflows currently being built.',
+   calc:()=>byStatus('in-progress')},
+  {id:'due14', tier:'Leading', type:'Leading', label:'Due Next 14 Days', unit:'', dir:null, owner:'Delivery Lead',
+   decision:'Near-term go-lives to pre-clear — workflows scheduled to finish within two weeks.',
+   calc:()=>dueWithin(14).length},
+
+  {id:'adoption', tier:'Outcome', type:'Lagging', label:'Workflow Adoption', unit:'%', dir:'up', target:80, owner:'Field Ops', instrument:true,
+   decision:'Value realisation — share of field sites/tasks actually executed through live workflows.',
+   calc:()=>null},
+];
+const TIER_DESC={
+  'Outcome':'Did we deliver and is it used? — lagging results.',
+  'Driver':'What moves the outcome? — manage these weekly.',
+  'Schedule':'Are we on time? — recover before it bites.',
+  'Leading':'What is happening now? — early signals.'
+};
+
+/* ---------------- Seed ---------------- */
+const SEED={
   meta:{title:'Infrastructure Workflow Programme',
     sub:'Workflow build & deployment tracker across Transmission Line, Jio Tower Solarisation, and Diesel Elimination workstreams.',
-    owner:'Programme Office', updated:'19 Jun 2026'},
-  snapshots:[],
+    owner:'Programme Office', updated:'19 Jun 2026',
+    kpiObjective:'Build and deploy production-grade construction & quality digital workflows across all programme scopes, on schedule, so execution teams can be onboarded onto the platform and field operations run on it.'},
+  snapshots:[], kpis:{},
   workstreams:[
     {code:'1', name:'Transmission Line', items:[
-      {code:'1.1', name:'Foundation — Construction Workflow', status:'review',
-       note:'Workflow approved. Routing logic incorporated to send sites to Pile or Open-Cast foundation flows based on ROW availability and Construction Manager confirmation. Final UAT pending before execution-team onboarding.'},
-      {code:'1.1', name:'Foundation — Quality & Quantity Workflow', status:'in-progress',
-       note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
-      {code:'1.2', name:'Erection — Construction Workflow', status:'blocked',
-       note:'Workflow design pending; awaiting detailed business inputs.'},
-      {code:'1.2', name:'Erection — Quality & Quantity Workflow', status:'in-progress',
-       note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
-      {code:'1.3', name:'Stringing — Construction Workflow', status:'blocked',
-       note:'Workflow creation pending; awaiting business team inputs.'},
-      {code:'1.3', name:'Stringing — Quality & Quantity Workflow', status:'in-progress',
-       note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
-      {code:'1.4', name:'Earthing — Construction Workflow', status:'review',
-       note:'Workflow configured and submitted for final business approval.'},
-      {code:'1.4', name:'Earthing — Transmission Logic in Forms', status:'done',
-       note:'Transmission logic finalised in forms.'},
+      {code:'1.1', name:'Foundation — Construction Workflow', status:'review', note:'Workflow approved. Routing logic incorporated to send sites to Pile or Open-Cast foundation flows based on ROW availability and Construction Manager confirmation. Final UAT pending before execution-team onboarding.'},
+      {code:'1.1', name:'Foundation — Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.2', name:'Erection — Construction Workflow', status:'blocked', note:'Workflow design pending; awaiting detailed business inputs.'},
+      {code:'1.2', name:'Erection — Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.3', name:'Stringing — Construction Workflow', status:'blocked', note:'Workflow creation pending; awaiting business team inputs.'},
+      {code:'1.3', name:'Stringing — Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.4', name:'Earthing — Construction Workflow', status:'review', note:'Workflow configured and submitted for final business approval.'},
+      {code:'1.4', name:'Earthing — Transmission Logic in Forms', status:'done', note:'Transmission logic finalised in forms.'},
     ]},
     {code:'2', name:'Jio Tower Solarisation', items:[
       {code:'2.1', name:'Survey Workflow', status:'done', note:'Survey workflow finalised, tested, and deployed.'},
       {code:'2.2', name:'Design Workflow', status:'done', note:'Design workflow finalised and implemented.'},
-      {code:'2.3', name:'Execution Workflow', status:'done',
-       note:'Execution workflow finalised and implemented, including recent field enhancements.\n• Updated execution dashboards.\n• Raft and pile options implemented in forms across all states.'},
+      {code:'2.3', name:'Execution Workflow', status:'done', note:'Execution workflow finalised and implemented, including recent field enhancements.\n• Updated execution dashboards.\n• Raft and pile options implemented in forms across all states.'},
       {code:'2.4', name:'Consolidated Dashboard', status:'done', note:'End-to-end visibility dashboard developed across survey, design, and execution stages.'},
       {code:'2.5', name:'Barcode Scanning Feature', status:'in-progress', note:'Development in progress. Expected in the upcoming platform release.'},
     ]},
     {code:'3', name:'Diesel Elimination for Jio Tower', items:[
       {code:'3.1', name:'Survey Workflow', status:'review', note:'Survey workflow under finalisation and stakeholder review.'},
       {code:'3.2', name:'Execution Workflow', status:'review', note:'Execution workflow under finalisation; pending business sign-off.'},
+      {code:'3.3', name:'Creation of Assets', status:'done', note:'30/30 Completed'},
+      {code:'3.4', name:'Creation of Classes', status:'done', note:'26/30'},
+      {code:'3.5', name:'Creation of Features', status:'in-progress', note:'0/30'},
+      {code:'3.6', name:'Form Assignment to Respective Asset Features', status:'in-progress', note:'0/30'},
+      {code:'3.7', name:'Site Onboarding via GeoJSON Files', status:'in-progress', note:'24/30'},
     ]},
   ]
 };
 
 /* ---------------- State ---------------- */
-let view = 'board';
-let data = structuredClone(SEED);
-let isFirstLoad = true;
-
-db.collection('app').doc('plan').onSnapshot((doc) => {
-  if (doc.exists) {
-    data = ensureSchema(doc.data());
-  } else {
-    data = ensureSchema(structuredClone(SEED));
-    db.collection('app').doc('plan').set(data);
-  }
-  rerender();
-  if (isFirstLoad) {
-    flashSaved('Synced remotely');
-    isFirstLoad = false;
-  }
-}, (error) => {
-  console.error("Firestore error:", error);
-  try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) data=ensureSchema(JSON.parse(raw)); } catch(e){}
-  rerender();
-});
-
-/* fill missing schedule + snapshots so old saves still work */
+let view='board';
+let data=structuredClone(SEED); let isFirstLoad = true; db.collection("app").doc("plan").onSnapshot((doc) => { if (doc.exists) { data = ensureSchema(doc.data()); } else { data = ensureSchema(structuredClone(SEED)); db.collection("app").doc("plan").set(data); } rerender(); if (isFirstLoad) { flashSaved("Synced remotely"); isFirstLoad = false; } }, (error) => { console.error("Firestore error:", error); try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) data=ensureSchema(JSON.parse(raw)); } catch(e){} rerender(); });catch(e){}return structuredClone(SEED);}
 function ensureSchema(d){
-  if(!d.snapshots) d.snapshots=[];
-  const base = mondayOf(new Date(2026,4,4)); // Mon 4 May 2026 — programme anchor
-  const plan = {'done':[0,5],'review':[4,8],'in-progress':[5,10],'blocked':[8,13],'not-started':[9,14]};
-  d.workstreams.forEach(ws=>ws.items.forEach((it,ii)=>{
-    const [s,e] = plan[it.status] || [5,9];
-    const stagger = ii % 3;
-    if(!it.start) it.start = iso(addDays(base, s*7 + stagger));
-    if(!it.end)   it.end   = iso(addDays(base, e*7 + stagger));
-  }));
+  if(!d.snapshots)d.snapshots=[];
+  if(!d.kpis)d.kpis={};
+  if(!d.meta)d.meta={};
+  if(!d.meta.kpiObjective)d.meta.kpiObjective=SEED.meta.kpiObjective;
+  KPIS.forEach(k=>{ if(!d.kpis[k.id])d.kpis[k.id]={}; if(d.kpis[k.id].target==null&&k.target!=null)d.kpis[k.id].target=k.target; if(!d.kpis[k.id].owner)d.kpis[k.id].owner=k.owner; });
+  const base=mondayOf(new Date(2026,4,4));
+  const plan={'done':[0,5],'review':[4,8],'in-progress':[5,10],'blocked':[8,13],'not-started':[9,14]};
+  d.workstreams.forEach(ws=>ws.items.forEach((it,ii)=>{const[s,e]=plan[it.status]||[5,9];const st=ii%3;
+    if(!it.start)it.start=iso(addDays(base,s*7+st)); if(!it.end)it.end=iso(addDays(base,e*7+st));}));
   return d;
 }
-function persist(silent){
-  db.collection('app').doc('plan').set(data)
-    .then(() => flashSaved(silent ? '' : 'Saved remotely'))
-    .catch((e) => {
-       console.error("Error saving:", e);
-       try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved('Saved locally (offline)'); } catch(err){}
-    });
-}
+function persist(silent){ db.collection("app").doc("plan").set(data).then(() => flashSaved(silent ? "" : "Saved remotely")).catch((e) => { console.error("Error saving:", e); try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved("Saved locally (offline)"); } catch(err){} }); }catch(e){flashSaved('In-memory only — use Export to save');}}
 let savedTimer;
-function flashSaved(msg){
-  const el=document.getElementById('saved-tag'); el.textContent=msg;
-  clearTimeout(savedTimer); if(msg==='Saved') savedTimer=setTimeout(()=>el.textContent='',1800);
-}
+function flashSaved(msg){const el=document.getElementById('saved-tag');el.textContent=msg;clearTimeout(savedTimer);if(msg==='Saved')savedTimer=setTimeout(()=>el.textContent='',1800);}
+const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-/* ---------------- Computation ---------------- */
-const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-const allItems = ()=>data.workstreams.flatMap(w=>w.items);
-function wsProgress(ws){ if(!ws.items.length) return 0; return ws.items.reduce((a,it)=>a+(STATUS[it.status]?.weight??0),0)/ws.items.length; }
-function overallProgress(){ const it=allItems(); return it.length? it.reduce((a,x)=>a+(STATUS[x.status]?.weight??0),0)/it.length : 0; }
-function countDone(ws){ return ws.items.filter(i=>i.status==='done').length; }
-
-/* ---------------- Top-level render ---------------- */
-function rerender(){ updateHeader(); view==='board' ? renderBoard() : renderTimeline(); }
+/* ---------------- Top-level ---------------- */
+function rerender(){updateHeader(); if(view==='board')renderBoard(); else if(view==='timeline')renderTimeline(); else renderKPI();}
 function updateHeader(){
-  document.querySelectorAll('[data-meta]').forEach(el=>{ const k=el.dataset.meta; if(el.textContent!==(data.meta[k]||'')) el.textContent=data.meta[k]||''; });
+  document.querySelectorAll('[data-meta]').forEach(el=>{const k=el.dataset.meta;if(el.textContent!==(data.meta[k]||''))el.textContent=data.meta[k]||'';});
   document.getElementById('ws-count').textContent=data.workstreams.length;
   document.getElementById('item-count').textContent=allItems().length;
   const ov=Math.round(overallProgress()*100);
@@ -414,35 +449,28 @@ function updateHeader(){
   document.getElementById('overall-bar').style.width=ov+'%';
 }
 
-/* ---------------- Board view ---------------- */
-const board = document.getElementById('board');
+/* ---------------- Board ---------------- */
+const board=document.getElementById('board');
 function renderBoard(){
   board.innerHTML='';
   data.workstreams.forEach((ws,wi)=>{
     const pct=Math.round(wsProgress(ws)*100);
-    const card=document.createElement('section');
-    card.className='ws'+(ws.collapsed?' collapsed':'');
+    const card=document.createElement('section');card.className='ws'+(ws.collapsed?' collapsed':'');
     const segs=ws.items.map(it=>`<span class="seg ${it.status}" title="${esc(it.name)}"></span>`).join('')||'<span class="seg not-started"></span>';
     card.innerHTML=`
       <div class="ws-head" data-toggle="${wi}">
         <span class="ws-code" contenteditable="true" data-ws="${wi}" data-field="code">${esc(ws.code)}</span>
-        <div class="ws-titlewrap">
-          <h2 class="ws-name" contenteditable="true" data-ws="${wi}" data-field="name">${esc(ws.name)}</h2>
+        <div class="ws-titlewrap"><h2 class="ws-name" contenteditable="true" data-ws="${wi}" data-field="name">${esc(ws.name)}</h2>
           <div class="ws-meta">${ws.items.length} item${ws.items.length!==1?'s':''} · ${countDone(ws)} completed</div>
-          <div class="rail">${segs}</div>
-        </div>
-        <div class="ws-right">
-          <span class="ws-pct">${pct}%</span>
-          <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg>
-        </div>
+          <div class="rail">${segs}</div></div>
+        <div class="ws-right"><span class="ws-pct">${pct}%</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg></div>
       </div>
-      <div class="ws-body">
-        ${ws.items.map((it,ii)=>itemHTML(wi,ii,it)).join('')}
+      <div class="ws-body">${ws.items.map((it,ii)=>itemHTML(wi,ii,it)).join('')}
         <div class="ws-actions">
           <button class="add-link" data-add-item="${wi}"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 4v12M4 10h12"/></svg>Add item</button>
           <button class="add-link delete-ws" data-del-ws="${wi}">Remove workstream</button>
-        </div>
-      </div>`;
+        </div></div>`;
     board.appendChild(card);
   });
   bindBoard();
@@ -451,191 +479,191 @@ function itemHTML(wi,ii,it){
   const opts=Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===it.status?'selected':''}>${v.label}</option>`).join('');
   return `<div class="item">
       <div class="item-code" contenteditable="true" data-item="${wi}.${ii}" data-field="code">${esc(it.code)}</div>
-      <div class="item-main">
-        <p class="item-name" contenteditable="true" data-item="${wi}.${ii}" data-field="name">${esc(it.name)}</p>
-        <p class="item-note" contenteditable="true" data-item="${wi}.${ii}" data-field="note">${esc(it.note)}</p>
-      </div>
-      <div class="item-ctrls">
-        <select class="status ${it.status}" data-item="${wi}.${ii}">${opts}</select>
-        <button class="icon-btn" data-del-item="${wi}.${ii}" title="Remove item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 6h10M8 6V4h4v2M6 6l1 10h6l1-10"/></svg></button>
-      </div>
+      <div class="item-main"><p class="item-name" contenteditable="true" data-item="${wi}.${ii}" data-field="name">${esc(it.name)}</p>
+        <p class="item-note" contenteditable="true" data-item="${wi}.${ii}" data-field="note">${esc(it.note)}</p></div>
+      <div class="item-ctrls"><select class="status ${it.status}" data-item="${wi}.${ii}">${opts}</select>
+        <button class="icon-btn" data-del-item="${wi}.${ii}" title="Remove item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 6h10M8 6V4h4v2M6 6l1 10h6l1-10"/></svg></button></div>
     </div>`;
 }
 function bindBoard(){
-  board.querySelectorAll('[data-toggle]').forEach(h=>h.addEventListener('click',e=>{
-    if(e.target.closest('[contenteditable]')) return;
-    const wi=+h.dataset.toggle; data.workstreams[wi].collapsed=!data.workstreams[wi].collapsed;
-    h.closest('.ws').classList.toggle('collapsed');
-  }));
-  board.querySelectorAll('select.status').forEach(sel=>sel.addEventListener('change',()=>{
-    const [wi,ii]=sel.dataset.item.split('.').map(Number);
-    data.workstreams[wi].items[ii].status=sel.value; rerender(); persist(true);
-  }));
-  board.querySelectorAll('[data-ws]').forEach(el=>{
-    el.addEventListener('blur',()=>{ const wi=+el.dataset.ws; data.workstreams[wi][el.dataset.field]=el.textContent.trim(); persist(true); });
-    stopEnter(el);
-  });
-  board.querySelectorAll('[data-item][data-field]').forEach(el=>{
-    el.addEventListener('blur',()=>{ const [wi,ii]=el.dataset.item.split('.').map(Number);
-      data.workstreams[wi].items[ii][el.dataset.field]= el.dataset.field==='note'? el.innerText.replace(/\u00a0/g,' '): el.textContent.trim();
-      persist(true); });
-    if(el.dataset.field!=='note') stopEnter(el);
-  });
-  board.querySelectorAll('[data-add-item]').forEach(b=>b.onclick=()=>{ const wi=+b.dataset.addItem;
-    const t=today(); data.workstreams[wi].items.push({code:'',name:'New item',status:'not-started',note:'',start:iso(mondayOf(t)),end:iso(addDays(mondayOf(t),14))});
-    rerender(); persist(true); });
-  board.querySelectorAll('[data-del-item]').forEach(b=>b.onclick=()=>{ const [wi,ii]=b.dataset.delItem.split('.').map(Number);
-    if(confirm('Remove this item?')){ data.workstreams[wi].items.splice(ii,1); rerender(); persist(true);} });
-  board.querySelectorAll('[data-del-ws]').forEach(b=>b.onclick=()=>{ const wi=+b.dataset.delWs;
-    if(confirm('Remove this entire workstream?')){ data.workstreams.splice(wi,1); rerender(); persist(true);} });
+  board.querySelectorAll('[data-toggle]').forEach(h=>h.addEventListener('click',e=>{if(e.target.closest('[contenteditable]'))return;const wi=+h.dataset.toggle;data.workstreams[wi].collapsed=!data.workstreams[wi].collapsed;h.closest('.ws').classList.toggle('collapsed');}));
+  board.querySelectorAll('select.status').forEach(sel=>sel.addEventListener('change',()=>{const[wi,ii]=sel.dataset.item.split('.').map(Number);data.workstreams[wi].items[ii].status=sel.value;rerender();persist(true);}));
+  board.querySelectorAll('[data-ws]').forEach(el=>{el.addEventListener('blur',()=>{const wi=+el.dataset.ws;data.workstreams[wi][el.dataset.field]=el.textContent.trim();persist(true);});stopEnter(el);});
+  board.querySelectorAll('[data-item][data-field]').forEach(el=>{el.addEventListener('blur',()=>{const[wi,ii]=el.dataset.item.split('.').map(Number);data.workstreams[wi].items[ii][el.dataset.field]=el.dataset.field==='note'?el.innerText.replace(/\u00a0/g,' '):el.textContent.trim();persist(true);});if(el.dataset.field!=='note')stopEnter(el);});
+  board.querySelectorAll('[data-add-item]').forEach(b=>b.onclick=()=>{const wi=+b.dataset.addItem;const t=today();data.workstreams[wi].items.push({code:'',name:'New item',status:'not-started',note:'',start:iso(mondayOf(t)),end:iso(addDays(mondayOf(t),14))});rerender();persist(true);});
+  board.querySelectorAll('[data-del-item]').forEach(b=>b.onclick=()=>{const[wi,ii]=b.dataset.delItem.split('.').map(Number);if(confirm('Remove this item?')){data.workstreams[wi].items.splice(ii,1);rerender();persist(true);}});
+  board.querySelectorAll('[data-del-ws]').forEach(b=>b.onclick=()=>{const wi=+b.dataset.delWs;if(confirm('Remove this entire workstream?')){data.workstreams.splice(wi,1);rerender();persist(true);}});
 }
-function stopEnter(el){ el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); }}); }
+function stopEnter(el){el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();el.blur();}});}
 
-/* ---------------- Timeline view ---------------- */
-function timelineRange(){
-  const items=allItems(); const t=today();
-  let starts=items.map(i=>pd(i.start)).concat(t);
-  let ends=items.map(i=>pd(i.end)).concat(t);
-  let min=new Date(Math.min(...starts)), max=new Date(Math.max(...ends));
-  const start=mondayOf(min);
-  const end=addDays(mondayOf(max),7);
-  const weeks=Math.max(1,Math.round(diffDays(start,end)/7));
-  return {start,weeks};
-}
-function renderTimeline(){ renderTrend(); renderGantt(); }
-
+/* ---------------- Timeline ---------------- */
+function timelineRange(){const items=allItems();const t=today();let starts=items.map(i=>pd(i.start)).concat(t),ends=items.map(i=>pd(i.end)).concat(t);let min=new Date(Math.min(...starts)),max=new Date(Math.max(...ends));const start=mondayOf(min),end=addDays(mondayOf(max),7);const weeks=Math.max(1,Math.round(diffDays(start,end)/7));return{start,weeks};}
+function renderTimeline(){renderTrend();renderGantt();}
 function renderGantt(){
-  const g=document.getElementById('gantt');
-  const {start,weeks}=timelineRange();
-  const W=weeks*WK;
-  const px = d => diffDays(start, (d instanceof Date)?d:pd(d))/7*WK;
-  const todayPx=px(today());
-
-  // header
-  let ticks='';
-  for(let i=0;i<weeks;i++){ const m=addDays(start,i*7);
-    ticks+=`<div class="wk-tick" style="left:${i*WK}px;width:${WK}px"><div class="wk-n">W${i+1}</div><div class="wk-d">${shortDate(m)}</div></div>`; }
-  let html=`<div class="grow head"><div class="lbl"><div class="lbl-name" style="color:var(--muted-2);font-size:12px">Workstream / Item</div></div>
-    <div class="track" style="--wk:${WK}px;width:${W}px">${ticks}<div class="today" style="left:${todayPx}px"></div></div></div>`;
-
+  const g=document.getElementById('gantt');const{start,weeks}=timelineRange();const W=weeks*WK;
+  const px=d=>diffDays(start,(d instanceof Date)?d:pd(d))/7*WK;const todayPx=px(today());
+  let ticks='';for(let i=0;i<weeks;i++){const m=addDays(start,i*7);ticks+=`<div class="wk-tick" style="left:${i*WK}px;width:${WK}px"><div class="wk-n">W${i+1}</div><div class="wk-d">${shortDate(m)}</div></div>`;}
+  let html=`<div class="grow head"><div class="lbl"><div class="lbl-name" style="color:var(--muted-2);font-size:12px">Workstream / Item</div></div><div class="track" style="--wk:${WK}px;width:${W}px">${ticks}<div class="today" style="left:${todayPx}px"></div></div></div>`;
   data.workstreams.forEach((ws,wi)=>{
     const s=ws.items.length?Math.min(...ws.items.map(i=>pd(i.start).getTime())):start.getTime();
     const e=ws.items.length?Math.max(...ws.items.map(i=>pd(i.end).getTime())):start.getTime();
-    const gl=px(new Date(s)), gw=Math.max(px(new Date(e))-gl,8);
-    html+=`<div class="grow group"><div class="lbl"><span class="lbl-code">${esc(ws.code)}</span><div class="lbl-name">${esc(ws.name)}</div></div>
-      <div class="track" style="--wk:${WK}px;width:${W}px"><div class="gbar" style="left:${gl}px;width:${gw}px"></div><div class="today" style="left:${todayPx}px"></div></div></div>`;
-    ws.items.forEach((it,ii)=>{
-      const l=px(it.start), w=Math.max(px(it.end)-l,16), fill=Math.round((STATUS[it.status]?.weight??0)*100);
-      html+=`<div class="grow item-row">
-        <div class="lbl">
-          <div class="lbl-name"><span class="lbl-code">${esc(it.code)}</span> ${esc(it.name)}</div>
-          <div class="lbl-dates"><input type="date" value="${it.start}" data-d="${wi}.${ii}.start"><input type="date" value="${it.end}" data-d="${wi}.${ii}.end"></div>
-        </div>
-        <div class="track" style="--wk:${WK}px;width:${W}px">
-          <div class="bar ${it.status}" style="left:${l}px;width:${w}px" title="${esc(it.name)} — ${STATUS[it.status].label}">
-            <div class="fill" style="width:${fill}%"></div><span class="bl">${fill}%</span>
-          </div>
-          <div class="today" style="left:${todayPx}px"></div>
-        </div></div>`;
-    });
+    const gl=px(new Date(s)),gw=Math.max(px(new Date(e))-gl,8);
+    html+=`<div class="grow group"><div class="lbl"><span class="lbl-code">${esc(ws.code)}</span><div class="lbl-name">${esc(ws.name)}</div></div><div class="track" style="--wk:${WK}px;width:${W}px"><div class="gbar" style="left:${gl}px;width:${gw}px"></div><div class="today" style="left:${todayPx}px"></div></div></div>`;
+    ws.items.forEach((it,ii)=>{const l=px(it.start),w=Math.max(px(it.end)-l,16),fill=Math.round((STATUS[it.status]?.weight??0)*100);
+      html+=`<div class="grow item-row"><div class="lbl"><div class="lbl-name"><span class="lbl-code">${esc(it.code)}</span> ${esc(it.name)}</div><div class="lbl-dates"><input type="date" value="${it.start}" data-d="${wi}.${ii}.start"><input type="date" value="${it.end}" data-d="${wi}.${ii}.end"></div></div><div class="track" style="--wk:${WK}px;width:${W}px"><div class="bar ${it.status}" style="left:${l}px;width:${w}px" title="${esc(it.name)} — ${STATUS[it.status].label}"><div class="fill" style="width:${fill}%"></div><span class="bl">${fill}%</span></div><div class="today" style="left:${todayPx}px"></div></div></div>`;});
   });
   g.innerHTML=html;
-  g.querySelectorAll('input[data-d]').forEach(inp=>inp.addEventListener('change',()=>{
-    const [wi,ii,f]=inp.dataset.d.split('.'); const it=data.workstreams[+wi].items[+ii];
-    if(inp.value) it[f]=inp.value;
-    if(pd(it.end)<pd(it.start)) it.end=it.start;   // keep end ≥ start
-    renderGantt(); persist(true);
-  }));
+  g.querySelectorAll('input[data-d]').forEach(inp=>inp.addEventListener('change',()=>{const[wi,ii,f]=inp.dataset.d.split('.');const it=data.workstreams[+wi].items[+ii];if(inp.value)it[f]=inp.value;if(pd(it.end)<pd(it.start))it.end=it.start;renderGantt();persist(true);}));
 }
-
-function weekKey(d){ return iso(mondayOf(d)); }
-function captureSnapshot(){
-  const t=today(); const key=weekKey(t);
-  const snap={week:key,date:iso(t),overall:Math.round(overallProgress()*100)};
-  const i=data.snapshots.findIndex(s=>s.week===key);
-  if(i>=0) data.snapshots[i]=snap; else data.snapshots.push(snap);
-  data.snapshots.sort((a,b)=>a.week<b.week?-1:1);
-  renderTrend(); persist(false);
+function weekKey(d){return iso(mondayOf(d));}
+function captureSnapshot(){const t=today();const key=weekKey(t);const snap={week:key,date:iso(t),overall:Math.round(overallProgress()*100),deploy:pctDone()};const i=data.snapshots.findIndex(s=>s.week===key);if(i>=0)data.snapshots[i]=snap;else data.snapshots.push(snap);data.snapshots.sort((a,b)=>a.week<b.week?-1:1);if(view==='timeline')renderTrend();else rerender();persist(false);}
+function trendSvg(field,color,W,H){
+  const snaps=data.snapshots.filter(s=>s[field]!=null);if(snaps.length<1)return null;
+  const pl=4,pr=4,pt=10,pb=4,n=snaps.length;
+  const xs=i=>n===1?(W/2):pl+i*(W-pl-pr)/(n-1);const ys=v=>pt+(1-v/100)*(H-pt-pb);
+  const pts=snaps.map((s,i)=>`${xs(i).toFixed(1)},${ys(s[field]).toFixed(1)}`).join(' ');
+  let dots=snaps.map((s,i)=>`<circle cx="${xs(i).toFixed(1)}" cy="${ys(s[field]).toFixed(1)}" r="2.4" fill="${color}"/>`).join('');
+  return `<svg class="kpi-spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${n>1?`<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round"/>`:''}${dots}</svg>`;
 }
 function renderTrend(){
-  const box=document.getElementById('trend');
-  const snaps=data.snapshots;
-  const now=Math.round(overallProgress()*100);
-  let delta='', dcls='flat';
-  if(snaps.length){ const d=now-snaps[snaps.length-1].overall; dcls=d>0?'up':d<0?'down':'flat'; delta=(d>0?'+':'')+d+' pts since last snapshot'; }
-  const head=`<div class="tl-trend-head">
-      <div><h3>Week-on-week progress</h3><p>Capture a snapshot each week to chart how overall completion is trending.</p></div>
+  const box=document.getElementById('trend');const snaps=data.snapshots;const now=Math.round(overallProgress()*100);
+  let delta='',dcls='flat';if(snaps.length){const d=now-snaps[snaps.length-1].overall;dcls=d>0?'up':d<0?'down':'flat';delta=(d>0?'+':'')+d+' pts since last snapshot';}
+  const head=`<div class="tl-trend-head"><div><h3>Week-on-week progress</h3><p>Capture a snapshot each week to chart how overall completion is trending.</p></div>
       <div class="tl-now"><div class="big">${now}%</div>${snaps.length?`<div class="delta ${dcls}">${delta}</div>`:''}</div>
-      <div style="width:100%;display:flex;gap:9px;margin-top:4px">
-        <button class="btn primary" id="btn-capture"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3v9m0 0l-3-3m3 3l3-3M4 15v2h12v-2"/></svg>Capture this week</button>
-        ${snaps.length?`<button class="btn ghost" id="btn-undo-snap">Remove last snapshot</button>`:''}
-      </div>`;
-
+      <div style="width:100%;display:flex;gap:9px;margin-top:4px"><button class="btn primary" id="btn-capture"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3v9m0 0l-3-3m3 3l3-3M4 15v2h12v-2"/></svg>Capture this week</button>${snaps.length?`<button class="btn ghost" id="btn-undo-snap">Remove last snapshot</button>`:''}</div>`;
   let body;
-  if(snaps.length<1){
-    body=`<div class="trend-empty">No snapshots yet. Click <strong>Capture this week</strong> to log today’s ${now}% and start the trend line.</div>`;
-  }else{
-    const W=820,H=130,pl=34,pr=12,pt=14,pb=22;
-    const n=snaps.length;
-    const xs=i=> n===1? (pl+(W-pl-pr)/2) : pl + i*(W-pl-pr)/(n-1);
-    const ys=v=> pt + (1-v/100)*(H-pt-pb);
-    let gl=''; [0,50,100].forEach(v=>{ const y=ys(v);
-      gl+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="var(--line)" stroke-width="1"/><text x="${pl-7}" y="${y+3}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted-2)">${v}</text>`; });
-    const pts=snaps.map((s,i)=>`${xs(i)},${ys(s.overall)}`).join(' ');
-    const area=`${pl},${ys(0)} ${pts} ${xs(n-1)},${ys(0)}`;
-    let dots='',labels='';
-    snaps.forEach((s,i)=>{ const x=xs(i),y=ys(s.overall);
-      dots+=`<circle cx="${x}" cy="${y}" r="3.5" fill="var(--emerald)" stroke="#fff" stroke-width="1.5"/>`;
-      dots+=`<text x="${x}" y="${y-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600" fill="var(--ink)">${s.overall}</text>`;
-      labels+=`<text x="${x}" y="${H-6}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted-2)">${shortDate(pd(s.week))}</text>`; });
-    body=`<svg class="trend-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
-        <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--emerald)" stop-opacity="0.22"/><stop offset="1" stop-color="var(--emerald)" stop-opacity="0"/></linearGradient></defs>
-        ${gl}<polygon points="${area}" fill="url(#ag)"/>
-        ${n>1?`<polyline points="${pts}" fill="none" stroke="var(--emerald)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`:''}
-        ${dots}${labels}</svg>`;
-  }
+  if(snaps.length<1){body=`<div class="trend-empty">No snapshots yet. Click <strong>Capture this week</strong> to log today’s ${now}% and start the trend line.</div>`;}
+  else{const W=820,H=130,pl=34,pr=12,pt=14,pb=22,n=snaps.length;const xs=i=>n===1?(pl+(W-pl-pr)/2):pl+i*(W-pl-pr)/(n-1);const ys=v=>pt+(1-v/100)*(H-pt-pb);
+    let gl='';[0,50,100].forEach(v=>{const y=ys(v);gl+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="var(--line)" stroke-width="1"/><text x="${pl-7}" y="${y+3}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted-2)">${v}</text>`;});
+    const pts=snaps.map((s,i)=>`${xs(i)},${ys(s.overall)}`).join(' ');const area=`${pl},${ys(0)} ${pts} ${xs(n-1)},${ys(0)}`;
+    let dots='',labels='';snaps.forEach((s,i)=>{const x=xs(i),y=ys(s.overall);dots+=`<circle cx="${x}" cy="${y}" r="3.5" fill="var(--emerald)" stroke="#fff" stroke-width="1.5"/><text x="${x}" y="${y-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600" fill="var(--ink)">${s.overall}</text>`;labels+=`<text x="${x}" y="${H-6}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted-2)">${shortDate(pd(s.week))}</text>`;});
+    body=`<svg class="trend-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--emerald)" stop-opacity="0.22"/><stop offset="1" stop-color="var(--emerald)" stop-opacity="0"/></linearGradient></defs>${gl}<polygon points="${area}" fill="url(#ag)"/>${n>1?`<polyline points="${pts}" fill="none" stroke="var(--emerald)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`:''}${dots}${labels}</svg>`;}
   box.innerHTML=head+body;
-  const cap=document.getElementById('btn-capture'); if(cap) cap.onclick=captureSnapshot;
-  const undo=document.getElementById('btn-undo-snap'); if(undo) undo.onclick=()=>{ data.snapshots.pop(); renderTrend(); persist(false); };
+  const cap=document.getElementById('btn-capture');if(cap)cap.onclick=captureSnapshot;
+  const undo=document.getElementById('btn-undo-snap');if(undo)undo.onclick=()=>{data.snapshots.pop();renderTrend();persist(false);};
 }
 
-/* ---------------- Meta editing ---------------- */
-document.querySelectorAll('[data-meta]').forEach(el=>{
-  el.addEventListener('blur',()=>{ data.meta[el.dataset.meta]=el.textContent.trim(); persist(true); });
-  el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); }});
+/* ---------------- KPI view ---------------- */
+function ragOf(k,v){
+  const t=data.kpis[k.id]?.target;
+  if(k.dir==null||v==null||t==null)return 'na';
+  if(k.dir==='up')return v>=t?'g':v>=t*0.75?'a':'r';
+  if(t===0)return v===0?'g':v<=2?'a':'r';
+  return v<=t?'g':v<=t*2?'a':'r';
+}
+const RAG_LABEL={g:'On track',a:'Watch',r:'Off track',na:'Monitor'};
+function renderKPI(){
+  const host=document.getElementById('kpi-view');
+  const tiers=['Outcome','Driver','Schedule','Leading'];
+  let html=`<div class="kpi-objective"><div class="k">Strategic objective</div><div class="o" contenteditable="true" data-meta="kpiObjective">${esc(data.meta.kpiObjective)}</div></div>`;
+
+  tiers.forEach(tier=>{
+    const list=KPIS.filter(k=>k.tier===tier);
+    html+=`<div class="kpi-tier"><div class="kpi-tier-h"><h3>${tier} KPIs</h3><span>${TIER_DESC[tier]}</span></div><div class="kpi-grid">`;
+    list.forEach(k=>{
+      const v=k.calc();const rag=ragOf(k,v);
+      const t=data.kpis[k.id]?.target, owner=data.kpis[k.id]?.owner||'';
+      const valTxt = k.instrument||v==null ? `<span style="font-size:18px;color:var(--muted-2)">Not yet measured</span>` : `${v}<span class="u">${k.unit}</span>`;
+      const spark = k.spark ? (trendSvg(k.spark==='deploy'?'deploy':'overall', 'var(--emerald)',120,22)||'') : '';
+      const tgtBlock = (k.dir!=null) ? `<label class="tgt">Target<input type="number" data-kpi="${k.id}" data-f="target" value="${t??''}"></label>` : '';
+      html+=`<div class="kpi-card ${rag}">
+        <div class="kpi-top"><span class="kpi-type">${k.type}</span><span class="rag ${rag}">${k.instrument?'Instrument':RAG_LABEL[rag]}</span></div>
+        <div class="kpi-val">${valTxt}</div>${spark}
+        <div class="kpi-name">${k.label}</div>
+        <div class="kpi-decision">${k.decision}</div>
+        <div class="kpi-foot">${tgtBlock}<label>Owner<input type="text" data-kpi="${k.id}" data-f="owner" value="${esc(owner)}"></label></div>
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+
+  // per-workstream matrix
+  html+=`<div class="kpi-matrix"><div class="cap">KPIs by workstream</div><table class="mtx"><thead><tr><th>Workstream</th><th>Deployment</th><th>Readiness</th><th>Blocked</th><th>Overdue</th></tr></thead><tbody>`;
+  data.workstreams.forEach(ws=>{
+    const n=ws.items.length||1;const dep=Math.round(ws.items.filter(i=>i.status==='done').length/n*100);
+    const rd=Math.round(wsProgress(ws)*100);const bl=ws.items.filter(i=>i.status==='blocked').length;
+    const od=ws.items.filter(i=>i.status!=='done'&&pd(i.end)<today()).length;
+    const depCls=dep>=70?'g':dep>=35?'a':'r';const rdCls=rd>=80?'g':rd>=60?'a':'r';
+    html+=`<tr><td class="wsname">${esc(ws.code)} · ${esc(ws.name)}</td>
+      <td class="num"><span class="pill ${depCls}">${dep}%</span></td>
+      <td class="num"><span class="pill ${rdCls}">${rd}%</span></td>
+      <td class="num">${bl?`<span class="pill r">${bl}</span>`:'0'}</td>
+      <td class="num">${od?`<span class="pill r">${od}</span>`:'0'}</td></tr>`;
+  });
+  html+=`</tbody></table></div>`;
+
+  // framework
+  let krows=KPIS.map(k=>{const t=data.kpis[k.id]?.target;const thr=k.dir==null?'—':(k.dir==='up'?`≥ ${t}${k.unit}`:`≤ ${t}${k.unit}`);
+    return `<tr><td>${k.label}</td><td>${k.type}</td><td>${k.decision}</td><td>${esc(data.kpis[k.id]?.owner||'')}</td><td>${thr}</td></tr>`;}).join('');
+  html+=`<details class="framework"><summary><svg class="cv" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 5l6 5-6 5"/></svg>KPI framework &amp; governance</summary>
+    <div class="fw-body">
+      <h4>KPI system</h4>
+      <table><thead><tr><th>KPI</th><th>Type</th><th>Decision it supports</th><th>Owner</th><th>Threshold</th></tr></thead><tbody>${krows}</tbody></table>
+      <h4>Driver tree — how the KPIs connect</h4>
+      <div class="fw-tree">Adoption (workflows used in the field)
+└─ Deployment Rate  (workflows live in production)
+   ├─ Approval / UAT throughput   (review → live)
+   │   └─ depends on: UAT capacity, business sign-off speed
+   └─ Build throughput            (in-progress → review)
+       ├─ Business inputs received   → unblocks design
+       ├─ Requirements & JMS integration design closed
+       └─ Schedule adherence         → recovers slippage early</div>
+      <h4>Metrics deliberately left out (vanity)</h4>
+      <ul>
+        <li><strong>Count of workflows created / configured</strong> — activity, not outcome; a configured workflow that isn't live delivers nothing.</li>
+        <li><strong>“% tasks ticked” in the tool alone</strong> — measures admin effort, not production deployment, so Deployment Rate is split out from the weighted Readiness Index.</li>
+        <li><strong>Total meetings / MoMs / documents produced</strong> — effort proxies that don't move go-live.</li>
+      </ul>
+      <h4>Review cadence &amp; escalation</h4>
+      <p><strong>Weekly programme review:</strong> capture the snapshot, walk the Off-track / Watch cards, action every blocked and overdue workflow. <strong>Bi-weekly business SPOC sync:</strong> clear the Business-Input Bottleneck and confirm JMS integration design. <strong>Monthly steering:</strong> Deployment Rate and Readiness Index trajectory vs target. <strong>Escalate</strong> any workflow blocked &gt; 2 weeks, any overdue critical-path item, or Deployment Rate trending below plan.</p>
+      <p style="margin-top:10px;color:var(--muted-2);font-size:12px">Targets and owners shown are editable defaults — confirm them with the programme office. Deployment, Readiness, Schedule and activity KPIs compute live from the plan; Workflow Adoption needs a feed from the field platform (e.g. TaskMapper / ITP) before it can be measured.</p>
+    </div></details>`;
+
+  host.innerHTML=html;
+  bindKPI();
+}
+function bindKPI(){
+  const host=document.getElementById('kpi-view');
+  host.querySelectorAll('input[data-kpi]').forEach(inp=>inp.addEventListener('change',()=>{
+    const id=inp.dataset.kpi,f=inp.dataset.f;if(!data.kpis[id])data.kpis[id]={};
+    data.kpis[id][f]= f==='target' ? (inp.value===''?null:Number(inp.value)) : inp.value;
+    renderKPI();persist(true);
+  }));
+  const obj=host.querySelector('[data-meta="kpiObjective"]');
+  if(obj){obj.addEventListener('blur',()=>{data.meta.kpiObjective=obj.textContent.trim();persist(true);});}
+}
+
+/* ---------------- Meta editing (header) ---------------- */
+document.querySelectorAll('header [data-meta]').forEach(el=>{
+  el.addEventListener('blur',()=>{data.meta[el.dataset.meta]=el.textContent.trim();persist(true);});
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();el.blur();}});
 });
 
 /* ---------------- View switch ---------------- */
 function showView(v){
   view=v;
-  document.getElementById('board-view').classList.toggle('hidden', v!=='board');
-  document.getElementById('timeline-view').classList.toggle('hidden', v!=='timeline');
-  document.getElementById('v-board').classList.toggle('active', v==='board');
-  document.getElementById('v-timeline').classList.toggle('active', v==='timeline');
+  document.getElementById('board-view').classList.toggle('hidden',v!=='board');
+  document.getElementById('timeline-view').classList.toggle('hidden',v!=='timeline');
+  document.getElementById('kpi-view').classList.toggle('hidden',v!=='kpi');
+  document.getElementById('v-board').classList.toggle('active',v==='board');
+  document.getElementById('v-timeline').classList.toggle('active',v==='timeline');
+  document.getElementById('v-kpi').classList.toggle('active',v==='kpi');
   rerender();
 }
 document.getElementById('v-board').onclick=()=>showView('board');
 document.getElementById('v-timeline').onclick=()=>showView('timeline');
+document.getElementById('v-kpi').onclick=()=>showView('kpi');
 
 /* ---------------- Toolbar ---------------- */
 document.getElementById('btn-save').onclick=()=>persist(false);
-document.getElementById('btn-add-ws').onclick=()=>{ data.workstreams.push({code:String(data.workstreams.length+1),name:'New Workstream',items:[]}); rerender(); persist(true); };
+document.getElementById('btn-add-ws').onclick=()=>{data.workstreams.push({code:String(data.workstreams.length+1),name:'New Workstream',items:[]});rerender();persist(true);};
 document.getElementById('btn-print').onclick=()=>window.print();
-document.getElementById('btn-export').onclick=()=>{
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download='project-plan-'+(data.meta.updated||'export').replace(/\s+/g,'-')+'.json'; a.click(); URL.revokeObjectURL(a.href);
-};
+document.getElementById('btn-export').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='project-plan-'+(data.meta.updated||'export').replace(/\s+/g,'-')+'.json';a.click();URL.revokeObjectURL(a.href);};
 document.getElementById('btn-import').onclick=()=>document.getElementById('file-input').click();
-document.getElementById('file-input').addEventListener('change',e=>{
-  const file=e.target.files[0]; if(!file) return;
-  const r=new FileReader();
-  r.onload=()=>{ try{ const p=JSON.parse(r.result); if(!p.workstreams) throw 0; data=ensureSchema(p); rerender(); persist(false); }
-    catch(err){ alert('That file could not be read as a project plan.'); } };
-  r.readAsText(file); e.target.value='';
-});
+document.getElementById('file-input').addEventListener('change',e=>{const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const p=JSON.parse(r.result);if(!p.workstreams)throw 0;data=ensureSchema(p);rerender();persist(false);}catch(err){alert('That file could not be read as a project plan.');}};r.readAsText(file);e.target.value='';});
 
 rerender();
 </script>
 </body>
 </html>
+
