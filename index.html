@@ -269,6 +269,20 @@
   <footer class="foot">Self-contained file · edits saved to this browser · export JSON to share or back up</footer>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDEoqWzL5Nm_YEmioMRrwxKqPO0LnCOfkQ",
+  authDomain: "project-plan-sync.firebaseapp.com",
+  projectId: "project-plan-sync",
+  storageBucket: "project-plan-sync.firebasestorage.app",
+  messagingSenderId: "965545331409",
+  appId: "1:965545331409:web:5bb1a8123c54d0e27053f0"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
 <script>
 /* ---------------- Status model ---------------- */
 const STATUS = {
@@ -334,13 +348,27 @@ const SEED = {
 
 /* ---------------- State ---------------- */
 let view = 'board';
-let data = ensureSchema(load());
+let data = structuredClone(SEED);
+let isFirstLoad = true;
 
-function load(){
-  try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) return JSON.parse(raw); }
-  catch(e){}
-  return structuredClone(SEED);
-}
+db.collection('app').doc('plan').onSnapshot((doc) => {
+  if (doc.exists) {
+    data = ensureSchema(doc.data());
+  } else {
+    data = ensureSchema(structuredClone(SEED));
+    db.collection('app').doc('plan').set(data);
+  }
+  rerender();
+  if (isFirstLoad) {
+    flashSaved('Synced remotely');
+    isFirstLoad = false;
+  }
+}, (error) => {
+  console.error("Firestore error:", error);
+  try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) data=ensureSchema(JSON.parse(raw)); } catch(e){}
+  rerender();
+});
+
 /* fill missing schedule + snapshots so old saves still work */
 function ensureSchema(d){
   if(!d.snapshots) d.snapshots=[];
@@ -355,8 +383,12 @@ function ensureSchema(d){
   return d;
 }
 function persist(silent){
-  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved(silent?'':'Saved'); }
-  catch(e){ flashSaved('In-memory only — use Export to save'); }
+  db.collection('app').doc('plan').set(data)
+    .then(() => flashSaved(silent ? '' : 'Saved remotely'))
+    .catch((e) => {
+       console.error("Error saving:", e);
+       try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved('Saved locally (offline)'); } catch(err){}
+    });
 }
 let savedTimer;
 function flashSaved(msg){
