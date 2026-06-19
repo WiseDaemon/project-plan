@@ -420,7 +420,7 @@ const SEED={
 
 /* ---------------- State ---------------- */
 let view='board';
-let data=structuredClone(SEED); let isFirstLoad = true; db.collection("app").doc("plan_v2").onSnapshot((doc) => { if (doc.exists) { data = ensureSchema(doc.data()); } else { data = ensureSchema(structuredClone(SEED)); db.collection("app").doc("plan_v2").set(data); } rerender(); if (isFirstLoad) { flashSaved("Synced remotely"); isFirstLoad = false; } }, (error) => { console.error("Firestore error:", error); try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) data=ensureSchema(JSON.parse(raw)); } catch(e){} rerender(); });
+let data=ensureSchema(structuredClone(SEED)); let isFirstLoad = true; db.collection("app").doc("plan_v2").onSnapshot((doc) => { if (doc.exists) { data = ensureSchema(doc.data()); } else { data = ensureSchema(structuredClone(SEED)); db.collection("app").doc("plan_v2").set(data); } rerender(); if (isFirstLoad) { flashSaved("Synced remotely"); isFirstLoad = false; } }, (error) => { console.error("Firestore error:", error); try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) data=ensureSchema(JSON.parse(raw)); } catch(e){} rerender(); });
 function ensureSchema(d){
   if(!d.snapshots)d.snapshots=[];
   if(!d.kpis)d.kpis={};
@@ -666,5 +666,6 @@ rerender();
 </script>
 </body>
 </html>
+
 
 
