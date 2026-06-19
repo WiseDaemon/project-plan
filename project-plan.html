@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Programme — Project Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a1628; --ink-2:#12233d;
+    --surface:#f7f8fa; --card:#ffffff;
+    --line:#e4e8ee; --line-strong:#cfd6e0;
+    --muted:#5c6b7e; --muted-2:#8794a4;
+
+    --emerald:#1f9d72; --emerald-soft:#e6f4ee;
+    --amber:#c4860f;  --amber-soft:#fbf1dd;
+    --blue:#2f6db5;   --blue-soft:#e6eef8;
+    --rust:#c0563c;   --rust-soft:#f8e8e2;
+    --slate:#8794a4;  --slate-soft:#eef1f5;
+
+    --shadow:0 1px 2px rgba(10,22,40,.04), 0 8px 24px rgba(10,22,40,.06);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--surface);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px 96px}
+
+  /* Header */
+  header.top{background:var(--ink);color:#fff;position:relative;overflow:hidden;border-bottom:3px solid var(--emerald)}
+  header.top .inner{max-width:1040px;margin:0 auto;padding:30px 22px 34px;position:relative;z-index:2}
+  .span-motif{position:absolute;inset:0;z-index:1;opacity:.5}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#7fd9b6;margin:0 0 10px}
+  h1.title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(26px,4.5vw,40px);letter-spacing:-.02em;margin:0;line-height:1.05}
+  h1.title[contenteditable]:focus,.sub[contenteditable]:focus{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px}
+  .sub{color:#aebbcb;margin:8px 0 0;font-size:14.5px;max-width:64ch}
+  .metabar{display:flex;flex-wrap:wrap;gap:26px;margin-top:24px;align-items:flex-end}
+  .metric .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#7c8aa0}
+  .metric .v{font-family:'Space Grotesk',sans-serif;font-size:21px;font-weight:600;margin-top:2px}
+  .metric .v small{font-size:13px;color:#aebbcb;font-weight:400}
+  .metric .v[contenteditable]:focus{outline:2px solid var(--emerald);outline-offset:2px;border-radius:4px}
+  .overall{margin-left:auto;min-width:230px}
+  .overall .k{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7c8aa0;margin-bottom:7px}
+  .overall .pct{color:#fff;font-weight:600}
+  .obar{height:9px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden}
+  .obar > span{display:block;height:100%;background:linear-gradient(90deg,var(--emerald),#3fc795);transition:width .6s cubic-bezier(.22,1,.36,1)}
+
+  /* Toolbar */
+  .toolbar{position:sticky;top:0;z-index:30;background:rgba(247,248,250,.86);backdrop-filter:saturate(150%) blur(8px);border-bottom:1px solid var(--line)}
+  .toolbar .inner{max-width:1040px;margin:0 auto;padding:11px 22px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .toolbar .right{margin-left:auto;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  button.btn{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--line-strong);background:var(--card);color:var(--ink);padding:7px 13px;border-radius:9px;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+  button.btn:hover{border-color:var(--ink);transform:translateY(-1px)}
+  button.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  button.btn.primary:hover{background:var(--ink-2)}
+  button.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+  button.btn.ghost:hover{background:var(--slate-soft);color:var(--ink)}
+  button.btn svg{width:15px;height:15px}
+  .saved-tag{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted-2);margin-left:4px}
+
+  /* View switch */
+  .vswitch{display:inline-flex;background:var(--slate-soft);border-radius:10px;padding:3px;gap:2px}
+  .vswitch button{border:none;background:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--muted);padding:6px 14px;border-radius:8px;transition:.15s}
+  .vswitch button.active{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(10,22,40,.08)}
+
+  /* Legend */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;padding:18px 0 6px;align-items:center}
+  .legend .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+  .dot{width:11px;height:11px;border-radius:50%;flex:none}
+  .dot.done{background:var(--emerald)} .dot.review{background:var(--blue)}
+  .dot.in-progress{background:var(--amber)} .dot.blocked{background:var(--rust)} .dot.not-started{background:var(--slate)}
+
+  /* Board */
+  .ws{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:18px;overflow:hidden}
+  .ws-head{display:flex;align-items:flex-start;gap:16px;padding:20px 22px 18px;cursor:pointer}
+  .ws-code{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:13px;color:var(--emerald);background:var(--emerald-soft);padding:5px 10px;border-radius:8px;flex:none;margin-top:2px}
+  .ws-titlewrap{flex:1;min-width:0}
+  .ws-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;letter-spacing:-.01em;margin:0}
+  .ws-name[contenteditable]:focus{outline:2px solid var(--emerald);outline-offset:3px;border-radius:4px}
+  .ws-meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted-2);margin-top:5px;letter-spacing:.04em}
+  .rail{display:flex;gap:3px;margin-top:13px}
+  .rail .seg{flex:1;height:7px;border-radius:2px;background:var(--slate);transition:.3s}
+  .rail .seg.done{background:var(--emerald)} .rail .seg.review{background:var(--blue)}
+  .rail .seg.in-progress{background:var(--amber)} .rail .seg.blocked{background:var(--rust)} .rail .seg.not-started{background:var(--line-strong)}
+  .ws-right{display:flex;flex-direction:column;align-items:flex-end;gap:9px;flex:none}
+  .ws-pct{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px}
+  .chev{width:20px;height:20px;color:var(--muted-2);transition:transform .25s}
+  .ws.collapsed .chev{transform:rotate(-90deg)}
+  .ws.collapsed .ws-body{display:none}
+  .ws-body{border-top:1px solid var(--line);padding:6px 22px 18px}
+  .item{display:grid;grid-template-columns:54px 1fr auto;gap:16px;align-items:start;padding:16px 0;border-bottom:1px dashed var(--line)}
+  .item:last-child{border-bottom:none}
+  .item-code{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted-2);padding-top:3px}
+  .item-main{min-width:0}
+  .item-name{font-weight:600;font-size:15px;margin:0}
+  .item-name[contenteditable]:focus,.item-note[contenteditable]:focus{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+  .item-note{color:var(--muted);font-size:13.5px;margin:5px 0 0;white-space:pre-wrap}
+  .item-note:empty::before{content:'Add notes…';color:var(--muted-2);font-style:italic}
+  .item-ctrls{display:flex;align-items:center;gap:8px}
+  select.status{appearance:none;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid transparent;border-radius:999px;padding:6px 26px 6px 12px;cursor:pointer;background-repeat:no-repeat;background-position:right 9px center;background-size:9px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23667' fill='none' stroke-width='1.6'/%3E%3C/svg%3E")}
+  select.status.done{background-color:var(--emerald-soft);color:var(--emerald)}
+  select.status.review{background-color:var(--blue-soft);color:var(--blue)}
+  select.status.in-progress{background-color:var(--amber-soft);color:var(--amber)}
+  select.status.blocked{background-color:var(--rust-soft);color:var(--rust)}
+  select.status.not-started{background-color:var(--slate-soft);color:var(--muted)}
+  .icon-btn{border:none;background:none;cursor:pointer;color:var(--muted-2);padding:5px;border-radius:7px;line-height:0;transition:.15s}
+  .icon-btn:hover{background:var(--rust-soft);color:var(--rust)}
+  .icon-btn svg{width:15px;height:15px}
+  .ws-actions{display:flex;gap:9px;padding-top:14px}
+  .add-link{font-family:'Inter',sans-serif;font-size:13px;font-weight:500;color:var(--muted);background:none;border:1px dashed var(--line-strong);border-radius:9px;padding:8px 13px;cursor:pointer;display:inline-flex;gap:6px;align-items:center;transition:.15s}
+  .add-link:hover{border-color:var(--emerald);color:var(--emerald)}
+  .add-link svg{width:14px;height:14px}
+  .delete-ws{margin-left:auto}
+  .add-ws{width:100%;margin-top:18px;justify-content:center;padding:16px}
+
+  /* ---------- Timeline / trend ---------- */
+  .tl-trend{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:18px;padding:20px 22px}
+  .tl-trend-head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .tl-trend-head h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0}
+  .tl-trend-head p{color:var(--muted);font-size:13px;margin:4px 0 0}
+  .tl-now{margin-left:auto;text-align:right}
+  .tl-now .big{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:30px;line-height:1}
+  .tl-now .delta{font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:4px}
+  .tl-now .delta.up{color:var(--emerald)} .tl-now .delta.flat{color:var(--muted-2)} .tl-now .delta.down{color:var(--rust)}
+  .trend-svg{width:100%;height:130px;margin-top:14px;display:block}
+  .trend-empty{margin-top:16px;padding:26px;border:1px dashed var(--line-strong);border-radius:12px;text-align:center;color:var(--muted);font-size:13.5px}
+
+  .gantt-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:18px;overflow:hidden}
+  .gantt-cap{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--line)}
+  .gantt-cap h3{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;margin:0}
+  .gantt-cap .hint{font-size:12.5px;color:var(--muted-2);margin-left:auto}
+  .gantt-scroll{overflow-x:auto}
+  .gantt{position:relative}
+  .grow{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}
+  .grow:last-child{border-bottom:none}
+  .grow.group{background:var(--surface)}
+  .lbl{flex:none;width:300px;position:sticky;left:0;z-index:3;background:var(--card);border-right:1px solid var(--line);padding:11px 16px;display:flex;flex-direction:column;gap:6px}
+  .grow.group .lbl{background:var(--surface)}
+  .grow.head .lbl{background:var(--card)}
+  .lbl-name{font-size:13.5px;font-weight:500;line-height:1.3}
+  .grow.group .lbl-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px}
+  .lbl-code{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--emerald);font-weight:600}
+  .lbl-dates{display:flex;gap:6px}
+  .lbl-dates input{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 5px;background:var(--surface);width:50%}
+  .lbl-dates input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+  .track{flex:none;position:relative;background-image:repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px var(--wk))}
+  .grow.head .track{height:46px}
+  .grow.group .track,.grow.item-row .track{min-height:54px}
+  .wk-tick{position:absolute;top:7px;text-align:center;font-family:'IBM Plex Mono',monospace;pointer-events:none}
+  .wk-tick .wk-n{font-size:9.5px;color:var(--muted-2);letter-spacing:.06em}
+  .wk-tick .wk-d{font-size:10px;color:var(--ink);font-weight:500;margin-top:2px}
+  .bar{position:absolute;top:50%;transform:translateY(-50%);height:22px;border-radius:6px;display:flex;align-items:center;overflow:hidden;box-shadow:0 1px 2px rgba(10,22,40,.12)}
+  .bar .fill{height:100%;border-radius:6px 0 0 6px}
+  .bar .bl{position:absolute;right:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600}
+  .bar.done{background:var(--emerald-soft)} .bar.done .fill{background:var(--emerald)} .bar.done .bl{color:var(--emerald)}
+  .bar.review{background:var(--blue-soft)} .bar.review .fill{background:var(--blue)} .bar.review .bl{color:var(--blue)}
+  .bar.in-progress{background:var(--amber-soft)} .bar.in-progress .fill{background:var(--amber)} .bar.in-progress .bl{color:var(--amber)}
+  .bar.blocked{background:var(--rust-soft)} .bar.blocked .fill{background:var(--rust)} .bar.blocked .bl{color:var(--rust)}
+  .bar.not-started{background:var(--slate-soft)} .bar.not-started .fill{background:var(--slate)} .bar.not-started .bl{color:var(--muted)}
+  .gbar{position:absolute;top:50%;transform:translateY(-50%);height:9px;border-radius:5px;background:linear-gradient(90deg,var(--ink),var(--ink-2));opacity:.55}
+  .today{position:absolute;top:0;bottom:0;width:2px;background:var(--rust);z-index:2}
+  .today::before{content:'TODAY';position:absolute;top:2px;left:4px;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;color:var(--rust);letter-spacing:.1em}
+
+  footer.foot{text-align:center;color:var(--muted-2);font-size:12px;font-family:'IBM Plex Mono',monospace;margin-top:38px;letter-spacing:.04em}
+  .hidden{display:none!important}
+
+  @media print{
+    .toolbar,.ws-actions,.icon-btn,.add-ws,.legend .lg-hint,.gantt-cap .hint,#btn-capture,.lbl-dates{display:none!important}
+    body{background:#fff}
+    .ws,.gantt-card,.tl-trend{break-inside:avoid;box-shadow:none;border-color:#bbb}
+    header.top{border-bottom:3px solid var(--emerald)}
+    .ws.collapsed .ws-body{display:block!important}
+  }
+  @media (max-width:640px){
+    .item{grid-template-columns:1fr;gap:9px}
+    .item-code{padding-top:0}
+    .item-ctrls{justify-content:flex-start}
+    .overall{margin-left:0;width:100%}
+    .lbl{width:200px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <svg class="span-motif" viewBox="0 0 1040 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#1f9d72" stroke-width="1" fill="none" opacity="0.55">
+      <path d="M-20 150 L120 60 L260 150 L400 60 L540 150 L680 60 L820 150 L960 60 L1100 150"/>
+      <path d="M-20 150 L1100 150" opacity="0.4"/>
+      <path d="M-20 120 L1100 120" opacity="0.25"/>
+    </g>
+    <g fill="#1f9d72" opacity="0.8">
+      <circle cx="120" cy="60" r="3"/><circle cx="400" cy="60" r="3"/>
+      <circle cx="680" cy="60" r="3"/><circle cx="960" cy="60" r="3"/>
+    </g>
+  </svg>
+  <div class="inner">
+    <p class="eyebrow">Programme Status · Live Plan</p>
+    <h1 class="title" contenteditable="true" data-meta="title">Infrastructure Workflow Programme</h1>
+    <p class="sub" contenteditable="true" data-meta="sub">Workflow build &amp; deployment tracker across Transmission Line, Jio Tower Solarisation, and Diesel Elimination workstreams.</p>
+    <div class="metabar">
+      <div class="metric"><div class="k">Owner</div><div class="v" contenteditable="true" data-meta="owner">Programme Office</div></div>
+      <div class="metric"><div class="k">Updated</div><div class="v" contenteditable="true" data-meta="updated">19 Jun 2026</div></div>
+      <div class="metric"><div class="k">Workstreams</div><div class="v"><span id="ws-count">3</span> <small>/ <span id="item-count">0</span> items</small></div></div>
+      <div class="overall">
+        <div class="k"><span>Overall progress</span><span class="pct" id="overall-pct">0%</span></div>
+        <div class="obar"><span id="overall-bar" style="width:0"></span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="inner">
+    <div class="vswitch">
+      <button id="v-board" class="active">Board</button>
+      <button id="v-timeline">Timeline</button>
+    </div>
+    <button class="btn primary" id="btn-save">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9l3 3v9H4z"/><path d="M7 4v4h6M7 16v-5h6v5"/></svg>
+      Save
+    </button>
+    <span class="saved-tag" id="saved-tag"></span>
+    <div class="right">
+      <button class="btn ghost" id="btn-import">Import JSON</button>
+      <button class="btn ghost" id="btn-export">Export JSON</button>
+      <button class="btn ghost" id="btn-print">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8V3h8v5M6 14H4v-4h12v4h-2M7 14h6v4H7z"/></svg>
+        Print / PDF
+      </button>
+    </div>
+    <input type="file" id="file-input" accept="application/json" hidden>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- BOARD VIEW -->
+  <div id="board-view">
+    <div class="legend">
+      <div class="lg"><span class="dot done"></span>Completed</div>
+      <div class="lg"><span class="dot review"></span>Under review / approval</div>
+      <div class="lg"><span class="dot in-progress"></span>In progress</div>
+      <div class="lg"><span class="dot blocked"></span>Awaiting inputs</div>
+      <div class="lg"><span class="dot not-started"></span>Not started</div>
+      <div class="lg lg-hint" style="margin-left:auto;color:var(--muted-2)">Click any text to edit · status drop-downs roll up automatically</div>
+    </div>
+    <div id="board"></div>
+    <button class="btn ghost add-ws" id="btn-add-ws">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 4v12M4 10h12"/></svg>
+      Add workstream
+    </button>
+  </div>
+
+  <!-- TIMELINE VIEW -->
+  <div id="timeline-view" class="hidden">
+    <div class="tl-trend" id="trend"></div>
+    <div class="gantt-card">
+      <div class="gantt-cap">
+        <h3>Schedule (Gantt)</h3>
+        <span class="hint">Edit start/end dates per item · bars fill by % complete</span>
+      </div>
+      <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
+    </div>
+  </div>
+
+  <footer class="foot">Self-contained file · edits saved to this browser · export JSON to share or back up</footer>
+</div>
+
+<script>
+/* ---------------- Status model ---------------- */
+const STATUS = {
+  'done':        {label:'Completed',      weight:1.00},
+  'review':      {label:'Under Review',   weight:0.75},
+  'in-progress': {label:'In Progress',    weight:0.40},
+  'blocked':     {label:'Awaiting Inputs',weight:0.10},
+  'not-started': {label:'Not Started',    weight:0.00},
+};
+const STORAGE_KEY = 'workflow-programme-plan-v1';
+const WK = 64;            /* px per week */
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+/* ---------------- Date helpers ---------------- */
+const pad = n => String(n).padStart(2,'0');
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const pd  = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+const addDays = (d,n)=>{ const x=new Date(d); x.setDate(x.getDate()+n); return x; };
+const diffDays = (a,b)=>Math.round((b - a)/86400000);
+function mondayOf(d){ const x=new Date(d); const k=(x.getDay()+6)%7; x.setDate(x.getDate()-k); x.setHours(0,0,0,0); return x; }
+const shortDate = d => `${d.getDate()} ${MON[d.getMonth()]}`;
+const today = ()=>{ const t=new Date(); t.setHours(0,0,0,0); return t; };
+
+/* ---------------- Seed data ---------------- */
+const SEED = {
+  meta:{title:'Infrastructure Workflow Programme',
+    sub:'Workflow build & deployment tracker across Transmission Line, Jio Tower Solarisation, and Diesel Elimination workstreams.',
+    owner:'Programme Office', updated:'19 Jun 2026'},
+  snapshots:[],
+  workstreams:[
+    {code:'1', name:'Transmission Line', items:[
+      {code:'1.1', name:'Foundation — Construction Workflow', status:'review',
+       note:'Workflow approved. Routing logic incorporated to send sites to Pile or Open-Cast foundation flows based on ROW availability and Construction Manager confirmation. Final UAT pending before execution-team onboarding.'},
+      {code:'1.1', name:'Foundation — Quality & Quantity Workflow', status:'in-progress',
+       note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.2', name:'Erection — Construction Workflow', status:'blocked',
+       note:'Workflow design pending; awaiting detailed business inputs.'},
+      {code:'1.2', name:'Erection — Quality & Quantity Workflow', status:'in-progress',
+       note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.3', name:'Stringing — Construction Workflow', status:'blocked',
+       note:'Workflow creation pending; awaiting business team inputs.'},
+      {code:'1.3', name:'Stringing — Quality & Quantity Workflow', status:'in-progress',
+       note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.4', name:'Earthing — Construction Workflow', status:'review',
+       note:'Workflow configured and submitted for final business approval.'},
+      {code:'1.4', name:'Earthing — Transmission Logic in Forms', status:'done',
+       note:'Transmission logic finalised in forms.'},
+    ]},
+    {code:'2', name:'Jio Tower Solarisation', items:[
+      {code:'2.1', name:'Survey Workflow', status:'done', note:'Survey workflow finalised, tested, and deployed.'},
+      {code:'2.2', name:'Design Workflow', status:'done', note:'Design workflow finalised and implemented.'},
+      {code:'2.3', name:'Execution Workflow', status:'done',
+       note:'Execution workflow finalised and implemented, including recent field enhancements.\n• Updated execution dashboards.\n• Raft and pile options implemented in forms across all states.'},
+      {code:'2.4', name:'Consolidated Dashboard', status:'done', note:'End-to-end visibility dashboard developed across survey, design, and execution stages.'},
+      {code:'2.5', name:'Barcode Scanning Feature', status:'in-progress', note:'Development in progress. Expected in the upcoming platform release.'},
+    ]},
+    {code:'3', name:'Diesel Elimination for Jio Tower', items:[
+      {code:'3.1', name:'Survey Workflow', status:'review', note:'Survey workflow under finalisation and stakeholder review.'},
+      {code:'3.2', name:'Execution Workflow', status:'review', note:'Execution workflow under finalisation; pending business sign-off.'},
+    ]},
+  ]
+};
+
+/* ---------------- State ---------------- */
+let view = 'board';
+let data = ensureSchema(load());
+
+function load(){
+  try{ const raw=localStorage.getItem(STORAGE_KEY); if(raw) return JSON.parse(raw); }
+  catch(e){}
+  return structuredClone(SEED);
+}
+/* fill missing schedule + snapshots so old saves still work */
+function ensureSchema(d){
+  if(!d.snapshots) d.snapshots=[];
+  const base = mondayOf(new Date(2026,4,4)); // Mon 4 May 2026 — programme anchor
+  const plan = {'done':[0,5],'review':[4,8],'in-progress':[5,10],'blocked':[8,13],'not-started':[9,14]};
+  d.workstreams.forEach(ws=>ws.items.forEach((it,ii)=>{
+    const [s,e] = plan[it.status] || [5,9];
+    const stagger = ii % 3;
+    if(!it.start) it.start = iso(addDays(base, s*7 + stagger));
+    if(!it.end)   it.end   = iso(addDays(base, e*7 + stagger));
+  }));
+  return d;
+}
+function persist(silent){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); flashSaved(silent?'':'Saved'); }
+  catch(e){ flashSaved('In-memory only — use Export to save'); }
+}
+let savedTimer;
+function flashSaved(msg){
+  const el=document.getElementById('saved-tag'); el.textContent=msg;
+  clearTimeout(savedTimer); if(msg==='Saved') savedTimer=setTimeout(()=>el.textContent='',1800);
+}
+
+/* ---------------- Computation ---------------- */
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const allItems = ()=>data.workstreams.flatMap(w=>w.items);
+function wsProgress(ws){ if(!ws.items.length) return 0; return ws.items.reduce((a,it)=>a+(STATUS[it.status]?.weight??0),0)/ws.items.length; }
+function overallProgress(){ const it=allItems(); return it.length? it.reduce((a,x)=>a+(STATUS[x.status]?.weight??0),0)/it.length : 0; }
+function countDone(ws){ return ws.items.filter(i=>i.status==='done').length; }
+
+/* ---------------- Top-level render ---------------- */
+function rerender(){ updateHeader(); view==='board' ? renderBoard() : renderTimeline(); }
+function updateHeader(){
+  document.querySelectorAll('[data-meta]').forEach(el=>{ const k=el.dataset.meta; if(el.textContent!==(data.meta[k]||'')) el.textContent=data.meta[k]||''; });
+  document.getElementById('ws-count').textContent=data.workstreams.length;
+  document.getElementById('item-count').textContent=allItems().length;
+  const ov=Math.round(overallProgress()*100);
+  document.getElementById('overall-pct').textContent=ov+'%';
+  document.getElementById('overall-bar').style.width=ov+'%';
+}
+
+/* ---------------- Board view ---------------- */
+const board = document.getElementById('board');
+function renderBoard(){
+  board.innerHTML='';
+  data.workstreams.forEach((ws,wi)=>{
+    const pct=Math.round(wsProgress(ws)*100);
+    const card=document.createElement('section');
+    card.className='ws'+(ws.collapsed?' collapsed':'');
+    const segs=ws.items.map(it=>`<span class="seg ${it.status}" title="${esc(it.name)}"></span>`).join('')||'<span class="seg not-started"></span>';
+    card.innerHTML=`
+      <div class="ws-head" data-toggle="${wi}">
+        <span class="ws-code" contenteditable="true" data-ws="${wi}" data-field="code">${esc(ws.code)}</span>
+        <div class="ws-titlewrap">
+          <h2 class="ws-name" contenteditable="true" data-ws="${wi}" data-field="name">${esc(ws.name)}</h2>
+          <div class="ws-meta">${ws.items.length} item${ws.items.length!==1?'s':''} · ${countDone(ws)} completed</div>
+          <div class="rail">${segs}</div>
+        </div>
+        <div class="ws-right">
+          <span class="ws-pct">${pct}%</span>
+          <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8l5 5 5-5"/></svg>
+        </div>
+      </div>
+      <div class="ws-body">
+        ${ws.items.map((it,ii)=>itemHTML(wi,ii,it)).join('')}
+        <div class="ws-actions">
+          <button class="add-link" data-add-item="${wi}"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M10 4v12M4 10h12"/></svg>Add item</button>
+          <button class="add-link delete-ws" data-del-ws="${wi}">Remove workstream</button>
+        </div>
+      </div>`;
+    board.appendChild(card);
+  });
+  bindBoard();
+}
+function itemHTML(wi,ii,it){
+  const opts=Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===it.status?'selected':''}>${v.label}</option>`).join('');
+  return `<div class="item">
+      <div class="item-code" contenteditable="true" data-item="${wi}.${ii}" data-field="code">${esc(it.code)}</div>
+      <div class="item-main">
+        <p class="item-name" contenteditable="true" data-item="${wi}.${ii}" data-field="name">${esc(it.name)}</p>
+        <p class="item-note" contenteditable="true" data-item="${wi}.${ii}" data-field="note">${esc(it.note)}</p>
+      </div>
+      <div class="item-ctrls">
+        <select class="status ${it.status}" data-item="${wi}.${ii}">${opts}</select>
+        <button class="icon-btn" data-del-item="${wi}.${ii}" title="Remove item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 6h10M8 6V4h4v2M6 6l1 10h6l1-10"/></svg></button>
+      </div>
+    </div>`;
+}
+function bindBoard(){
+  board.querySelectorAll('[data-toggle]').forEach(h=>h.addEventListener('click',e=>{
+    if(e.target.closest('[contenteditable]')) return;
+    const wi=+h.dataset.toggle; data.workstreams[wi].collapsed=!data.workstreams[wi].collapsed;
+    h.closest('.ws').classList.toggle('collapsed');
+  }));
+  board.querySelectorAll('select.status').forEach(sel=>sel.addEventListener('change',()=>{
+    const [wi,ii]=sel.dataset.item.split('.').map(Number);
+    data.workstreams[wi].items[ii].status=sel.value; rerender(); persist(true);
+  }));
+  board.querySelectorAll('[data-ws]').forEach(el=>{
+    el.addEventListener('blur',()=>{ const wi=+el.dataset.ws; data.workstreams[wi][el.dataset.field]=el.textContent.trim(); persist(true); });
+    stopEnter(el);
+  });
+  board.querySelectorAll('[data-item][data-field]').forEach(el=>{
+    el.addEventListener('blur',()=>{ const [wi,ii]=el.dataset.item.split('.').map(Number);
+      data.workstreams[wi].items[ii][el.dataset.field]= el.dataset.field==='note'? el.innerText.replace(/\u00a0/g,' '): el.textContent.trim();
+      persist(true); });
+    if(el.dataset.field!=='note') stopEnter(el);
+  });
+  board.querySelectorAll('[data-add-item]').forEach(b=>b.onclick=()=>{ const wi=+b.dataset.addItem;
+    const t=today(); data.workstreams[wi].items.push({code:'',name:'New item',status:'not-started',note:'',start:iso(mondayOf(t)),end:iso(addDays(mondayOf(t),14))});
+    rerender(); persist(true); });
+  board.querySelectorAll('[data-del-item]').forEach(b=>b.onclick=()=>{ const [wi,ii]=b.dataset.delItem.split('.').map(Number);
+    if(confirm('Remove this item?')){ data.workstreams[wi].items.splice(ii,1); rerender(); persist(true);} });
+  board.querySelectorAll('[data-del-ws]').forEach(b=>b.onclick=()=>{ const wi=+b.dataset.delWs;
+    if(confirm('Remove this entire workstream?')){ data.workstreams.splice(wi,1); rerender(); persist(true);} });
+}
+function stopEnter(el){ el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); }}); }
+
+/* ---------------- Timeline view ---------------- */
+function timelineRange(){
+  const items=allItems(); const t=today();
+  let starts=items.map(i=>pd(i.start)).concat(t);
+  let ends=items.map(i=>pd(i.end)).concat(t);
+  let min=new Date(Math.min(...starts)), max=new Date(Math.max(...ends));
+  const start=mondayOf(min);
+  const end=addDays(mondayOf(max),7);
+  const weeks=Math.max(1,Math.round(diffDays(start,end)/7));
+  return {start,weeks};
+}
+function renderTimeline(){ renderTrend(); renderGantt(); }
+
+function renderGantt(){
+  const g=document.getElementById('gantt');
+  const {start,weeks}=timelineRange();
+  const W=weeks*WK;
+  const px = d => diffDays(start, (d instanceof Date)?d:pd(d))/7*WK;
+  const todayPx=px(today());
+
+  // header
+  let ticks='';
+  for(let i=0;i<weeks;i++){ const m=addDays(start,i*7);
+    ticks+=`<div class="wk-tick" style="left:${i*WK}px;width:${WK}px"><div class="wk-n">W${i+1}</div><div class="wk-d">${shortDate(m)}</div></div>`; }
+  let html=`<div class="grow head"><div class="lbl"><div class="lbl-name" style="color:var(--muted-2);font-size:12px">Workstream / Item</div></div>
+    <div class="track" style="--wk:${WK}px;width:${W}px">${ticks}<div class="today" style="left:${todayPx}px"></div></div></div>`;
+
+  data.workstreams.forEach((ws,wi)=>{
+    const s=ws.items.length?Math.min(...ws.items.map(i=>pd(i.start).getTime())):start.getTime();
+    const e=ws.items.length?Math.max(...ws.items.map(i=>pd(i.end).getTime())):start.getTime();
+    const gl=px(new Date(s)), gw=Math.max(px(new Date(e))-gl,8);
+    html+=`<div class="grow group"><div class="lbl"><span class="lbl-code">${esc(ws.code)}</span><div class="lbl-name">${esc(ws.name)}</div></div>
+      <div class="track" style="--wk:${WK}px;width:${W}px"><div class="gbar" style="left:${gl}px;width:${gw}px"></div><div class="today" style="left:${todayPx}px"></div></div></div>`;
+    ws.items.forEach((it,ii)=>{
+      const l=px(it.start), w=Math.max(px(it.end)-l,16), fill=Math.round((STATUS[it.status]?.weight??0)*100);
+      html+=`<div class="grow item-row">
+        <div class="lbl">
+          <div class="lbl-name"><span class="lbl-code">${esc(it.code)}</span> ${esc(it.name)}</div>
+          <div class="lbl-dates"><input type="date" value="${it.start}" data-d="${wi}.${ii}.start"><input type="date" value="${it.end}" data-d="${wi}.${ii}.end"></div>
+        </div>
+        <div class="track" style="--wk:${WK}px;width:${W}px">
+          <div class="bar ${it.status}" style="left:${l}px;width:${w}px" title="${esc(it.name)} — ${STATUS[it.status].label}">
+            <div class="fill" style="width:${fill}%"></div><span class="bl">${fill}%</span>
+          </div>
+          <div class="today" style="left:${todayPx}px"></div>
+        </div></div>`;
+    });
+  });
+  g.innerHTML=html;
+  g.querySelectorAll('input[data-d]').forEach(inp=>inp.addEventListener('change',()=>{
+    const [wi,ii,f]=inp.dataset.d.split('.'); const it=data.workstreams[+wi].items[+ii];
+    if(inp.value) it[f]=inp.value;
+    if(pd(it.end)<pd(it.start)) it.end=it.start;   // keep end ≥ start
+    renderGantt(); persist(true);
+  }));
+}
+
+function weekKey(d){ return iso(mondayOf(d)); }
+function captureSnapshot(){
+  const t=today(); const key=weekKey(t);
+  const snap={week:key,date:iso(t),overall:Math.round(overallProgress()*100)};
+  const i=data.snapshots.findIndex(s=>s.week===key);
+  if(i>=0) data.snapshots[i]=snap; else data.snapshots.push(snap);
+  data.snapshots.sort((a,b)=>a.week<b.week?-1:1);
+  renderTrend(); persist(false);
+}
+function renderTrend(){
+  const box=document.getElementById('trend');
+  const snaps=data.snapshots;
+  const now=Math.round(overallProgress()*100);
+  let delta='', dcls='flat';
+  if(snaps.length){ const d=now-snaps[snaps.length-1].overall; dcls=d>0?'up':d<0?'down':'flat'; delta=(d>0?'+':'')+d+' pts since last snapshot'; }
+  const head=`<div class="tl-trend-head">
+      <div><h3>Week-on-week progress</h3><p>Capture a snapshot each week to chart how overall completion is trending.</p></div>
+      <div class="tl-now"><div class="big">${now}%</div>${snaps.length?`<div class="delta ${dcls}">${delta}</div>`:''}</div>
+      <div style="width:100%;display:flex;gap:9px;margin-top:4px">
+        <button class="btn primary" id="btn-capture"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3v9m0 0l-3-3m3 3l3-3M4 15v2h12v-2"/></svg>Capture this week</button>
+        ${snaps.length?`<button class="btn ghost" id="btn-undo-snap">Remove last snapshot</button>`:''}
+      </div>`;
+
+  let body;
+  if(snaps.length<1){
+    body=`<div class="trend-empty">No snapshots yet. Click <strong>Capture this week</strong> to log today’s ${now}% and start the trend line.</div>`;
+  }else{
+    const W=820,H=130,pl=34,pr=12,pt=14,pb=22;
+    const n=snaps.length;
+    const xs=i=> n===1? (pl+(W-pl-pr)/2) : pl + i*(W-pl-pr)/(n-1);
+    const ys=v=> pt + (1-v/100)*(H-pt-pb);
+    let gl=''; [0,50,100].forEach(v=>{ const y=ys(v);
+      gl+=`<line x1="${pl}" y1="${y}" x2="${W-pr}" y2="${y}" stroke="var(--line)" stroke-width="1"/><text x="${pl-7}" y="${y+3}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted-2)">${v}</text>`; });
+    const pts=snaps.map((s,i)=>`${xs(i)},${ys(s.overall)}`).join(' ');
+    const area=`${pl},${ys(0)} ${pts} ${xs(n-1)},${ys(0)}`;
+    let dots='',labels='';
+    snaps.forEach((s,i)=>{ const x=xs(i),y=ys(s.overall);
+      dots+=`<circle cx="${x}" cy="${y}" r="3.5" fill="var(--emerald)" stroke="#fff" stroke-width="1.5"/>`;
+      dots+=`<text x="${x}" y="${y-9}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" font-weight="600" fill="var(--ink)">${s.overall}</text>`;
+      labels+=`<text x="${x}" y="${H-6}" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="var(--muted-2)">${shortDate(pd(s.week))}</text>`; });
+    body=`<svg class="trend-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">
+        <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--emerald)" stop-opacity="0.22"/><stop offset="1" stop-color="var(--emerald)" stop-opacity="0"/></linearGradient></defs>
+        ${gl}<polygon points="${area}" fill="url(#ag)"/>
+        ${n>1?`<polyline points="${pts}" fill="none" stroke="var(--emerald)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`:''}
+        ${dots}${labels}</svg>`;
+  }
+  box.innerHTML=head+body;
+  const cap=document.getElementById('btn-capture'); if(cap) cap.onclick=captureSnapshot;
+  const undo=document.getElementById('btn-undo-snap'); if(undo) undo.onclick=()=>{ data.snapshots.pop(); renderTrend(); persist(false); };
+}
+
+/* ---------------- Meta editing ---------------- */
+document.querySelectorAll('[data-meta]').forEach(el=>{
+  el.addEventListener('blur',()=>{ data.meta[el.dataset.meta]=el.textContent.trim(); persist(true); });
+  el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); }});
+});
+
+/* ---------------- View switch ---------------- */
+function showView(v){
+  view=v;
+  document.getElementById('board-view').classList.toggle('hidden', v!=='board');
+  document.getElementById('timeline-view').classList.toggle('hidden', v!=='timeline');
+  document.getElementById('v-board').classList.toggle('active', v==='board');
+  document.getElementById('v-timeline').classList.toggle('active', v==='timeline');
+  rerender();
+}
+document.getElementById('v-board').onclick=()=>showView('board');
+document.getElementById('v-timeline').onclick=()=>showView('timeline');
+
+/* ---------------- Toolbar ---------------- */
+document.getElementById('btn-save').onclick=()=>persist(false);
+document.getElementById('btn-add-ws').onclick=()=>{ data.workstreams.push({code:String(data.workstreams.length+1),name:'New Workstream',items:[]}); rerender(); persist(true); };
+document.getElementById('btn-print').onclick=()=>window.print();
+document.getElementById('btn-export').onclick=()=>{
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='project-plan-'+(data.meta.updated||'export').replace(/\s+/g,'-')+'.json'; a.click(); URL.revokeObjectURL(a.href);
+};
+document.getElementById('btn-import').onclick=()=>document.getElementById('file-input').click();
+document.getElementById('file-input').addEventListener('change',e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ const p=JSON.parse(r.result); if(!p.workstreams) throw 0; data=ensureSchema(p); rerender(); persist(false); }
+    catch(err){ alert('That file could not be read as a project plan.'); } };
+  r.readAsText(file); e.target.value='';
+});
+
+rerender();
+</script>
+</body>
+</html>
