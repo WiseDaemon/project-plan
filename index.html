@@ -347,50 +347,20 @@ const KPIS=[
   {id:'tools_avg_progress', tier:'Weekly Summary', type:'Lagging', label:'Average Progress', unit:'%', dir:'up', target:76, owner:'Shivam Saxena',
    decision:'Portfolio momentum up week-over-week', calc:()=>Math.round(overallProgress()*100)},
 
-  {id:'deploy', tier:'Outcome', type:'Lagging', label:'Deployment Rate', unit:'%', dir:'up', target:70, owner:'Programme Lead', spark:'deploy',
-   decision:'Go / no-go on execution-team onboarding — are workflows actually live in production?',
-   calc:()=>pctDone()},
-  {id:'readiness', tier:'Outcome', type:'Lagging', label:'Programme Readiness Index', unit:'%', dir:'up', target:80, owner:'Programme Lead', spark:'readiness',
-   decision:'Overall trajectory toward full deployment; steering-committee headline.',
-   calc:()=>Math.round(overallProgress()*100)},
-
-  {id:'blocked', tier:'Driver', type:'Driver', label:'Business-Input Bottleneck', unit:'%', dir:'down', target:10, owner:'Business SPOC',
-   decision:'Escalate to business stakeholders — share of workflows stalled awaiting inputs.',
-   calc:()=>{const t=allItems().length;return t?Math.round(byStatus('blocked')/t*100):0;}},
-  {id:'approval', tier:'Driver', type:'Driver', label:'In Approval / UAT', unit:'', dir:null, owner:'QA / UAT Lead',
-   decision:'Where to point UAT and sign-off effort — workflows one step from going live.',
-   calc:()=>byStatus('review')},
-  {id:'pipeline', tier:'Driver', type:'Driver', label:'Pipeline Maturity', unit:'%', dir:'up', target:75, owner:'Programme Lead',
-   decision:'How much scope has reached approval-stage or beyond (review + live).',
-   calc:()=>{const t=allItems().length;return t?Math.round((byStatus('review')+byStatus('done'))/t*100):0;}},
-
-  {id:'adherence', tier:'Schedule', type:'Driver', label:'Schedule Adherence', unit:'%', dir:'up', target:90, owner:'PMO',
-   decision:'Replan / recover decision — share of workflows not past their planned end date.',
-   calc:()=>{const t=allItems().length;return t?Math.round((t-overdueItems().length)/t*100):0;}},
-  {id:'overdue', tier:'Schedule', type:'Lagging', label:'Overdue Workflows', unit:'', dir:'down', target:0, owner:'PMO',
-   decision:'Immediate escalation list — workflows past planned end and not yet live.',
-   calc:()=>overdueItems().length},
-  {id:'cycle', tier:'Schedule', type:'Driver', label:'Avg Planned Cycle', unit:'d', dir:null, owner:'PMO',
-   decision:'Capacity planning — average planned build-to-deploy duration per workflow.',
-   calc:()=>avgCycle()},
-
-  {id:'building', tier:'Leading', type:'Leading', label:'In Active Build', unit:'', dir:null, owner:'Delivery Lead',
-   decision:'Throughput signal — workflows currently being built.',
-   calc:()=>byStatus('in-progress')},
-  {id:'due14', tier:'Leading', type:'Leading', label:'Due Next 14 Days', unit:'', dir:null, owner:'Delivery Lead',
-   decision:'Near-term go-lives to pre-clear — workflows scheduled to finish within two weeks.',
-   calc:()=>dueWithin(14).length},
-
-  {id:'adoption', tier:'Outcome', type:'Lagging', label:'Workflow Adoption', unit:'%', dir:'up', target:80, owner:'Field Ops', instrument:true,
-   decision:'Value realisation — share of field sites/tasks actually executed through live workflows.',
-   calc:()=>null},
+  {id:'board_total', tier:'Board Stats', type:'Informational', label:'Total Items Tracked', unit:'', dir:null, owner:'Programme Office',
+   decision:'Total tasks actively tracked on the board.', calc:()=>allItems().length},
+  {id:'board_done', tier:'Board Stats', type:'Lagging', label:'Items Completed', unit:'', dir:'up', owner:'Programme Office',
+   decision:'Tasks that are 100% complete.', calc:()=>byStatus('done')},
+  {id:'board_review', tier:'Board Stats', type:'Leading', label:'In Approval / UAT', unit:'', dir:null, owner:'Programme Office',
+   decision:'Tasks awaiting sign-off or QA validation.', calc:()=>byStatus('review')},
+  {id:'board_active', tier:'Board Stats', type:'Leading', label:'In Active Build', unit:'', dir:null, owner:'Programme Office',
+   decision:'Tasks currently being worked on by the delivery team.', calc:()=>byStatus('in-progress')},
+  {id:'board_blocked', tier:'Board Stats', type:'Lagging', label:'Blocked Items', unit:'', dir:'down', target:0, owner:'Programme Office',
+   decision:'Tasks currently blocked or awaiting business inputs.', calc:()=>byStatus('blocked')}
 ];
 const TIER_DESC={
   'Weekly Summary': 'This Week vs Last Week KPI Summary.',
-  'Outcome':'Did we deliver and is it used? — lagging results.',
-  'Driver':'What moves the outcome? — manage these weekly.',
-  'Schedule':'Are we on time? — recover before it bites.',
-  'Leading':'What is happening now? — early signals.'
+  'Board Stats': 'Real-time roll-ups aggregated directly from the Board view.'
 };
 
 /* ---------------- Seed ---------------- */
@@ -572,7 +542,7 @@ function ragOf(k,v){
 const RAG_LABEL={g:'On track',a:'Watch',r:'Off track',na:'Monitor'};
 function renderKPI(){
   const host=document.getElementById('kpi-view');
-  const tiers=['Weekly Summary','Outcome','Driver','Schedule','Leading'];
+  const tiers=['Weekly Summary','Board Stats'];
   let html=`<div class="kpi-objective"><div class="k">Strategic objective</div><div class="o" contenteditable="true" data-meta="kpiObjective">${esc(data.meta.kpiObjective)}</div></div>`;
 
   tiers.forEach(tier=>{
