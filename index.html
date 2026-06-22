@@ -304,8 +304,8 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script><script>const firebaseConfig = {apiKey: "AIzaSyDEoqWzL5Nm_YEmioMRrwxKqPO0LnCOfkQ",authDomain: "project-plan-sync.firebaseapp.com",projectId: "project-plan-sync",storageBucket: "project-plan-sync.firebasestorage.app",messagingSenderId: "965545331409",appId: "1:965545331409:web:5bb1a8123c54d0e27053f0"};firebase.initializeApp(firebaseConfig);const db = firebase.firestore();</script><script>/* ---------------- Status model ---------------- */
 const STATUS = {
-  'done':{label:'Completed',weight:1.00}, 'review':{label:'Under Review',weight:0.75},
-  'in-progress':{label:'In Progress',weight:0.40}, 'blocked':{label:'Awaiting Inputs',weight:0.10},
+  'done':{label:'Completed',weight:1.00}, 'review':{label:'Under Review',weight:0.85},
+  'in-progress':{label:'In Progress',weight:0.65}, 'blocked':{label:'Awaiting Inputs',weight:0.10},
   'not-started':{label:'Not Started',weight:0.00},
 };
 const STORAGE_KEY='workflow-programme-plan-v1';
@@ -345,7 +345,7 @@ const KPIS=[
   {id:'tools_notstarted', tier:'Weekly Summary', type:'Leading', label:'Planning / Not Started', unit:'', dir:'down', owner:'Shivam Saxena',
    decision:'ML plan moved out of planning into build', calc:()=>0},
   {id:'tools_avg_progress', tier:'Weekly Summary', type:'Lagging', label:'Average Progress', unit:'%', dir:'up', target:76, owner:'Shivam Saxena',
-   decision:'Portfolio momentum up week-over-week', calc:()=>76},
+   decision:'Portfolio momentum up week-over-week', calc:()=>Math.round(overallProgress()*100)},
 
   {id:'deploy', tier:'Outcome', type:'Lagging', label:'Deployment Rate', unit:'%', dir:'up', target:70, owner:'Programme Lead', spark:'deploy',
    decision:'Go / no-go on execution-team onboarding — are workflows actually live in production?',
