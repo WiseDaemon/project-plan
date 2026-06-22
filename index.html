@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -244,7 +244,7 @@
     <p class="sub" contenteditable="true" data-meta="sub">Workflow build &amp; deployment tracker across Transmission Line, Jio Tower Solarisation, and Diesel Elimination workstreams.</p>
     <div class="metabar">
       <div class="metric"><div class="k">Owner</div><div class="v" contenteditable="true" data-meta="owner">Programme Office</div></div>
-      <div class="metric"><div class="k">Updated</div><div class="v" contenteditable="true" data-meta="updated">19 Jun 2026</div></div>
+      <div class="metric"><div class="k">Updated</div><div class="v" contenteditable="true" data-meta="updated">22 Jun 2026</div></div>
       <div class="metric"><div class="k">Workstreams</div><div class="v"><span id="ws-count">3</span> <small>/ <span id="item-count">0</span> items</small></div></div>
       <div class="overall">
         <div class="k"><span>Overall progress</span><span class="pct" id="overall-pct">0%</span></div>
@@ -387,24 +387,29 @@ const SEED={
     sub:'Workflow build & deployment tracker across Transmission Line, Jio Tower Solarisation, and Diesel Elimination workstreams.',
     owner:'Programme Office', updated:'19 Jun 2026',
     kpiObjective:'Build and deploy production-grade construction & quality digital workflows across all programme scopes, on schedule, so execution teams can be onboarded onto the platform and field operations run on it.'},
-  snapshots:[], kpis:{},
+  snapshots:[{week:'2026-06-08',date:'2026-06-08',overall:18,deploy:10},{week:'2026-06-15',date:'2026-06-19',overall:76,deploy:33}], kpis:{},
   workstreams:[
     {code:'1', name:'Transmission Line', items:[
-      {code:'1.1', name:'Foundation — Construction Workflow', status:'review', note:'Workflow approved. Routing logic incorporated to send sites to Pile or Open-Cast foundation flows based on ROW availability and Construction Manager confirmation. Final UAT pending before execution-team onboarding.'},
-      {code:'1.1', name:'Foundation — Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
-      {code:'1.2', name:'Erection — Construction Workflow', status:'blocked', note:'Workflow design pending; awaiting detailed business inputs.'},
-      {code:'1.2', name:'Erection — Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
-      {code:'1.3', name:'Stringing — Construction Workflow', status:'blocked', note:'Workflow creation pending; awaiting business team inputs.'},
-      {code:'1.3', name:'Stringing — Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
-      {code:'1.4', name:'Earthing — Construction Workflow', status:'review', note:'Workflow configured and submitted for final business approval.'},
-      {code:'1.4', name:'Earthing — Transmission Logic in Forms', status:'done', note:'Transmission logic finalised in forms.'},
+      {code:'1.1', name:'Foundation - Construction Workflow', status:'review', note:'Workflow approved. Routing logic incorporated to send sites to Pile or Open-Cast foundation flows based on ROW availability and Construction Manager confirmation. Final UAT pending before execution-team onboarding.'},
+      {code:'1.1', name:'Foundation - Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.2', name:'Erection - Construction Workflow', status:'blocked', note:'Workflow design pending; awaiting detailed business inputs.'},
+      {code:'1.2', name:'Erection - Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.3', name:'Stringing - Construction Workflow', status:'blocked', note:'Workflow creation pending; awaiting business team inputs.'},
+      {code:'1.3', name:'Stringing - Quality & Quantity Workflow', status:'in-progress', note:'Requirements gathering initiated. JMS integration approach to be finalised.'},
+      {code:'1.4', name:'Earthing - Construction Workflow', status:'review', note:'Workflow configured and submitted for final business approval.'},
+      {code:'1.4', name:'Earthing - Transmission Logic in Forms', status:'done', note:'Transmission logic finalised in forms.'},
     ]},
     {code:'2', name:'Jio Tower Solarisation', items:[
       {code:'2.1', name:'Survey Workflow', status:'done', note:'Survey workflow finalised, tested, and deployed.'},
       {code:'2.2', name:'Design Workflow', status:'done', note:'Design workflow finalised and implemented.'},
-      {code:'2.3', name:'Execution Workflow', status:'done', note:'Execution workflow finalised and implemented, including recent field enhancements.\n• Updated execution dashboards.\n• Raft and pile options implemented in forms across all states.'},
+      {code:'2.3', name:'Execution Workflow', status:'done', note:'Execution workflow finalised and implemented.\n  Updated execution dashboards highlighting start/end date KPIs across 29 tower assets.\n  Raft and Pile foundation ITP conditions pushed across all 29/29 assets (week of 15-19 Jun).'},
       {code:'2.4', name:'Consolidated Dashboard', status:'done', note:'End-to-end visibility dashboard developed across survey, design, and execution stages.'},
       {code:'2.5', name:'Barcode Scanning Feature', status:'in-progress', note:'Development in progress. Expected in the upcoming platform release.'},
+      {code:'2.6', name:'SunGenie Sprint Release Bulletin', status:'done', note:'Release bulletin published (week of 15-19 Jun) capturing all newly launched features and enhancements for the SunGenie sprint release.'},
+      {code:'2.7', name:'Raft & Pile Foundation ITPs', status:'done', note:'All Raft and Pile type foundation changes for Solar ITPs pushed with conditions applied. 29/29 assets completed. WoW: +80 pp (was 20%).'},
+      {code:'2.8', name:'Tower Solarization Execution Dashboard', status:'in-progress', note:'Built execution dashboard highlighting start and end date KPIs for tower solarization across 29 assets. 60% complete. WoW: +60 pp (new this week).'},
+      {code:'2.9', name:'Execution ITP Forms - Bug Fixes', status:'in-progress', note:'Fixing bugs in execution ITP forms across all states, post Raft/Pile implementation. 70% complete. WoW: +70 pp (new this week).'},
+      {code:'2.10', name:'JioSunGenie ML Implementation Plan', status:'in-progress', note:'Expanded ML implementation plan with additional use cases and business value documentation. Pre-POC stage. 45% complete. WoW: +25 pp (was 20%).'},
     ]},
     {code:'3', name:'Diesel Elimination for Jio Tower', items:[
       {code:'3.1', name:'Survey Workflow', status:'review', note:'Survey workflow under finalisation and stakeholder review.'},
@@ -414,6 +419,7 @@ const SEED={
       {code:'3.5', name:'Creation of Features', status:'in-progress', note:'0/30'},
       {code:'3.6', name:'Form Assignment to Respective Asset Features', status:'in-progress', note:'0/30'},
       {code:'3.7', name:'Site Onboarding via GeoJSON Files', status:'in-progress', note:'24/30'},
+      {code:'3.8', name:'Tower Onboarding - All States', status:'in-progress', note:'Onboarded tower sites and mapped forms to their respective containers across all states. 80% complete. WoW: +80 pp (new this week).'},
     ]},
   ]
 };
