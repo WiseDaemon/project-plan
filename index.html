@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -336,6 +336,17 @@ function avgCycle(){const it=allItems();if(!it.length)return 0;return Math.round
 /* ---------------- KPI definitions ---------------- */
 /* dir: 'up' higher-better, 'down' lower-better, null informational (no RAG) */
 const KPIS=[
+  {id:'tools_tracked', tier:'Weekly Summary', type:'Leading', label:'Project points / Tools Tracked', unit:'', dir:null, owner:'Shivam Saxena',
+   decision:'Same breadth of workstreams', calc:()=>6},
+  {id:'tools_completed', tier:'Weekly Summary', type:'Lagging', label:'Completed', unit:'', dir:'up', owner:'Shivam Saxena',
+   decision:'SunGenie release & Raft/Pile ITPs closed out', calc:()=>2},
+  {id:'tools_inprogress', tier:'Weekly Summary', type:'Leading', label:'In Progress', unit:'', dir:null, owner:'Shivam Saxena',
+   decision:'Dashboard, ML, bug fixes & diesel elimination active', calc:()=>4},
+  {id:'tools_notstarted', tier:'Weekly Summary', type:'Leading', label:'Planning / Not Started', unit:'', dir:'down', owner:'Shivam Saxena',
+   decision:'ML plan moved out of planning into build', calc:()=>0},
+  {id:'tools_avg_progress', tier:'Weekly Summary', type:'Lagging', label:'Average Progress', unit:'%', dir:'up', target:76, owner:'Shivam Saxena',
+   decision:'Portfolio momentum up week-over-week', calc:()=>76},
+
   {id:'deploy', tier:'Outcome', type:'Lagging', label:'Deployment Rate', unit:'%', dir:'up', target:70, owner:'Programme Lead', spark:'deploy',
    decision:'Go / no-go on execution-team onboarding — are workflows actually live in production?',
    calc:()=>pctDone()},
@@ -375,6 +386,7 @@ const KPIS=[
    calc:()=>null},
 ];
 const TIER_DESC={
+  'Weekly Summary': 'This Week vs Last Week KPI Summary.',
   'Outcome':'Did we deliver and is it used? — lagging results.',
   'Driver':'What moves the outcome? — manage these weekly.',
   'Schedule':'Are we on time? — recover before it bites.',
@@ -560,7 +572,7 @@ function ragOf(k,v){
 const RAG_LABEL={g:'On track',a:'Watch',r:'Off track',na:'Monitor'};
 function renderKPI(){
   const host=document.getElementById('kpi-view');
-  const tiers=['Outcome','Driver','Schedule','Leading'];
+  const tiers=['Weekly Summary','Outcome','Driver','Schedule','Leading'];
   let html=`<div class="kpi-objective"><div class="k">Strategic objective</div><div class="o" contenteditable="true" data-meta="kpiObjective">${esc(data.meta.kpiObjective)}</div></div>`;
 
   tiers.forEach(tier=>{
