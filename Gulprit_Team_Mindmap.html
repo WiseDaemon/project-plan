@@ -9,7 +9,7 @@
   color-scheme: light;
   --ink:#0F172A; --ink2:#334155; --muted:#64748B; --line:#E2E8F0; --bg:#F7F8FA; --card:#FFFFFF;
   --navy:#0B2545;
-  --sol:#2563EB; --act:#0F766E; --str:#15803D; --gap:#B45309;
+  --sol:#2563EB; --act:#0F766E;
   --font: "Segoe UI Variable Text","Segoe UI",Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
   --font-head: "Segoe UI Variable Display","Segoe UI Semibold","Segoe UI",Inter,-apple-system,"Helvetica Neue",Arial,sans-serif;
 }
@@ -84,7 +84,7 @@ h1{font-family:var(--font-head);font-weight:650;font-size:19px;letter-spacing:-.
   <div class="h-top">
     <div>
       <h1>Team Mindmap — Jio Devices Team under Gulprit S.</h1>
-      <div class="sub">Jio Devices Team · Solutions, Activities, Strengths &amp; Gaps · Source: TeamWork_GS.pptx weekly updates (Jun – Oct 2026)</div>
+      <div class="sub">Jio Devices Team · Solutions &amp; Activities · Source: TeamWork_GS.pptx weekly updates (Jun – Oct 2026)</div>
     </div>
     <div class="stats">
       <div class="stat"><b>14</b><span>Members</span></div>
@@ -110,8 +110,6 @@ h1{font-family:var(--font-head);font-weight:650;font-size:19px;letter-spacing:-.
       <button data-f="all" class="on">All</button>
       <button data-f="sol"><span class="dot" style="background:var(--sol)"></span>Solutions</button>
       <button data-f="act"><span class="dot" style="background:var(--act)"></span>Activities</button>
-      <button data-f="str"><span class="dot" style="background:var(--str)"></span>Strengths</button>
-      <button data-f="gap"><span class="dot" style="background:var(--gap)"></span>Gaps</button>
     </div>
     <span class="lbl">Zoom</span>
     <div class="grp">
@@ -127,9 +125,7 @@ h1{font-family:var(--font-head);font-weight:650;font-size:19px;letter-spacing:-.
 <script>
 const CAT = {
   sol:{label:"Solutions", color:"#2563EB", tint:"#EFF6FF"},
-  act:{label:"Activities", color:"#0F766E", tint:"#F0FDFA"},
-  str:{label:"Strengths", color:"#15803D", tint:"#F0FDF4"},
-  gap:{label:"Gaps", color:"#B45309", tint:"#FFFBEB"}
+  act:{label:"Activities", color:"#0F766E", tint:"#F0FDFA"}
 };
 const MONTHS=["Jun","Jul","Aug","Sep","Oct"];
 
@@ -149,119 +145,86 @@ const MEMBERS = [
   period:"Jun – Oct 2026", hours:"~10:00", cov:[4,5,4,4,4],
   stake:"Gulprit S., Jith T., Chidambar J.",
   sol:["JioSunGenie (Solar CMS) & TrueSolar mobile app","Jio TowerGenie / tower solarization on SenseHawk TaskMapper","DRE-site energy forecasting (XGBoost, LSTM, weather correction)","Mobile DG (MDG) asset-utilization reporting","Plant digitization — Kutch Z2, Bidar SCADA tags, Jamnagar BESS SLDs"],
-  act:["Defined SunGenie C&I vs Residential vs Lite offerings; pivot strategy & KYP decks","Built ITP forms (Raft/Pile), HOTO checklist across 29 state circles and KPI / national HTML dashboards","Back-tested multiple forecasting models on 40+ DRE sites; formulated model-selection logic","Publishes daily MDG utilization & TowerGenie updates to Apex","Mapped ICR3/ICR4 tags to SCADA (Bidar); drone sortie planning for Kutch Z2","Authored SoPs (asset onboarding, Solar-on-Tower), user guides, REI product guides & video scripts","Drafted AI-agent (RAG) and ML implementation plan for SunGenie; insight pipeline"],
-  str:["Rare mix of hands-on platform configuration and data-science / ML skills","Strong documentation discipline — SoPs, PRDs, onboarding guides","Sustained delivery cadence — daily MDG / TowerGenie updates to Apex","Covers the full chain: field forms → dashboards → leadership reporting"],
-  gap:["Spread across SunGenie, TowerGenie, plants, MDG reports and REI content — risk of diluted depth","Forecasting iterated Aug–Sep with no accuracy benchmark or production adoption yet","Platform business impact (adoption, diesel saved, SLA gains) not yet measured","NE-team solar asset onboarding dependency open since June"]},
+  act:["Defined SunGenie C&I vs Residential vs Lite offerings; pivot strategy & KYP decks","Built ITP forms (Raft/Pile), HOTO checklist across 29 state circles and KPI / national HTML dashboards","Back-tested multiple forecasting models on 40+ DRE sites; formulated model-selection logic","Publishes daily MDG utilization & TowerGenie updates to Apex","Mapped ICR3/ICR4 tags to SCADA (Bidar); drone sortie planning for Kutch Z2","Authored SoPs (asset onboarding, Solar-on-Tower), user guides, REI product guides & video scripts","Drafted AI-agent (RAG) and ML implementation plan for SunGenie; insight pipeline"]},
 
 { id:"anjali", cluster:"solar", name:"Anjali C.", role:"Program Management — Distributed Solar (tower solarization)",
   period:"Jun – Oct 2026", hours:"9:30–10:00", cov:[4,5,3,4,4],
   stake:"Gulprit S., Ranjini R., Harsha U., Pichammal V., Rajesh L.",
   sol:["Distributed solar: POC sites → 200 POC → 30K-site rollout; 480 USOF sites","TEMS, Zigbee, ACDB / ACJB, micro-inverters","SenseHawk execution BI & PAN-India tracker","Cost-savings HTML dashboard for Apex","Panel repackaging, e-SIM activation, STO / MAT-code SCM flow"],
-  act:["Runs weekly cadence and weekly project highlights mail to Apex & JTL","Secured on-time Zigbee PRD and delivery of 2.5K e-SIMs; activated 1,000 e-SIMs","Built 30K BoM delivery schedule; mapped TA/PDI owners for all BoM items","Drafted electrical, mechanical and MMS (2Px4, 2Px6) SOP templates","Unblocked budgets — repackaging vendor (200 sites), fasteners & mounting plates (1K sites)","Aligned RJIL on EPC WO approach, STO, kitting, MAT codes and RACI","Completed installation & commissioning of the BLR POC site (Oct)"],
-  str:["Excellent program control and follow-through","Proactive risk highlighting to Apex","Effective cross-organisation alignment (RJIL ↔ JTL)","Unblocks approvals and budgets quickly"],
-  gap:["Recurring SCM / material delays (mechanical items for 198 sites, ACJB plate shortage) — needs a firmer escalation path","First POC commissioned only in late Oct against a June start — timeline slippage","Tracking still largely manual (dashboard feature requests pending)"]},
+  act:["Runs weekly cadence and weekly project highlights mail to Apex & JTL","Secured on-time Zigbee PRD and delivery of 2.5K e-SIMs; activated 1,000 e-SIMs","Built 30K BoM delivery schedule; mapped TA/PDI owners for all BoM items","Drafted electrical, mechanical and MMS (2Px4, 2Px6) SOP templates","Unblocked budgets — repackaging vendor (200 sites), fasteners & mounting plates (1K sites)","Aligned RJIL on EPC WO approach, STO, kitting, MAT codes and RACI","Completed installation & commissioning of the BLR POC site (Oct)"]},
 
 { id:"kavit", cluster:"batt", name:"Kavit D.", role:"Program Mgmt: Telecom Battery in-life · Product Mgmt: TowerGenie 2.0",
   period:"Jun – Oct 2026", hours:"9:10–10:00", cov:[4,5,4,3,4],
   stake:"Gulprit S., Rakshit R., Gautam G., Mallikarjun B., Ranjini R.",
   sol:["314Ah telecom battery packs — in-life monitoring, FOTA, inactive packs","TowerGenie 2.0 (Claude MCP + web app, AI reports builder)","100Ah pack refurbishment / BRC reverse process","BESS (261 kWh, 45 kWh, Malur, AG1 sites), MBU, 45Ah vs 40Ah cells","Battery & BESS portfolio / GTM; BMS sub-component sourcing (Infineon)"],
-  act:["Categorised inactive packs (Cat 1 FOTA; Cat 2/3 site visits); FOTA tracking for 10K+ packs (M1 vs M4)","Bifurcated BMS states into good / bad / not remotely recoverable","Wrote TowerGenie BRD/PRD; ran UAT and logged bugs in Azure DevOps","Authored AI-in-Battery note for the Chairman with system architecture","Built ‘one platform – six products’ Battery/BESS portfolio & GTM deck","Malur BESS 10-yr FCF payback; BESS recommendations for 263 JCs; Ecom/Qcomm pitch","Onboarded 314Ah service partners; burnt-pack tracker; IAUD audit"],
-  str:["Strong analytical depth across Zabbix, Jenkins and Databricks data","Bridges strategy (Chairman notes, GTM) and operations (pack recovery)","Rigorous UAT / QA mindset","Data-backed RCA for field battery failures"],
-  gap:["Heavy operational load (daily reports, UAT) crowds out strategic battery work","Overlaps with Viniksha & Vikas on 314Ah issue tracking — role boundaries unclear","Inactive-pack recovery has no target or closure KPI (e.g., % packs back online)","Post-FOTA issues (un-auth status, M4 boards not upgrading) still open"]},
+  act:["Categorised inactive packs (Cat 1 FOTA; Cat 2/3 site visits); FOTA tracking for 10K+ packs (M1 vs M4)","Bifurcated BMS states into good / bad / not remotely recoverable","Wrote TowerGenie BRD/PRD; ran UAT and logged bugs in Azure DevOps","Authored AI-in-Battery note for the Chairman with system architecture","Built ‘one platform – six products’ Battery/BESS portfolio & GTM deck","Malur BESS 10-yr FCF payback; BESS recommendations for 263 JCs; Ecom/Qcomm pitch","Onboarded 314Ah service partners; burnt-pack tracker; IAUD audit"]},
 
 { id:"khemraj", cluster:"batt", name:"Khemraj K.", role:"Strategy & Research: BESS · Second-life batteries · Business modelling",
   period:"Jun – Oct 2026", hours:"9:30–11:00", cov:[4,5,3,3,4],
   stake:"Gulprit S., Gautam G., Nandy S., Chitbhav, Mallikarjun B.",
   sol:["JioBESS Studio — DG TCO engine & BESS sales calculator (ToD arbitrage)","JC fleet BESS economics (1,039 JCO sites); Karad / Yousta site model","MBU commercials; second-life 100Ah / BRC programme","12.8V / 25.6V packs with LiB & TruePower","Energenie monitoring platform; Ambient (HAR tag); micro-inverter markets; Dukosi"],
-  act:["JC fleet deck to APEX: DG ₹221 Cr vs BESS ₹75.6 Cr → ₹145.5 Cr 10-yr saving","Karad P&L: IRR 10.8%, payback 71 months; secured BESS deployment approval","MBU TCO ₹115.6L vs MDG ₹221L; 18-scenario sensitivity cross-validation","Second-life implementation draft & market map of 30+ players","100Ah BRC approach note and business plan: +₹614 Cr (ROI 18%)","Energenie benchmarking, custom chart builder; fixed a savings-calculation bug","Ambient proposal approved by business and moved to Revenue team"],
-  str:["Excellent financial modelling and quantification","Builds working tools, not just decks","Pushes vendors on pace and design trade-offs","Clear business-case storytelling"],
-  gap:["100Ah BRC business plan awaiting decision; the 12.8V pack route loses money at current price (break-even ~₹13,462 vs ₹13,000)","Repeated model re-baselining (DG cost ₹134.8 → ₹87.7/kWh) — lock assumptions upfront","Spread across BESS, 100Ah, Ambient, inverters, Dukosi — focus risk"]},
+  act:["JC fleet deck to APEX: DG ₹221 Cr vs BESS ₹75.6 Cr → ₹145.5 Cr 10-yr saving","Karad P&L: IRR 10.8%, payback 71 months; secured BESS deployment approval","MBU TCO ₹115.6L vs MDG ₹221L; 18-scenario sensitivity cross-validation","Second-life implementation draft & market map of 30+ players","100Ah BRC approach note and business plan: +₹614 Cr (ROI 18%)","Energenie benchmarking, custom chart builder; fixed a savings-calculation bug","Ambient proposal approved by business and moved to Revenue team"]},
 
 { id:"viniksha", cluster:"batt", name:"Viniksha S. V.", role:"Battery research → 314Ah critical-issue management (iNOC / Jio Garnet)",
   period:"Jun – Oct 2026", hours:"9:30–10:00", cov:[4,5,4,4,5],
   stake:"Gulprit S., Mahadev PM, Sarada Bal, Ranjini R., Madhu Phaniraj",
   sol:["587Ah / 684Ah cell research & BESS products (C&I, residential)","BMS portfolio assessment; <50Ah packs (40Ah prismatic vs 45Ah cylindrical)","MBU techno-commercial doc; Jio Restore portfolio & GTM","Malur 45 kWh BESS analysis; 263-JC BESS ratings; IEX research","314Ah issue tracking — iNOC, Jio Garnet, MES data, BMS security assessment"],
-  act:["Found telecom pack on 587Ah feasible; flagged BMS gap for C&I","Showed cylindrical cells ~10% cheaper for a 45Ah pack","Malur: zero EB bill due to power wheeling → 15-yr payback; advised against 45 kWh","Identified 108 issues via iNOC; designed Jio Garnet single-source issue process","Tracked replacement packs (267 → 352) and action items for 1,000+ inactive packs","Burnt-pack / fire analysis (cell ageing, serial numbers); L1/L2 inactive-pack SOP"],
-  str:["Fast research synthesis with clear, decision-ready conclusions","Process builder — Garnet flow, SOPs, user stories","Tenacious daily follow-up with field & engineering teams","Data-driven issue categorisation"],
-  gap:["Since Aug role shifted to operational monitoring — research strengths under-used","Identification outpacing resolution: replacement backlog 267 → 352 packs, inactive packs 500 → 1,000+","Overlap with Kavit on inactive-pack work"]},
+  act:["Found telecom pack on 587Ah feasible; flagged BMS gap for C&I","Showed cylindrical cells ~10% cheaper for a 45Ah pack","Malur: zero EB bill due to power wheeling → 15-yr payback; advised against 45 kWh","Identified 108 issues via iNOC; designed Jio Garnet single-source issue process","Tracked replacement packs (267 → 352) and action items for 1,000+ inactive packs","Burnt-pack / fire analysis (cell ageing, serial numbers); L1/L2 inactive-pack SOP"]},
 
 { id:"vikas", cluster:"batt", name:"Vikas G.", role:"Strategy & Research: IoT, New Energy — leadership papers & battery failure analysis",
   period:"Jun – Oct 2026", hours:"9:45–10:00", cov:[2,3,0,3,3],
   stake:"Gulprit S., Malli B., Ranjini R.",
   sol:["Leadership papers — 261 kWh BESS, 45Ah pack, EnerGrid (IIT Gandhinagar), Dukosi IC, TOD-based DR, MBU, BMS security","587Ah cells; BESS for JCs and MFL/LFL sites","314Ah failure analysis (Aremac) & service network","TowerGenie 2.0 APEX metrics dashboard","Solar dongle market; BRC process"],
-  act:["Closed 261 kWh, 45Ah and EnerGrid papers; Dukosi, TOD, MBU in progress","Prepared BESS deck for APEX and solar-update/AI paper","Shortlisted vendors for burnt-pack analysis; NDA with Aremac in progress","Initiated 314Ah service network; built a 314Ah master tracking sheet","Supported HR on manager span health & project allocation data"],
-  str:["Editor / integrator of team-wide leadership papers","Good stakeholder coordination (HR, managers, vendors)","Broad research coverage"],
-  gap:["Many outputs remain ‘draft shared / ongoing’ without closure dates","Failure-analysis vendor engagement slow (started Sep, NDA open mid-Oct)","Admin tasks (HR data) dilute research focus"]},
+  act:["Closed 261 kWh, 45Ah and EnerGrid papers; Dukosi, TOD, MBU in progress","Prepared BESS deck for APEX and solar-update/AI paper","Shortlisted vendors for burnt-pack analysis; NDA with Aremac in progress","Initiated 314Ah service network; built a 314Ah master tracking sheet","Supported HR on manager span health & project allocation data"]},
 
 { id:"jyoti", cluster:"ev", name:"Jyoti R.", role:"Program Mgmt: EV charger service delivery · New product development",
   period:"Jul – Oct 2026", hours:"~10:00", cov:[0,3,0,3,2],
   stake:"Ashwani P., Kapil S., Puneet A., Malli B., Piyush C.",
   sol:["7.4 kW AC charger (Amazon B2C) & Aries 7 kW (Iljin)","3.3 kW AC charger — UAT before Amazon listing","DC chargers at CBG sites; 180–400 kW UFC / Quench validation","Plugzmart firmware (v7.1.15 / v7.1.16), TruePower CMS","EV charging business strategy (₹100 Cr FY’28)"],
-  act:["Drove RCA and fixes for Amazon customer charger issues","Got KEI to accept a gun design fault and replace entire inventory (500 guns dispatched)","Repaired 8/10 faulty boards; SOPs for PCBA replacement & manual firmware flashing","Wrote SORs for next production batch and SOWs for repair (76 / 56 units)","Trained L1/L2 Ops; enabled vendor FTP/ASN uploads","Developing alternate 7.4 kW vendors (Sterling & Wilson, Tianyin, Nytrotec)","Drafted ₹100 Cr EV charging plan and PO-to-commissioning process deck"],
-  str:["Strong supplier management and escalation","Deep technical RCA capability","Turns fixes into reusable SOPs / SORs","Growing into business-strategy ownership"],
-  gap:["Mostly reactive firefighting; preventive QA / incoming inspection not visible","Recurring dependency on a single firmware vendor (PZ) — FW v7.1.16 and Rev 2 BOM still pending","Charger reliability not tracked by KPIs (uptime, repeat-failure rate)","Limited charger inventory; alternate 7.4 kW vendor not yet finalised"]},
+  act:["Drove RCA and fixes for Amazon customer charger issues","Got KEI to accept a gun design fault and replace entire inventory (500 guns dispatched)","Repaired 8/10 faulty boards; SOPs for PCBA replacement & manual firmware flashing","Wrote SORs for next production batch and SOWs for repair (76 / 56 units)","Trained L1/L2 Ops; enabled vendor FTP/ASN uploads","Developing alternate 7.4 kW vendors (Sterling & Wilson, Tianyin, Nytrotec)","Drafted ₹100 Cr EV charging plan and PO-to-commissioning process deck"]},
 
 { id:"amol", cluster:"cons", name:"Amol V.", role:"Product Management — JioThings super app & consumer devices",
   period:"Jun – Oct 2026", hours:"~9:45", cov:[4,5,4,4,4],
   stake:"Gulprit S., Riju B., Ajay, Sandeep, Vishal",
   sol:["JioThings super app","JioLabel (QR vehicle label), JioShield (ex-JioChildSafe)","JioTag 2 (launched Jul), Itel Blink 4G (launched Sep)","JioMotive, JioFind, JioBook, Dashcam / JioEyeQ, JioSense Air","EV charger locator, number-sharing SDK, Android Auto/CarPlay for bikes (proposal)"],
-  act:["Drove JioLabel readiness — 3 rounds of physical feedback, 25+ user test, packaging & MRP compliance, domains, T&C published","Led JioShield integration, co-parent feature and onboarding-friction fixes","Launched JioTag 2 and Itel Blink 4G","L3 support for JioMotive / JioFind / JioBook; VAPT & InfoSec submissions","Caught JioMotive B2B devices sold as B2C on Amazon; re-initiated FOTA","Built JioThings ecosystem monetisation plan and JioTag growth strategy"],
-  str:["Strong end-to-end PM execution — two launches delivered","Customer-centric (user testing, CX recommendations)","High attention to compliance (Legal, InfoSec, MRP)","Proactive issue detection (B2B devices on Amazon, IDAM bug)"],
-  gap:["JioLabel in readiness since June (5 months) — vendor samples & SIT instability delaying launch","Large parallel portfolio plus L3 support load","Monetisation plan shared but no decision taken yet","Success KPIs (activations, ratings, ticket trends) not defined for launched products"]},
+  act:["Drove JioLabel readiness — 3 rounds of physical feedback, 25+ user test, packaging & MRP compliance, domains, T&C published","Led JioShield integration, co-parent feature and onboarding-friction fixes","Launched JioTag 2 and Itel Blink 4G","L3 support for JioMotive / JioFind / JioBook; VAPT & InfoSec submissions","Caught JioMotive B2B devices sold as B2C on Amazon; re-initiated FOTA","Built JioThings ecosystem monetisation plan and JioTag growth strategy"]},
 
 { id:"vaishnavi", cluster:"mob", name:"Vaishnavi B.", role:"Strategy & Research — Smart Mobility, JUMP, Automotive, thought leadership",
   period:"Jun – Oct 2026", hours:"9:30–10:00", cov:[4,5,4,3,4],
   stake:"Gulprit S., Puneet Agarwal",
   sol:["JUMP Centre of Excellence deck; NHEV & DISCOM proposals; NRSTC deck","‘Why Jio in Automotive’ narrative; JATA alliance & academic network","Smart Mobility KPI dashboard (HTML) & JUMP geospatial footprint map","Reliance Group customer mapping; device SKU repository","Knowledge Nugget, weekly AI intelligence, V2X research; ITS India / ET Auto / Berg Insight submissions"],
-  act:["Built JUMP CoE narrative and LinkedIn thought-leadership posts for stakeholder","Completed NHEV proposal; iterated DISCOM proposal with stakeholders","Vahan-based EV market analysis; V2X webinar summary & panel Q&A","Mapped Reliance Group entities to JioThings solutions for whitespace","Prototyped KPI dashboard with form-based data collection; state/city cluster map","Developed DISCOM prioritisation matrix (EV penetration, subsidy leakage)"],
-  str:["Excellent storytelling and executive-ready content","Wide research breadth across mobility, EV, AI","Builds working HTML prototypes","Ecosystem building — JATA academic & partner networks"],
-  gap:["DISCOM proposal iterated ~6 weeks (Jun–Aug) — slow closure","Business outcomes of decks (wins, adoption, leads) not tracked","Broad topical spread; KPI dashboard depends on product-team data inputs"]},
+  act:["Built JUMP CoE narrative and LinkedIn thought-leadership posts for stakeholder","Completed NHEV proposal; iterated DISCOM proposal with stakeholders","Vahan-based EV market analysis; V2X webinar summary & panel Q&A","Mapped Reliance Group entities to JioThings solutions for whitespace","Prototyped KPI dashboard with form-based data collection; state/city cluster map","Developed DISCOM prioritisation matrix (EV penetration, subsidy leakage)"]},
 
 { id:"shivek", cluster:"deliv", name:"Shivek B.", role:"Program Mgmt — RRL Delivery, JUMP/MOVE, Xplor, JHS, AIM, Sintex, AIS140",
   period:"Jun – Oct 2026", hours:"10:00–10:50", cov:[4,4,3,3,4],
   stake:"Ankit Dube, Kieth B., Rahul M., Kartik T., Vijaypravin",
   sol:["RRL delivery — 166 sites (Energy IoT & IR)","Jio JUMP 2.0 / MOVE 2.1, Jio Xplor (Maps, Indoor, APIs), JHS","Jio AIM, Sintex Energy Solution, OBD tracker (JVT 1440/1441 v2.4)","AIS140 — JVT4180 production, JVT1441 EOL"],
-  act:["Weekly governance across 6+ programmes; release governance framework","Initiated DevOps migration for JUMP, MOVE, Xplor","RRL master deployment tracker (166 sites); HOTO 57 → 68 sites; GRN closure to 95 sites","Led customer handover meetings, portal BRD and post-HOTO support model","Set up AIM governance; Sintex SO raised","Took ownership of AIS140: ~1,000 JVT4180 units by end-Nov, ~9,000 by Dec ’26"],
-  str:["Structured governance and portfolio visibility","Customer-facing handover leadership","Scales across many programmes"],
-  gap:["RRL HOTO / GRN closure stretching from June to October","Wi-Fi, PO and out-of-scope site dependencies keep blocking RRL installation — no dated closure plan","AIS140 ramp (10K units by Dec) hinges on enclosure validation, COP finance approval & warranty terms","Portfolio keeps growing (AIS140 added) — bandwidth risk"]},
+  act:["Weekly governance across 6+ programmes; release governance framework","Initiated DevOps migration for JUMP, MOVE, Xplor","RRL master deployment tracker (166 sites); HOTO 57 → 68 sites; GRN closure to 95 sites","Led customer handover meetings, portal BRD and post-HOTO support model","Set up AIM governance; Sintex SO raised","Took ownership of AIS140: ~1,000 JVT4180 units by end-Nov, ~9,000 by Dec ’26"]},
 
 { id:"ankit", cluster:"deliv", name:"Ankit K.", role:"Program Mgmt: Smart Assets & Utility service delivery · Revenue & process improvement",
   period:"Jun – Oct 2026", hours:"9:15–9:45", cov:[4,5,2,4,3],
   stake:"Sreejith N., Lakshmikant R., Biswanath D., Amit Jain, Vinayak E.",
   sol:["Smart Utility (SU) & Smart Assets (SA) service delivery","Smart Mobility / Assets / Utility PO financial flow & orderbook","Project mgmt: RPPMSL, Si Nonna’s, RPTPL, RRL","DISCOM invoicing — PVVNL, TP Odisha, MVVNL, TDDL, CESC, Intellismart"],
-  act:["Weekly activation database for invoicing (e.g., 2,051 connections; 228,408 activations mapped across 42 accounts)","PO validation, PM approvals and SO releases (incl. Torrent Power 134K units)","Actual vs forecast: Aug ₹34.3 Cr vs ₹36.1 Cr (−5%); Q2 FY27 ₹76.34 Cr","Mapped erroneous invoices; reviewed JTL outstanding (₹98.1 Cr > 30 days)","Built Smart Utility AOP FY27 (~₹180 Cr) and PM scorecards","Delivery TAT ~10–14 days, 8–15% better than standard"],
-  str:["Strong command of numbers — revenue, forecast and orderbook","Strong financial and process discipline","Owns a revenue-critical flow end to end","Root-causes variances (cancelled invoices, missed activations)"],
-  gap:["Largely transactional — little process automation despite ‘Process Improvement’ remit","Invoice errors recur every month (25–43 invoices) and drive the forecast shortfall — root cause not fixed","Overdue receivables (₹98.1 Cr > 30 days) flagged but no owner / recovery plan"]},
+  act:["Weekly activation database for invoicing (e.g., 2,051 connections; 228,408 activations mapped across 42 accounts)","PO validation, PM approvals and SO releases (incl. Torrent Power 134K units)","Actual vs forecast: Aug ₹34.3 Cr vs ₹36.1 Cr (−5%); Q2 FY27 ₹76.34 Cr","Mapped erroneous invoices; reviewed JTL outstanding (₹98.1 Cr > 30 days)","Built Smart Utility AOP FY27 (~₹180 Cr) and PM scorecards","Delivery TAT ~10–14 days, 8–15% better than standard"]},
 
 { id:"kesava", cluster:"deliv", name:"Kesava J.", role:"Solutions readiness & catalogues · Billing support · NDAs / MoUs",
   period:"Jun – Oct 2026", hours:"9:40–10:20", cov:[4,2,2,3,3],
   stake:"Gulprit S., Ranjini R., Gautam G., Anish, Puneet A.",
   sol:["IoT Solutions Readiness Catalogue (Sep-26) & Master Catalogue V1.0","IoT Device catalogue; JioUrja Map (HTML); org-structure catalogue","Smart Mobility billing & invoicing (MFC, JMS, CBG)","NDAs / MDAs — Aster, Viaplus, Powertrac, tri-party Jio–Dukosi–Nash"],
-  act:["Collected data for 17 solutions from 5 product teams; HTML readiness portal","Published Sep-26 Solution Readiness Catalogue to IoT & New Energy group","Closed MDA Powertrac (digital sign) and Viaplus NDA; drafted tri-party NDA","Supported Aug-26 billing closure (VF / HUL / FNL), Inter-Co reconciliation, escalations","Updated JioUrja Map with PO & delivery footprint across states","KT and handover of CBG billing / JMS to Bhoumik"],
-  str:["Reliable data consolidation and follow-up","Produces structured, reusable artefacts","Tracks legal paperwork to closure"],
-  gap:["Role fragmented across catalogue, legal and billing — primary ownership unclear","Tri-party NDA (Jio–Dukosi–Nash) open since Aug, awaiting Nash","Pending RIL invoice clearance and Inter-Co mismatches escalated but unresolved","Device-catalogue data stalled ‘awaiting updates’ through Jul–Aug"]},
+  act:["Collected data for 17 solutions from 5 product teams; HTML readiness portal","Published Sep-26 Solution Readiness Catalogue to IoT & New Energy group","Closed MDA Powertrac (digital sign) and Viaplus NDA; drafted tri-party NDA","Supported Aug-26 billing closure (VF / HUL / FNL), Inter-Co reconciliation, escalations","Updated JioUrja Map with PO & delivery footprint across states","KT and handover of CBG billing / JMS to Bhoumik"]},
 
 { id:"bhoumik", cluster:"legal", name:"Bhoumik P.", role:"Legal & Commercial Ops · Pricing · Partner engagement (Ambient) · Telecom Battery & BESS governance",
   period:"Jun – Oct 2026 · includes Gurpreet S.’s Jun–Aug work (transferred)", hours:"9:30–11:00", cov:[4,5,2,4,3],
   stake:"Rajesh Lalwani, Pratik Sejpal, Madhubanti B., Mallikarjun B., Ashish Lodha, Sunil Kaul, Arun Koteshwar",
   sol:["Jio PowerSight (JPS) pricing & GTM; JioMove pricing","Pricing — SunGenie Lite, JioXplor asset & indoor navigation, TruePower custom order","HAR Tag (Ambient) — LTE / BLE / LTE+BLE; BLE fall detection via IOG (ODM)","Agreements — Ambient Scientific, Swelect, JTL×AISWEI (Solplanet), RNM×JTL BMS, DaaS, IoT Lab, JTL-Enercent, BSES, Powertrac MDA, Aremac NDA; JHS T&C","JTL–RIL master agreement framework (proposed)","Telecom battery programme: 45Ah, 314Ah 2nd-source BMS, 261 kWh BESS"],
-  act:["Jun–Aug: closed HAR tag product pivot; PRD to ODM; IOG design & prototype plan signed off; 2K-unit pilot model with Ambient","Jun–Aug: closed pricing for SunGenie Lite, JioXplor asset and indoor navigation","Jun–Aug: initiated Swelect, IoT Lab and Enercent MoUs; JHS T&C first draft","Cut PowerSight costing from ₹8.4 to ₹4.18","Closed and sent Ambient agreement; escalated framing mismatch","Found 4 structural clashes between RIL PO and DaaS draft; routed to Legal","Fixed Swelect MoU term (3+2 yrs) and InfoSec queries","Battery programme tracker, daily sync-ups & MoMs; 45Ah RFQ (30K packs); Megmeet option 3; Lineage (89%) chosen; 50-unit BESS sample plan","Flagged NDA scope gap (Nash Energy vs Nash Industries)"],
-  str:["Sharp legal / commercial risk-spotting","Quantified cost wins and a track record of pricing approvals","Owns partner engagement end to end (ODM, Ambient CEO)","Fast ramp-up into programme governance; surfaces time-critical decisions early"],
-  gap:["Ambient agreement took ~3 months of drafts (Jun–Aug) before closure","Many agreements still in flight (Solplanet, BMS, DaaS, Aremac)","BMS sourcing decision (TVS vs Nash) and Nash documentation gaps unresolved — supply-timeline risk","Scope now spans legal + pricing + partner mgmt + battery PMO + billing — bandwidth risk"]},
+  act:["Jun–Aug: closed HAR tag product pivot; PRD to ODM; IOG design & prototype plan signed off; 2K-unit pilot model with Ambient","Jun–Aug: closed pricing for SunGenie Lite, JioXplor asset and indoor navigation","Jun–Aug: initiated Swelect, IoT Lab and Enercent MoUs; JHS T&C first draft","Cut PowerSight costing from ₹8.4 to ₹4.18","Closed and sent Ambient agreement; escalated framing mismatch","Found 4 structural clashes between RIL PO and DaaS draft; routed to Legal","Fixed Swelect MoU term (3+2 yrs) and InfoSec queries","Battery programme tracker, daily sync-ups & MoMs; 45Ah RFQ (30K packs); Megmeet option 3; Lineage (89%) chosen; 50-unit BESS sample plan","Flagged NDA scope gap (Nash Energy vs Nash Industries)"]},
 
 { id:"sanatan", cluster:"mkt", name:"Sanatan C.", role:"IoT Marketing — collaterals, lead management, marketing reporting",
   period:"Jun – Oct 2026", reportsTo:"Rahul Gupta", hours:"~9:45", cov:[5,4,5,5,3],
   stake:"Rahul Gupta, Solar team, BD team, Powertrac team",
   sol:["Product collaterals — Smart Assets / JioLocus, JioXplor Assets, JioMaps Outdoor, JHS, Jio IoT Labs, IoT for Hospitals","Centralised lead tracker + Solar IoT lead tracker with dashboards & predictive model","B2B / B2C marketing database","Monthly IoT newsletter; 6-month & fortnightly marketing reports","Solar GTM support — ‘Why partner with JioThings’ deck, global distributor research, JioSparq benchmarking"],
-  act:["Delivered jiotised decks for JioXplor Assets, Jio IoT Labs and JioMaps; built IoT for Hospitals deck","Tracks 100+ leads a week from LinkedIn, email and website; daily & weekly lead reports to leadership","Built Solar lead tracker with daily / weekly / monthly dashboards and a predictive model (reach-frequency-yield, conversion ratio); presented to leadership","Trained BD team and master distributor on the lead-status sheet","Cleaned B2C / B2B databases and added new segments for campaigns","Started daily lead-to-order tracking with Powertrac; created fortnightly marketing report","Revised battery SOW with team comments; event concepts for Vidyut AI"],
-  str:["Applies data skills (SQL, dashboards, predictive model) to marketing","Reliable multi-channel lead tracking","Turns product inputs into polished collaterals","Enables sales partners (BD, distributor training)"],
-  gap:["Lead-to-order conversion not yet measured — tracking only started in Oct","Predictive lead model built on dummy data; still awaiting historical data","Collateral sign-offs pending — JioMaps and ‘Why partner’ decks: versions shared, iterations and approvals ongoing","Split across marketing, BD research and ad-hoc asks — focus risk"]}
+  act:["Delivered jiotised decks for JioXplor Assets, Jio IoT Labs and JioMaps; built IoT for Hospitals deck","Tracks 100+ leads a week from LinkedIn, email and website; daily & weekly lead reports to leadership","Built Solar lead tracker with daily / weekly / monthly dashboards and a predictive model (reach-frequency-yield, conversion ratio); presented to leadership","Trained BD team and master distributor on the lead-status sheet","Cleaned B2C / B2B databases and added new segments for campaigns","Started daily lead-to-order tracking with Powertrac; created fortnightly marketing report","Revised battery SOW with team comments; event concepts for Vidyut AI"]}
 ];
-
-const TEAM_OBS = {
-  str:["Strong analytical / modelling bench (Khemraj, Kavit, Ankit, Shivam)","Two consumer launches (JioTag 2, Itel Blink 4G) and first distributed-solar POC commissioned","Leadership-grade content engine (Vaishnavi, Vikas, Kavit)"],
-  gap:["314Ah battery issue work is split across Kavit, Viniksha, Vikas & Bhoumik — define one owner & RACI","Vendor / partner dependencies are the common blocker (PZ firmware, LiB casings, Nash, SCM materials) — needs a shared escalation tracker","Several long-running workstreams without closure (JioLabel, RRL HOTO, DISCOM proposal, tri-party NDA)","Outcome KPIs not defined for most workstreams — set 2–3 per member"]
-};
 
 /* ---------- build tree ---------- */
 let uid=0;
@@ -280,10 +243,6 @@ CLUSTERS.forEach(c=>{
   });
   cn.subtitle=cn.children.length+(cn.children.length>1?" members":" member");
 });
-const tn=N({type:"cluster", title:"Team-level observations", color:"#0B2545", open:true, parent:root, subtitle:"Cross-team view"});
-root.children.push(tn);
-const tm=N({type:"member", m:{name:"Whole team", role:"Strengths & gaps that cut across members", period:"Jun – Oct 2026", team:true}, color:"#0B2545", open:false, parent:tn});
-tn.children.push(tm); addCats(tm, TEAM_OBS);
 
 /* ---------- render ---------- */
 const stage=document.getElementById("stage"), svg=document.getElementById("links"),
@@ -454,8 +413,7 @@ function openDrawer(m){
     <div class="d-body">
       <div class="meta"><div>Reports to</div><div>${m.reportsTo||"Gulprit S."}</div><div>Key stakeholders</div><div>${m.stake}</div><div>Avg. man-hours</div><div>${m.hours} hrs/day</div>
       <div>Weekly slides</div><div><div class="cov">${cov}</div></div></div>
-      ${sec("sol")}${sec("act")}${sec("str")}${sec("gap")}
-      <div class="note">Strengths and gaps are inferred from the member’s weekly status slides only; they are discussion prompts for 1:1s, not a performance rating.</div>
+      ${sec("sol")}${sec("act")}
     </div>`;
   dr.classList.add("open");
 }
