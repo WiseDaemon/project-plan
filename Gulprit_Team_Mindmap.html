@@ -88,7 +88,7 @@ h1{font-family:var(--font-head);font-weight:650;font-size:19px;letter-spacing:-.
     </div>
     <div class="stats">
       <div class="stat"><b>14</b><span>Members</span></div>
-      <div class="stat"><b>8</b><span>Focus areas</span></div>
+      <div class="stat"><b>9</b><span>Focus areas</span></div>
       <div class="stat"><b>5</b><span>Months</span></div>
       <div class="stat"><b>~250</b><span>Weekly slides</span></div>
     </div>
@@ -136,6 +136,7 @@ const CLUSTERS = [
  {id:"cons",  name:"Consumer IoT — JioThings", color:"#DB2777"},
  {id:"mob",   name:"Smart Mobility Strategy & Insights", color:"#4F46E5"},
  {id:"deliv", name:"Program Delivery, Ops & Revenue", color:"#B7791F"},
+ {id:"serv",  name:"Service Delivery and Service Assurance", color:"#0D9488"},
  {id:"legal", name:"Legal, Commercial & Pricing", color:"#475569"},
  {id:"mkt",   name:"IoT Marketing & Lead Management", color:"#BE123C"}
 ];
@@ -201,23 +202,32 @@ const MEMBERS = [
   sol:["RRL delivery — 166 sites (Energy IoT & IR)","Jio JUMP 2.0 / MOVE 2.1, Jio Xplor (Maps, Indoor, APIs), JHS","Jio AIM, Sintex Energy Solution, OBD tracker (JVT 1440/1441 v2.4)","AIS140 — JVT4180 production, JVT1441 EOL"],
   act:["Weekly governance across 6+ programmes; release governance framework","Initiated DevOps migration for JUMP, MOVE, Xplor","RRL master deployment tracker (166 sites); HOTO 57 → 68 sites; GRN closure to 95 sites","Led customer handover meetings, portal BRD and post-HOTO support model","Set up AIM governance; Sintex SO raised","Took ownership of AIS140: ~1,000 JVT4180 units by end-Nov, ~9,000 by Dec ’26"]},
 
-{ id:"ankit", cluster:"deliv", name:"Ankit Khandekar", role:"Forecast & Revenue Management · Smart Utility Billing · Hardware Service Delivery & PMO",
-  period:"Apr – Dec 2026 (Q1–Q3 FY’27)", hours:"9:15–9:45", cov:[5,5,5,5,4],
-  stake:"Gulprit S., Finance & Leadership, Solution PMs, Smart Utility Discoms (Tata Power Odisha, Techno Electric, Apraava, Genus)",
-  sol:["Forecast & Revenue Management — 12 IoT solutions (Smart Utility, Smart Asset, Smart Mobility, EV, Solar) & rolling 9-month baseline",
-       "Smart Utility SLA Billing & Account Ledger (60+ entities, ~15.8M meter connections, ₹65.35 Cr H1 billing)",
-       "Hardware Delivery & Valuation — predictive forecast-led stock transfer & SLOC management (₹34.63 Cr H1 delivery)",
-       "Connectivity & Platform Activation-to-Billing handover (weekly SIM/platform feeds, cycle validation, over-activation audits)",
-       "IoT PMO Governance & Device Repository (IMSI, ICCID, RSN traceability, AoP allocation across project managers)",
-       "Revenue Assurance & Integrated S&OP (Q3 roadmap: usage-to-bill controls, ABC-XYZ inventory & SLA early-warning alerts)"],
-  act:["Maintained monthly Actual-vs-Forecast revenue engine for 12 solutions: Q1 ₹35.67 Cr (−0.65%), Q2 ₹76.34 Cr (−2.33%), closing H1 FY27 at ₹112.01 Cr (98.2% of ₹114.07 Cr forecast)",
-       "Isolated quarterly variance drivers (Q1 Employee Tracking −18.5%, Connectivity −9.7%; Q2 August ₹1.28 Cr credit notes & Fleet −21.6%) and integrated replacement demand into 9-month forecast",
-       "Validated SLA compliance and generated account-wise ledgers for Smart Utility (Techno Electric, Apraava, Genus, Esyasoft, Odisha discoms): ₹27.24 Cr in Q1 and ₹38.11 Cr in Q2 (₹65.35 Cr H1 total)",
-       "Drove end-to-end service delivery (PO validation, PM approval, SO release, dispatch, invoicing) across SU, DG, Solar, EV, Lighting & Fleet: ₹4.19 Cr in Q1 (100.7%) and ₹30.44 Cr in Q2 (100.0%)",
-       "Optimised delivery TAT via forecast-led stock transfer: planned inter-plant/SLOC transfers & antenna stock verification against 9-month demand, provisioning 1% spares as safety stock",
-       "Converted weekly SIM/connectivity and platform activations into billing instructions; built Solar & EV activation ledgers mapped to POs to eliminate over-activation against POs",
-       "Tracked client PO consumption across delivery, installation, SIM and go-live; built device repository (IMSI, ICCID, RSN, BL ID) and acted as single POC for PMs on AoP allocation",
-       "Q3 FY27 Work Plan: implementing automated usage-to-bill revenue assurance, monthly S&OP with MAPE/bias tracking, ABC-XYZ inventory segmentation, and pre-billing SLA early-warning alerts"]},
+{ id:"ankit", cluster:"serv", name:"Ankit Khandekar", role:"Service Delivery & Service Assurance — Smart Asset, Smart Utility & Smart Mobility",
+  period:"Apr – Dec 2026", hours:"9:15–9:45", cov:[5,5,5,5,4],
+  stake:"Gulprit S., Finance & Leadership, Solution PMs, Enterprise Utility & IoT Partners",
+  sol:[
+    "Smart Asset: Smart Lighting",
+    "Smart Asset: Smart DG Monitoring",
+    "Smart Asset: Sub-Metering",
+    "Smart Asset: Condition Monitoring",
+    "Smart Asset: Smart Connectivity",
+    "Smart Asset: Smart Solar Monitoring",
+    "Smart Asset: Building Management System",
+    "Smart Utility: Electricity Metering",
+    "Smart Utility: Gas Metering",
+    "Smart Utility: Water Metering",
+    "Smart Mobility: EV",
+    "Smart Mobility: Smart Fleet Monitoring"
+  ],
+  act:[
+    "Manage monthly and quarterly Actual-vs-Forecast revenue reconciliation across all 12 solutions in Smart Asset, Smart Utility, and Smart Mobility to provide leadership with a unified financial baseline",
+    "Maintain the rolling multi-month hardware demand forecast, isolating line-level variances and incorporating device replacement demand to align procurement and revenue baselines",
+    "Audit and enforce monthly SLA compliance across enterprise utility and smart metering accounts, validating block load, daily load, and metering feeds before billing instructions are generated",
+    "Orchestrate end-to-end service delivery from PO validation to invoicing, optimizing fulfillment lead times through predictive, forecast-led inter-plant stock transfers and strategic safety-stock sizing",
+    "Convert weekly SIM, connectivity, and platform activations into structured billing instructions, reconciling activation feeds against orderbooks to prevent revenue leakage and unbilled consumption",
+    "Govern end-to-end PO consumption from delivery to go-live, maintaining an enterprise device traceability repository and serving as the central point of contact for project managers on AoP allocation",
+    "Quarterly governance: implement automated usage-to-bill controls, establish monthly S&OP demand-supply reviews with forecast accuracy tracking, and deploy pre-billing SLA early-warning alerts"
+  ]},
 
 { id:"kesava", cluster:"deliv", name:"Kesava J.", role:"Solutions readiness & catalogues · Billing support · NDAs / MoUs",
   period:"Jun – Oct 2026", hours:"9:40–10:20", cov:[4,2,2,3,3],
