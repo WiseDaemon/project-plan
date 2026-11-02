@@ -71,10 +71,6 @@ h1{font-family:var(--font-head);font-weight:650;font-size:19px;letter-spacing:-.
 .d-sec li{font-size:13px;line-height:1.45;margin:3px 0;color:var(--ink)}
 .meta{display:grid;grid-template-columns:110px 1fr;gap:5px 10px;font-size:12.5px;margin-top:14px}
 .meta div:nth-child(odd){color:var(--muted)}
-.cov{display:flex;gap:6px;margin-top:4px}
-.cov .m{text-align:center;font-size:10.5px;color:var(--muted)}
-.cov .b{width:44px;height:7px;border-radius:4px;background:#E2E8F0;overflow:hidden;margin-bottom:3px}
-.cov .b i{display:block;height:100%;background:var(--navy)}
 .note{font-size:11.5px;color:var(--muted);line-height:1.45;margin-top:18px;border-top:1px dashed var(--line);padding-top:10px}
 #hint{position:fixed;right:16px;bottom:14px;z-index:15;font-size:11.5px;color:var(--muted);background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:8px;padding:6px 10px;max-width:560px;line-height:1.45}
 </style>
@@ -84,13 +80,12 @@ h1{font-family:var(--font-head);font-weight:650;font-size:19px;letter-spacing:-.
   <div class="h-top">
     <div>
       <h1>Team Mindmap — Jio Devices Team under Gulprit S.</h1>
-      <div class="sub">Jio Devices Team · Solutions &amp; Activities · Source: TeamWork_GS.pptx weekly updates (Jun – Oct 2026)</div>
+      <div class="sub">Jio Devices Team · Solutions &amp; Activities</div>
     </div>
     <div class="stats">
       <div class="stat"><b>14</b><span>Members</span></div>
       <div class="stat"><b>9</b><span>Focus areas</span></div>
       <div class="stat"><b>5</b><span>Months</span></div>
-      <div class="stat"><b>~250</b><span>Weekly slides</span></div>
     </div>
   </div>
   <div class="toolbar">
@@ -127,7 +122,6 @@ const CAT = {
   sol:{label:"Solutions", color:"#2563EB", tint:"#EFF6FF"},
   act:{label:"Activities", color:"#0F766E", tint:"#F0FDFA"}
 };
-const MONTHS=["Jun","Jul","Aug","Sep","Oct"];
 
 const CLUSTERS = [
  {id:"solar", name:"Solar & Green-Energy Platforms", color:"#EA580C"},
@@ -143,7 +137,7 @@ const CLUSTERS = [
 
 const MEMBERS = [
 { id:"shivam", cluster:"solar", name:"Shivam Saxena", role:"Strategy & Product Architecture: Solar CMS · Tower Solarization & Clean Energy Analytics",
-  period:"Apr – Dec 2026", hours:"~10:00", cov:[5,5,5,5,5],
+  period:"Apr – Dec 2026",
   stake:"Gulprit S., Apex Leadership, Solar & Infra Engineering, Network Elements Team",
   sol:[
     "Solar CMS: JioSunGenie (C&I, Residential, Lite)",
@@ -170,7 +164,7 @@ const MEMBERS = [
   ]},
 
 { id:"anjali", cluster:"solar", name:"Anjali C.", role:"Program Management: Distributed Solar & Nationwide Tower Solarization Rollout",
-  period:"Jun – Oct 2026", hours:"9:30–10:00", cov:[4,5,3,4,4],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Ranjini R., Harsha U., Pichammal V., Rajesh L.",
   sol:[
     "Distributed Solar: Nationwide Tower Solarization Architecture",
@@ -191,7 +185,7 @@ const MEMBERS = [
   ]},
 
 { id:"kavit", cluster:"batt", name:"Kavit D.", role:"Product Management: Telecom Battery In-Life Fleet & TowerGenie 2.0 AI Platform",
-  period:"Jun – Oct 2026", hours:"9:10–10:00", cov:[4,5,4,3,4],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Rakshit R., Gautam G., Mallikarjun B., Ranjini R.",
   sol:[
     "Battery Fleet Management: High-Capacity Telecom Battery In-Life Telemetry",
@@ -212,7 +206,7 @@ const MEMBERS = [
   ]},
 
 { id:"khemraj", cluster:"batt", name:"Khemraj K.", role:"Strategy & Techno-Commercial Modeling: BESS, Second-Life Batteries & Circular Economy",
-  period:"Jun – Oct 2026", hours:"9:30–11:00", cov:[4,5,3,3,4],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Gautam G., Nandy S., Chitbhav, Mallikarjun B.",
   sol:[
     "Techno-Commercial Engine: JioBESS Studio TCO & Tariff Arbitrage Calculator",
@@ -233,7 +227,7 @@ const MEMBERS = [
   ]},
 
 { id:"viniksha", cluster:"batt", name:"Viniksha S. V.", role:"Battery Research & Technical Governance: Cell Chemistry, BMS & Critical Operations",
-  period:"Jun – Oct 2026", hours:"9:30–10:00", cov:[4,5,4,4,5],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Mahadev PM, Sarada Bal, Ranjini R., Madhu Phaniraj",
   sol:[
     "Cell Chemistry Research: Ultra-High-Capacity Prismatic & Cylindrical Cell Analysis",
@@ -253,7 +247,7 @@ const MEMBERS = [
   ]},
 
 { id:"vikas", cluster:"batt", name:"Vikas G.", role:"Strategic Research & Executive Intelligence: New Energy, BESS & Hardware Forensics",
-  period:"Jun – Oct 2026", hours:"9:45–10:00", cov:[2,3,0,3,3],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Malli B., Ranjini R.",
   sol:[
     "Executive Research: High-Capacity BESS, Smart Grid & Demand Response Whitepapers",
@@ -273,7 +267,7 @@ const MEMBERS = [
   ]},
 
 { id:"jyoti", cluster:"ev", name:"Jyoti R.", role:"Product Management: EV Charger Hardware · Service Support & New Product Development",
-  period:"Jul – Oct 2026", hours:"~10:00", cov:[0,3,0,3,2],
+  period:"Jul – Oct 2026",
   stake:"Ashwani P., Kapil S., Puneet A., Malli B., Piyush C.",
   sol:[
     "7.4 kW AC Charger Portfolio — Amazon B2C & Aries 7 kW (Iljin)",
@@ -312,7 +306,7 @@ const MEMBERS = [
   ]},
 
 { id:"amol", cluster:"cons", name:"Amol V.", role:"Product Management — JioThings super app & consumer devices",
-  period:"Jun – Oct 2026", hours:"~9:45", cov:[4,5,4,4,4],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Riju B., Ajay, Sandeep, Vishal",
   sol:[
     "JioThings super app",
@@ -332,7 +326,7 @@ const MEMBERS = [
   ]},
 
 { id:"vaishnavi", cluster:"mob", name:"Vaishnavi B.", role:"Strategy & Thought Leadership: Smart Mobility, Connected Automotive & JUMP Ecosystem",
-  period:"Jun – Oct 2026", hours:"9:30–10:00", cov:[4,5,4,3,4],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Puneet Agarwal",
   sol:[
     "Mobility Strategy Platform: JUMP Centre of Excellence & Automotive Narrative",
@@ -353,7 +347,7 @@ const MEMBERS = [
   ]},
 
 { id:"shivek", cluster:"deliv", name:"Shivek B.", role:"Program Management: Enterprise IoT Delivery, Telematics & Multi-Platform Governance",
-  period:"Jun – Oct 2026", hours:"10:00–10:50", cov:[4,4,3,3,4],
+  period:"Jun – Oct 2026",
   stake:"Ankit Dube, Kieth B., Rahul M., Kartik T., Vijaypravin",
   sol:[
     "Enterprise Energy Delivery: Retail & Commercial Energy IoT Deployment",
@@ -373,7 +367,7 @@ const MEMBERS = [
   ]},
 
 { id:"ankit", cluster:"serv", name:"Ankit Khandekar", role:"Service Delivery & Service Assurance — Smart Asset, Smart Utility & Smart Mobility",
-  period:"Apr – Dec 2026", hours:"9:15–9:45", cov:[5,5,5,5,4],
+  period:"Apr – Dec 2026",
   stake:"Gulprit S., Finance & Leadership, Solution PMs, Enterprise Utility & IoT Partners",
   sol:[
     "Smart Asset: Smart Lighting",
@@ -400,7 +394,7 @@ const MEMBERS = [
   ]},
 
 { id:"kesava", cluster:"deliv", name:"Kesava J.", role:"Solutions Governance: Master Catalogues, Commercial Ops & Strategic Legal Agreements",
-  period:"Jun – Oct 2026", hours:"9:40–10:20", cov:[4,2,2,3,3],
+  period:"Jun – Oct 2026",
   stake:"Gulprit S., Ranjini R., Gautam G., Anish, Puneet A.",
   sol:[
     "Solution Catalogues: IoT Master Solution Readiness Portal & Commercial Catalogues",
@@ -420,7 +414,7 @@ const MEMBERS = [
   ]},
 
 { id:"bhoumik", cluster:"legal", name:"Bhoumik P.", role:"Legal & Commercial Operations: Pricing Strategy, Strategic Partnerships & Program Governance",
-  period:"Jun – Oct 2026", hours:"9:30–11:00", cov:[4,5,2,4,3],
+  period:"Jun – Oct 2026",
   stake:"Rajesh Lalwani, Pratik Sejpal, Madhubanti B., Mallikarjun B., Ashish Lodha, Sunil Kaul, Arun Koteshwar",
   sol:[
     "Pricing Architecture: Enterprise PowerSight & Smart Mobility Commercial Pricing",
@@ -441,7 +435,7 @@ const MEMBERS = [
   ]},
 
 { id:"sanatan", cluster:"mkt", name:"Sanatan C.", role:"Growth & Marketing Operations: Product Collaterals, Lead Pipeline & Market Intelligence",
-  period:"Jun – Oct 2026", hours:"~9:45", cov:[5,4,5,5,3],
+  period:"Jun – Oct 2026",
   stake:"Rahul Gupta",
   sol:[
     "Marketing Collateral: Enterprise IoT Solution Decks & Sector Collateral Suites",
@@ -641,14 +635,12 @@ document.querySelectorAll("#orient button").forEach(b=>{
 const dr=document.getElementById("drawer");
 function openDrawer(m){
   const sec=k=>`<div class="d-sec"><h3 style="color:${CAT[k].color}"><span class="dot" style="background:${CAT[k].color}"></span>${CAT[k].label}</h3><ul>${m[k].map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`;
-  const cov=m.cov.map((c,i)=>`<div class="m"><div class="b"><i style="width:${Math.min(100,c/5*100)}%"></i></div>${MONTHS[i]} · ${c}</div>`).join("");
   const cl=CLUSTERS.find(c=>c.id===m.cluster);
   dr.innerHTML=`<div class="d-head"><button class="x" onclick="document.getElementById('drawer').classList.remove('open')">✕</button>
     <div class="d-name">${m.name}</div><div class="d-role">${esc(m.role)}</div>
     <span class="chip" style="background:${cl.color}1A;color:${cl.color}">${cl.name}</span><span class="chip">${esc(m.period)}</span></div>
     <div class="d-body">
-      <div class="meta"><div>Reports to</div><div>${m.reportsTo||"Gulprit S."}</div><div>Key stakeholders</div><div>${m.stake}</div><div>Avg. man-hours</div><div>${m.hours} hrs/day</div>
-      <div>Weekly slides</div><div><div class="cov">${cov}</div></div></div>
+      <div class="meta"><div>Reports to</div><div>${m.reportsTo||"Gulprit S."}</div><div>Key stakeholders</div><div>${m.stake}</div></div>
       ${sec("sol")}${sec("act")}
     </div>`;
   dr.classList.add("open");
