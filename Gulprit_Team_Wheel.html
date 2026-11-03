@@ -1,0 +1,1189 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jio Devices Team — Executive 3D Wheel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; overflow: hidden; }
+body {
+  font-family: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+  color: #fff;
+  background: radial-gradient(ellipse at 35% 45%, #14407a 0%, #0a2447 55%, #051326 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Navbar */
+.navbar {
+  height: 64px;
+  background: rgba(6, 20, 41, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(120, 190, 240, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex: none;
+  z-index: 50;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-badge {
+  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.5);
+}
+.brand-title {
+  font-size: 17.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #f8fafc;
+}
+.brand-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-left: 6px;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.btn-group {
+  display: inline-flex;
+  background: rgba(15, 34, 64, 0.85);
+  border: 1px solid rgba(120, 190, 240, 0.3);
+  border-radius: 8px;
+  padding: 3px;
+}
+.btn-group button {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 13px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-group button.active {
+  background: #0284c7;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.45);
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #e2e8f0;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 7px 15px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.18);
+}
+.btn-icon {
+  background: rgba(15, 34, 64, 0.85);
+  border: 1px solid rgba(120, 190, 240, 0.3);
+  color: #e2e8f0;
+  font-size: 13px;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-icon:hover {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+
+/* Layout */
+.layout {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  padding: 2vh 2vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 3D Stage & Tilt */
+.stage {
+  height: min(84vh, 52vw);
+  aspect-ratio: 1;
+  flex: none;
+  perspective: 1200px;
+  position: relative;
+}
+.tilt {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+.layer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+#ring {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+#ring svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Wheel Sector Pop */
+.wheel-sector {
+  cursor: pointer;
+  transform-origin: 0px 0px;
+  transition: transform 0.28s cubic-bezier(0.2, 0.9, 0.25, 1.25), filter 0.28s ease;
+}
+.wheel-sector:hover, .wheel-sector.on {
+  transform: scale(1.05) translateZ(40px);
+  filter: drop-shadow(0 16px 24px rgba(0,0,0,0.8)) drop-shadow(0 0 22px var(--glow, rgba(120,205,255,0.95)));
+}
+
+/* Center Hub Layer */
+#hub-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(28px);
+}
+.hub-center {
+  width: 33%;
+  height: 33%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #18467e 0%, #0a254a 60%, #041022 100%);
+  border: 3px solid rgba(143, 208, 247, 0.65);
+  box-shadow: 0 0 30px rgba(14, 165, 233, 0.5), inset 0 0 22px rgba(14, 165, 233, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hub-center:hover {
+  transform: scale(1.035);
+  box-shadow: 0 0 40px rgba(14, 165, 233, 0.75), inset 0 0 26px rgba(14, 165, 233, 0.45);
+}
+.hub-kicker {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+}
+.hub-title {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 3px 0 2px;
+}
+.hub-sub {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+.hub-badge {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(14, 165, 233, 0.22);
+  border: 1px solid rgba(14, 165, 233, 0.45);
+  color: #bae6fd;
+  padding: 3px 9px;
+  border-radius: 12px;
+}
+
+/* Detail Panel */
+.panel {
+  width: min(480px, 36vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: rgba(6, 20, 41, 0.88);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(120, 190, 240, 0.35);
+  border-radius: 16px;
+  box-shadow: -10px 0 36px rgba(0, 0, 0, 0.65);
+  padding: 22px 24px 28px;
+  display: none;
+  animation: slideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 40;
+}
+.panel.show { display: block; }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.close-btn {
+  float: right;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 17px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.close-btn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  border-color: #ef4444;
+  color: #fff;
+}
+
+.panel-cluster-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.panel h2 {
+  font-size: 21px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+}
+.panel .tag {
+  font-size: 13px;
+  color: #93c5fd;
+  margin-top: 5px;
+  line-height: 1.45;
+}
+
+/* Panel Sections */
+.panel-sec {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.panel-sec h3 {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-sec h3::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38bdf8;
+}
+
+/* Member Cards */
+.member-card {
+  background: rgba(15, 34, 64, 0.7);
+  border: 1px solid rgba(120, 190, 240, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+.member-card .m-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.member-card .m-period {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+.member-card .m-role {
+  font-size: 12.5px;
+  color: #cbd5e1;
+  margin: 5px 0 8px;
+  line-height: 1.4;
+}
+.member-card .m-stake {
+  font-size: 11.5px;
+  color: #94a3b8;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 6px;
+}
+.member-card .m-stake b { color: #cbd5e1; }
+
+/* Solutions & Activities Lists */
+.item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.item-list li {
+  font-size: 13px;
+  line-height: 1.48;
+  color: #e2e8f0;
+  background: rgba(15, 34, 64, 0.45);
+  border: 1px solid rgba(120, 190, 240, 0.18);
+  border-radius: 8px;
+  padding: 9px 12px;
+  border-left: 3px solid var(--item-accent, #38bdf8);
+}
+.item-list.solutions li b {
+  color: #67e8f9;
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+/* Floating Hint */
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(6, 20, 41, 0.85);
+  border: 1px solid rgba(120, 190, 240, 0.3);
+  padding: 5px 15px;
+  border-radius: 20px;
+  pointer-events: none;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  z-index: 30;
+}
+
+/* Scrollbar */
+.panel::-webkit-scrollbar { width: 6px; }
+.panel::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); border-radius: 3px; }
+.panel::-webkit-scrollbar-thumb { background: rgba(120, 190, 240, 0.4); border-radius: 3px; }
+.panel::-webkit-scrollbar-thumb:hover { background: rgba(120, 190, 240, 0.7); }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .layout { flex-direction: column; gap: 12px; overflow-y: auto; padding: 12px; }
+  .stage { height: auto; width: min(88vw, 54vh); }
+  .panel { width: 94vw; max-height: 44vh; }
+  .navbar { flex-wrap: wrap; height: auto; padding: 10px 14px; gap: 8px; }
+  .controls { margin-left: auto; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="brand">
+    <span class="brand-badge">JIO DEVICES</span>
+    <div>
+      <span class="brand-title">Team Wheel — Jio Devices Team</span>
+      <span class="brand-sub">under Gulprit S.</span>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="btn-group" id="mode-switch">
+      <button id="btn-mode-clusters" class="active" onclick="switchMode('clusters')">🎯 9 Focus Areas</button>
+      <button id="btn-mode-members" onclick="switchMode('members')">👥 14 Team Members</button>
+    </div>
+    <button id="btn-spin-toggle" class="btn-icon" title="Pause / Resume Rotation" onclick="toggleSpin()">⏸</button>
+    <a href="Gulprit_Team_Mindmap.html" class="nav-btn" title="Switch to Mindmap View">🌿 Mindmap View ⟶</a>
+  </div>
+</header>
+
+<main class="layout">
+  <div class="stage" id="stage">
+    <div class="tilt" id="tilt">
+      <div class="layer" id="ring">
+        <svg id="wheel-svg" viewBox="-500 -500 1000 1000"></svg>
+      </div>
+      <div id="hub-layer">
+        <div class="hub-center" id="hub-center" onclick="resetView()">
+          <span class="hub-kicker" id="hub-kicker">JIO DEVICES</span>
+          <span class="hub-title" id="hub-title">Gulprit S.</span>
+          <span class="hub-sub" id="hub-sub">IoT &amp; New Energy</span>
+          <span class="hub-badge" id="hub-badge">14 Members · 9 Focus Areas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</main>
+
+<div class="hint">Point at a segment to lift it &middot; click it and the wheel spins round to it &middot; press Esc to close</div>
+
+<script>
+const CLUSTERS = [
+ {id:"solar", name:"Solar & Green-Energy Platforms", color:"#EA580C"},
+ {id:"batt",  name:"Battery, BESS & Energy Research", color:"#7C3AED"},
+ {id:"ev",    name:"EV Charging", color:"#0891B2"},
+ {id:"cons",  name:"Consumer IoT — JioThings", color:"#DB2777"},
+ {id:"mob",   name:"Smart Mobility Strategy & Insights", color:"#4F46E5"},
+ {id:"deliv", name:"Program Delivery, Ops & Revenue", color:"#B7791F"},
+ {id:"serv",  name:"Service Delivery and Service Assurance", color:"#0D9488"},
+ {id:"legal", name:"Legal, Commercial & Pricing", color:"#475569"},
+ {id:"mkt",   name:"IoT Marketing & Lead Management", color:"#BE123C"}
+];
+
+const MEMBERS = [
+{ id:"shivam", cluster:"solar", name:"Shivam Saxena", role:"Strategy & Product Architecture: Solar CMS · Tower Solarization & Clean Energy Analytics",
+  period:"Apr – Dec 2026",
+  stake:"Gulprit S., Apex Leadership, Solar & Infra Engineering, Network Elements Team",
+  sol:[
+    "Solar CMS: JioSunGenie (C&I, Residential, Lite)",
+    "Solar CMS: TrueSolar Mobile Platform & Installer Ecosystem",
+    "Solar CMS: Energy Management System (EMS) & TEMS Architecture",
+    "Solar CMS: JSG2090 Multi-Inverter Gateway (MODBUS & Zigbee)",
+    "Tower Digitization: Jio TowerGenie Diesel Elimination Platform",
+    "Tower Digitization: TaskMapper Survey, Design & Execution Workflows",
+    "Tower Digitization: Foundation & Structural Assessment Modules (Raft, Pile & Open-Cast)",
+    "Tower Digitization: Mobile DG (MDG) Asset-Utilization & Fleet Tracking",
+    "Clean Energy Analytics: DRE Generation Forecasting Engine (XGBoost, LSTM & Weather Correction)",
+    "Clean Energy Analytics: Utility-Scale Plant Digitization & Drone Mapping (Kutch Z2)",
+    "Clean Energy Analytics: SCADA & ICR Tag Integration (Bidar & Jamnagar BESS SLD)",
+    "Clean Energy Analytics: SunGenie Generative AI Agent & Insight Analytics Pipeline"
+  ],
+  act:[
+    "Architect product tiers and pivot roadmaps for the solar CMS platform across commercial, residential, and distributed offerings, aligning technical specifications with enterprise market requirements",
+    "Standardize nationwide tower solarization and diesel elimination processes across states, deploying structural foundation frameworks, digital execution workflows, and commissioning handover governance",
+    "Publish executive-level utilization and operational intelligence dashboards for mobile generation assets and telecom tower networks, identifying data-capture bottlenecks and field anomalies",
+    "Engineer predictive energy generation models for distributed solar sites utilizing back-tested machine learning algorithms with real-time solar irradiance and weather correction",
+    "Lead utility-scale plant digitization through aerial drone sortie mapping, SCADA and instrumentation tag integration, and single-line diagram modeling for battery energy storage systems",
+    "Build and scale conversational AI agent prototypes and natural-language insight pipelines to deliver automated diagnostics and operational intelligence directly from platform telemetry",
+    "Quarterly governance: operationalize machine learning forecasting into production pipelines, complete nationwide commissioning rollouts, and deliver comprehensive product guides and multimedia walkthroughs for industry forums"
+  ]},
+
+{ id:"anjali", cluster:"solar", name:"Anjali C.", role:"Program Management: Distributed Solar & Nationwide Tower Solarization Rollout",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Ranjini R., Harsha U., Pichammal V., Rajesh L.",
+  sol:[
+    "Distributed Solar: Nationwide Tower Solarization Architecture",
+    "Distributed Solar: Universal Service Obligation (USOF) Remote Site Program",
+    "Solar Hardware & Grid Interface: ACDB, ACJB & Micro-Inverter Integration",
+    "Solar IoT Communication: TEMS & Zigbee Wireless Architecture",
+    "Digital Program Tracking: Execution BI & Nationwide Rollout Analytics",
+    "Supply Chain & Governance: Material Code (MAT) & STO Ingestion Engine"
+  ],
+  act:[
+    "Lead cross-functional program governance and strategic progress reviews across telecom infrastructure and renewable energy entities",
+    "Establish end-to-end Bill of Materials (BoM) delivery schedules and map technical acceptance (TA/PDI) ownership across all hardware components",
+    "Standardize electrical, mechanical, and module mounting structure (MMS) standard operating procedures for field deployment teams",
+    "Align EPC contracting frameworks, work-order release workflows, material kitting, and responsibility assignment matrices (RACI)",
+    "Coordinate nationwide supply chain pipelines, vendor packaging allocations, and secure fastener inventory to prevent rollout bottlenecks",
+    "Oversee connectivity provisioning and SIM activation workflows to guarantee remote telemetry upon physical installation",
+    "Quarterly governance: orchestrate pilot-to-scale commissioning milestones, establish automated materials tracking, and deploy field execution playbooks"
+  ]},
+
+{ id:"kavit", cluster:"batt", name:"Kavit D.", role:"Product Management: Telecom Battery In-Life Fleet & TowerGenie 2.0 AI Platform",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Rakshit R., Gautam G., Mallikarjun B., Ranjini R.",
+  sol:[
+    "Battery Fleet Management: High-Capacity Telecom Battery In-Life Telemetry",
+    "Battery Intelligence: Remote Firmware-Over-the-Air (FOTA) Management Engine",
+    "Enterprise AI Platform: TowerGenie 2.0 Generative Intelligence & Automated Reporting",
+    "Circular Economy: Battery Refurbishment Center (BRC) Reverse Logistics Architecture",
+    "Energy Storage Systems: Containerized & Distributed Enterprise BESS",
+    "Hardware Architecture: Advanced BMS Component Sourcing & Security Specifications"
+  ],
+  act:[
+    "Govern nationwide telecom battery fleet telemetry and establish categorical triaging for inactive energy assets",
+    "Manage remote firmware-over-the-air (FOTA) deployment pipelines and state-of-health diagnostics across active field packs",
+    "Architect the enterprise software roadmap for the TowerGenie intelligence platform, driving user acceptance and backlog governance",
+    "Formulate executive strategic architecture notes detailing AI-driven diagnostics and predictive maintenance in battery networks",
+    "Structure unified commercial portfolio frameworks and go-to-market roadmaps spanning modular battery packs and utility-scale BESS",
+    "Evaluate long-term economic models and techno-commercial feasibility for enterprise storage deployments across retail and industrial nodes",
+    "Quarterly governance: onboard authorized service network partners, enforce field audit compliance, and institute root-cause failure tracking"
+  ]},
+
+{ id:"khemraj", cluster:"batt", name:"Khemraj K.", role:"Strategy & Techno-Commercial Modeling: BESS, Second-Life Batteries & Circular Economy",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Gautam G., Nandy S., Chitbhav, Mallikarjun B.",
+  sol:[
+    "Techno-Commercial Engine: JioBESS Studio TCO & Tariff Arbitrage Calculator",
+    "Energy Storage Modeling: Enterprise BESS & Multi-Site Fleet Economics",
+    "Mobile Energy Solutions: Mobile Battery Units (MBU) Asset Architecture",
+    "Circular Economy: Second-Life Repurposing & Battery Refurbishment Ecosystem",
+    "Low-Voltage Energy Packs: Light Electric Vehicle & Auxiliary Power Storage",
+    "Energy IoT Platforms: Advanced Fleet Telemetry & Ambient Sensor Integration"
+  ],
+  act:[
+    "Build comprehensive Total Cost of Ownership (TCO) models comparing conventional diesel generation against advanced battery energy storage",
+    "Conduct multi-scenario sensitivity analyses and long-term financial modeling to secure capital allocation for energy storage deployments",
+    "Author strategic implementation blueprints for second-life battery circularity, mapping the global recycling and repurposing ecosystem",
+    "Formulate commercial approach notes and business plans for nationwide battery refurbishment centers to capture asset residual value",
+    "Benchmark enterprise monitoring platforms and engineer analytical chart builders to visualize real-time energy savings",
+    "Lead cross-functional proposals for ultra-low-power ambient sensor commercialization, transitioning strategic initiatives to revenue teams",
+    "Quarterly governance: evaluate emerging cell chemistries, model time-of-day tariff structures, and publish strategic BESS investment dossiers"
+  ]},
+
+{ id:"viniksha", cluster:"batt", name:"Viniksha S. V.", role:"Battery Research & Technical Governance: Cell Chemistry, BMS & Critical Operations",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Mahadev PM, Sarada Bal, Ranjini R., Madhu Phaniraj",
+  sol:[
+    "Cell Chemistry Research: Ultra-High-Capacity Prismatic & Cylindrical Cell Analysis",
+    "Storage Product Architecture: Commercial, Industrial & Residential BESS Platforms",
+    "BMS Technology: Battery Management Architecture & Cyber Security Assessment",
+    "Mobile Energy Systems: Mobile Battery Units (MBU) & Rapid Restoration Systems",
+    "Incident Operations Platform: Enterprise Battery Incident Management & Tracking"
+  ],
+  act:[
+    "Evaluate advanced cell chemistries and form-factor economics, analyzing prismatic versus cylindrical configurations for energy packs",
+    "Assess battery management system (BMS) portfolio capabilities, identifying technical and cybersecurity requirements across applications",
+    "Perform technical due diligence on stationary energy storage installations, evaluating power-wheeling economics and grid interconnection parameters",
+    "Architect single-source incident-tracking workflows across network operation centers to streamline field anomaly detection and resolution",
+    "Lead deep-dive technical failure investigations, examining cell aging mechanisms, manufacturing telemetry, and thermal performance",
+    "Formulate multi-tiered standard operating procedures for field service engineers governing inactive pack diagnosis and recovery",
+    "Quarterly governance: track fleet replacement logistics, enforce quality controls on cell batches, and publish technical safety directives"
+  ]},
+
+{ id:"vikas", cluster:"batt", name:"Vikas G.", role:"Strategic Research & Executive Intelligence: New Energy, BESS & Hardware Forensics",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Malli B., Ranjini R.",
+  sol:[
+    "Executive Research: High-Capacity BESS, Smart Grid & Demand Response Whitepapers",
+    "Hardware Architecture: Cell Chemistry Sizing & BMS Cybersecurity Frameworks",
+    "Diagnostic Forensics: Third-Party Failure Analysis & Authorized Service Ecosystem",
+    "Executive Analytics: Executive Leadership Dashboards & Operational Intelligence",
+    "IoT Hardware Platforms: Distributed Solar Connectivity Dongles & Telemetry Modules"
+  ],
+  act:[
+    "Author strategic leadership papers and whitepapers on containerized BESS, demand-response frameworks, and microgrid integrations",
+    "Prepare executive briefings on clean energy initiatives, institutional collaborations, and next-generation battery management integrated circuits",
+    "Coordinate with accredited forensic testing laboratories to conduct comprehensive metallurgical and electrical failure analyses",
+    "Structure the operational framework for authorized service networks to support mission-critical battery maintenance across states",
+    "Design executive metrics dashboards to track program deliverables, engineering milestones, and resource optimization across projects",
+    "Conduct market landscape analyses for solar telemetry hardware and connectivity dongles to identify component sourcing options",
+    "Quarterly governance: maintain master defect tracking repositories, establish technical non-disclosure agreements with partners, and deliver executive strategy decks"
+  ]},
+
+{ id:"jyoti", cluster:"ev", name:"Jyoti R.", role:"Product Management: EV Charger Hardware · Service Support & New Product Development",
+  period:"Jul – Oct 2026",
+  stake:"Ashwani P., Kapil S., Puneet A., Malli B., Piyush C.",
+  sol:[
+    "7.4 kW AC Charger Portfolio — Amazon B2C & Aries 7 kW (Iljin)",
+    "7.4 kW AC Hardware & Firmware Optimization (Plugzmart)",
+    "7.4 kW AC Manufacturing Enablement & Production Line Issue Resolution (Iljin)",
+    "7.4 kW AC Sourcing Derisking & Alternate Vendor Evaluation",
+    "3.3 kW AC Wall-Mount Charger — B2C UAT & Amazon Commercialization",
+    "3.3 kW AC Hardware & Firmware Enhancements (EVQ Point)",
+    "3.3 kW AC Portable Charger — New Product Validation (NPV)",
+    "3.3 kW AC Alternate Vendor Benchmarking & Sourcing",
+    "30 kW DC Fast Charger — New Product Development (NPD)",
+    "60 kW CBG DC Fast Charger Deployment & Field Issue Resolution (UFC / Salzer)",
+    "DC Charger Localization — Domestic Value Addition (DVA >50%) Initiative",
+    "DC Fast Charger Alternate OEM / ODM Evaluation",
+    "DC Charger After-Sales Service SLA & Field Support Framework (Salzer & UFC)",
+    "DC Charger Hardware & Firmware Platform Upgrades (UFC)",
+    "ARAI & PMP Regulatory Compliance & Certification Roadmap for DC Chargers",
+    "DC Charger Supply Chain Resilience & Critical Component Sourcing Strategy",
+    "High-Power Scalable DC Chargers (180 kW, 240 kW, 360 kW, 400 kW) Validation",
+    "Critical Subsystem Derisking — Power Modules & Controller Board Sourcing",
+    "EV Charging Business Strategy (₹100 Cr FY’28) & Commercial Scaling Framework"
+  ],
+  act:[
+    "Led end-to-end Root Cause Analysis (RCA) and corrective actions for customer issues on Amazon, institutionalizing design & assembly fixes directly into the manufacturing line for subsequent production runs",
+    "Spearheaded supplier escalation with KEI on charging gun design defects, successfully securing 100% replacement of entire inventory (1,000+ units) at zero cost",
+    "Authored comprehensive Standard Operating Procedures (SOPs) for field engineering teams covering PCBA replacement, manual firmware flashing, and high-voltage fuse replacements",
+    "Formulated Statements of Requirements (SORs) for upcoming production batches and structured Statements of Work (SOWs) for repairing and refurbishing field-returned units",
+    "Conducted technical training programs for L1/L2 Operations teams on AC and DC charger diagnostics, developing exhaustive troubleshooting collaterals and escalation matrices",
+    "Onboarded key manufacturing and logistics partners onto secure FTP protocols to streamline automated Advance Shipping Notice (ASN) file ingestion and inventory visibility",
+    "Actively evaluating and benchmarking alternate tier-1 manufacturing partners for AC chargers (Sterling & Wilson, Tianyin, Bender) to mitigate single-source dependencies",
+    "Architected the ₹100 Cr FY’28 EV Charging Business Strategy and formulated an end-to-end PO-to-Commissioning governance blueprint for executive leadership",
+    "Initiated regulatory alignment and compliance readiness workflows for ARAI type approval and Phased Manufacturing Programme (PMP) certifications",
+    "Leading technical and commercial bid preparation across major high-stakes RFPs, including the RNE Jamnagar–Kutch green corridor, Rajasthan State utility tenders, NHAI highway corridors, and Cisco enterprise deployments",
+    "Coordinating cross-functional engineering and vendor testing for the next-generation 400 kW ultra-fast charger, focusing on liquid-cooled thermal management and high-throughput reliability",
+    "Devising a strategic component localization and alternate sourcing framework for critical sub-assemblies (power conversion modules, controllers) to eliminate import supply chain risks"
+  ]},
+
+{ id:"amol", cluster:"cons", name:"Amol V.", role:"Product Management — JioThings super app & consumer devices",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Riju B., Ajay, Sandeep, Vishal",
+  sol:[
+    "JioThings super app",
+    "MyConnects — Number sharing for smartwatches and smart devices",
+    "JioLabel (QR label), JioShield (ex-JioChildSafe)",
+    "JioTag 2 (launched Jul), Itel Blink 4G (launched Sep)",
+    "JioMotive, JioFind, JioBook, Dashcam / JioEyeQ, JioSense Air",
+    "EV charger locator, number-sharing SDK, Android Auto/CarPlay for bikes (proposal)"
+  ],
+  act:[
+    "Drove JioLabel readiness — 3 rounds of physical feedback, 25+ user test, packaging & MRP compliance, domains, T&C published",
+    "Led JioShield integration, co-parent feature and onboarding-friction fixes",
+    "Launched JioTag 2 and Itel Blink 4G",
+    "L3 support for JioMotive / JioFind / JioBook; VAPT & InfoSec submissions",
+    "Caught JioMotive B2B devices sold as B2C on Amazon; re-initiated FOTA",
+    "Built JioThings ecosystem monetisation plan and JioTag growth strategy"
+  ]},
+
+{ id:"vaishnavi", cluster:"mob", name:"Vaishnavi B.", role:"Strategy & Thought Leadership: Smart Mobility, Connected Automotive & JUMP Ecosystem",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Puneet Agarwal",
+  sol:[
+    "Mobility Strategy Platform: JUMP Centre of Excellence & Automotive Narrative",
+    "Infrastructure Modernization: National Highway EV Corridors & Utility Modernization",
+    "Connected Mobility: Enterprise Connected Vehicle Ecosystem & V2X Architecture",
+    "Geospatial Analytics: Smart Mobility KPI Dashboards & Footprint Mapping",
+    "Enterprise Whitespace Mapping: Conglomerate Customer & Device SKU Repositories",
+    "Industry Intelligence: Automotive Alliances & Global Industry Analyst Submissions"
+  ],
+  act:[
+    "Architect executive narratives and Centre of Excellence strategy decks to position enterprise automotive and mobility solutions",
+    "Formulate competitive proposals for national highway EV infrastructure projects and state power distribution utility modernization initiatives",
+    "Conduct vehicle registry and market penetration analyses to identify regional adoption patterns and commercial whitespace",
+    "Map conglomerate subsidiaries and operating divisions to IoT product suites to identify cross-selling opportunities",
+    "Prototype executive KPI dashboards and geospatial deployment maps with integrated data collection pipelines for leadership review",
+    "Develop data-driven prioritization matrices evaluating regional EV readiness, grid infrastructure capacity, and fleet transition readiness",
+    "Quarterly governance: publish industry research briefings on cellular vehicle-to-everything (C-V2X) architectures and coordinate analyst submissions"
+  ]},
+
+{ id:"shivek", cluster:"deliv", name:"Shivek B.", role:"Program Management: Enterprise IoT Delivery, Telematics & Multi-Platform Governance",
+  period:"Jun – Oct 2026",
+  stake:"Ankit Dube, Kieth B., Rahul M., Kartik T., Vijaypravin",
+  sol:[
+    "Enterprise Energy Delivery: Retail & Commercial Energy IoT Deployment",
+    "Smart Mobility Platforms: Connected Vehicle Platforms & Fleet Solutions",
+    "Geospatial Platforms: Enterprise Digital Indoor Mapping & Location APIs",
+    "Asset Monitoring: Industrial Asset Intelligence & Smart Water Infrastructure",
+    "Automotive Telematics: Regulatory Standard (AIS-140) Compliant Telematics Hardware"
+  ],
+  act:[
+    "Manage weekly multi-program delivery governance and software release frameworks across enterprise mobility and mapping applications",
+    "Spearhead DevOps migration and CI/CD standardization across core telematics, fleet management, and indoor geospatial platforms",
+    "Direct nationwide enterprise rollout governance, tracking handover-to-operations (HOTO) milestones and goods-receipt closures across sites",
+    "Lead customer handover reviews, operational portal business requirement documentation (BRD), and post-commissioning SLA models",
+    "Establish delivery governance and sales order release workflows for industrial energy and asset monitoring solutions",
+    "Oversee automotive telematics hardware production lifecycles, managing regulatory compliance testing and end-of-life device transitions",
+    "Quarterly governance: institute cross-functional escalation channels, track manufacturing supply buffers, and lead operational stabilization reviews"
+  ]},
+
+{ id:"ankit", cluster:"serv", name:"Ankit Khandekar", role:"Service Delivery & Service Assurance — Smart Asset, Smart Utility & Smart Mobility",
+  period:"Apr – Dec 2026",
+  stake:"Gulprit S., Finance & Leadership, Solution PMs, Enterprise Utility & IoT Partners",
+  sol:[
+    "Smart Asset: Smart Lighting",
+    "Smart Asset: Smart DG Monitoring",
+    "Smart Asset: Sub-Metering",
+    "Smart Asset: Condition Monitoring",
+    "Smart Asset: Smart Connectivity",
+    "Smart Asset: Smart Solar Monitoring",
+    "Smart Asset: Building Management System",
+    "Smart Utility: Electricity Metering",
+    "Smart Utility: Gas Metering",
+    "Smart Utility: Water Metering",
+    "Smart Mobility: EV",
+    "Smart Mobility: Smart Fleet Monitoring"
+  ],
+  act:[
+    "Manage monthly and quarterly Actual-vs-Forecast revenue reconciliation across all 12 solutions in Smart Asset, Smart Utility, and Smart Mobility to provide leadership with a unified financial baseline",
+    "Maintain the rolling multi-month hardware demand forecast, isolating line-level variances and incorporating device replacement demand to align procurement and revenue baselines",
+    "Audit and enforce monthly SLA compliance across enterprise utility and smart metering accounts, validating block load, daily load, and metering feeds before billing instructions are generated",
+    "Orchestrate end-to-end service delivery from PO validation to invoicing, optimizing fulfillment lead times through predictive, forecast-led inter-plant stock transfers and strategic safety-stock sizing",
+    "Convert weekly SIM, connectivity, and platform activations into structured billing instructions, reconciling activation feeds against orderbooks to prevent revenue leakage and unbilled consumption",
+    "Govern end-to-end PO consumption from delivery to go-live, maintaining an enterprise device traceability repository and serving as the central point of contact for project managers on AoP allocation",
+    "Quarterly governance: implement automated usage-to-bill controls, establish monthly S&OP demand-supply reviews with forecast accuracy tracking, and deploy pre-billing SLA early-warning alerts"
+  ]},
+
+{ id:"kesava", cluster:"deliv", name:"Kesava J.", role:"Solutions Governance: Master Catalogues, Commercial Ops & Strategic Legal Agreements",
+  period:"Jun – Oct 2026",
+  stake:"Gulprit S., Ranjini R., Gautam G., Anish, Puneet A.",
+  sol:[
+    "Solution Catalogues: IoT Master Solution Readiness Portal & Commercial Catalogues",
+    "Hardware Specifications: Enterprise IoT & Smart Energy Device Repository",
+    "Geospatial Deployment: Regional Clean Energy Deployment Footprint Mapping",
+    "Commercial Operations: Smart Mobility Billing Governance & Inter-Company Controls",
+    "Strategic Frameworks: Master Data Agreements & Multiparty Technology Frameworks"
+  ],
+  act:[
+    "Consolidate multi-solution technical and operational architectures into an enterprise solution readiness portal across product verticals",
+    "Publish and maintain enterprise master device and solution catalogues for leadership, business development, and partner ecosystems",
+    "Lead contract governance and execution workflows for non-disclosure agreements, master data agreements, and tri-party collaborations",
+    "Drive monthly billing reconciliations, revenue closures, and inter-company accounting settlements across mobility and fleet accounts",
+    "Update geospatial deployment intelligence platforms with real-time purchase order execution and hardware delivery footprints",
+    "Execute structured operational handovers and knowledge transfers for billing administration and mobility services to operating teams",
+    "Quarterly governance: streamline partner digital contracting workflows, automate master catalogue revisions, and resolve inter-company audit escalations"
+  ]},
+
+{ id:"bhoumik", cluster:"legal", name:"Bhoumik P.", role:"Legal & Commercial Operations: Pricing Strategy, Strategic Partnerships & Program Governance",
+  period:"Jun – Oct 2026",
+  stake:"Rajesh Lalwani, Pratik Sejpal, Madhubanti B., Mallikarjun B., Ashish Lodha, Sunil Kaul, Arun Koteshwar",
+  sol:[
+    "Pricing Architecture: Enterprise PowerSight & Smart Mobility Commercial Pricing",
+    "Custom Solution Pricing: Solar CMS Lite, Geospatial Assets & Custom Hardware Pricing",
+    "Next-Gen IoT Hardware: Ultra-Low-Power Ambient IoT Tags & Sensor Architecture",
+    "Enterprise Contracting: Master Service Agreements, NDAs & Device-as-a-Service (DaaS) Frameworks",
+    "Corporate Frameworks: Inter-Entity Group Master Agreement Governance",
+    "Battery Program Governance: Telecom Battery Packs, Dual-Source BMS & Utility BESS Procurement"
+  ],
+  act:[
+    "Structure product pricing architectures and commercial go-to-market models across clean energy, power monitoring, and fleet solutions",
+    "Direct ODM partner engagement, product requirement definitions, and prototype pilot models for next-generation ambient tracking tags",
+    "Negotiate strategic memorandums of understanding, vendor supply pacts, and Device-as-a-Service (DaaS) contract architectures",
+    "Optimize hardware Bill of Materials (BoM) economics and manufacturing cost structures through rigorous commercial negotiations",
+    "Resolve contractual liabilities and scope ambiguities across complex enterprise agreements, aligning terms with corporate legal standards",
+    "Drive end-to-end commercial governance for large-scale battery procurement, managing vendor quotation evaluations and technical selection",
+    "Quarterly governance: institute master supplier contract reviews, streamline infosec compliance sign-offs, and conduct contract risk mitigation"
+  ]},
+
+{ id:"sanatan", cluster:"mkt", name:"Sanatan C.", role:"Growth & Marketing Operations: Product Collaterals, Lead Pipeline & Market Intelligence",
+  period:"Jun – Oct 2026",
+  stake:"Rahul Gupta",
+  sol:[
+    "Marketing Collateral: Enterprise IoT Solution Decks & Sector Collateral Suites",
+    "Pipeline Infrastructure: Centralized IoT & Clean Energy Lead Management Platform",
+    "Predictive Intelligence: Multi-Channel Lead-Conversion & Yield Modeling",
+    "Audience Architecture: Segmented Enterprise B2B & B2C Market Databases",
+    "Market Enablement: Clean Energy Go-to-Market Kits & Distribution Strategy",
+    "Industry Communications: Periodic Executive Market Briefings & Industry Conclaves"
+  ],
+  act:[
+    "Author enterprise product collateral, technical solution decks, and industry-specific capability briefs for commercial IoT suites",
+    "Manage multi-channel inbound and outbound lead acquisition pipelines across digital platforms, direct marketing, and partner networks",
+    "Develop predictive lead-scoring models and analytical dashboards tracking conversion velocities, reach-frequency dynamics, and funnel yield",
+    "Conduct comprehensive enablement sessions and product walkthroughs for business development teams and channel distributors",
+    "Architect segmented enterprise B2B marketing databases to drive targeted account-based marketing and demand-generation campaigns",
+    "Establish end-to-end lead-to-order visibility and pipeline tracking mechanisms in coordination with strategic sales partners",
+    "Quarterly governance: publish executive market newsletters, optimize scope-of-work documentation, and formulate thought-leadership event concepts"
+  ]}
+];
+
+const CLUSTER_META = {
+  solar: { icon: "☀️", short: "SOLAR & GREEN ENERGY", badge: "2 Members", sub1: "Shivam S. · Anjali C.", sub2: "Solar CMS · Tower Solar" },
+  batt:  { icon: "🔋", short: "BATTERY & BESS", badge: "4 Members", sub1: "Kavit · Khemraj · Viniksha · Vikas", sub2: "Fleet · TowerGenie · BRC" },
+  ev:    { icon: "⚡", short: "EV CHARGING", badge: "1 Member", sub1: "Jyoti R.", sub2: "AC/DC Chargers · DVA >50%" },
+  cons:  { icon: "📱", short: "CONSUMER IOT", badge: "1 Member", sub1: "Amol V.", sub2: "JioThings · MyConnects" },
+  mob:   { icon: "🚗", short: "SMART MOBILITY", badge: "1 Member", sub1: "Vaishnavi B.", sub2: "JUMP CoE · NHEV · V2X" },
+  deliv: { icon: "📦", short: "PROGRAM DELIVERY", badge: "2 Members", sub1: "Shivek B. · Kesava J.", sub2: "Commercial Energy · Catalogues" },
+  serv:  { icon: "🛡️", short: "SERVICE ASSURANCE", badge: "1 Member", sub1: "Ankit Khandekar", sub2: "Actual-vs-Forecast · SLAs" },
+  legal: { icon: "⚖️", short: "LEGAL & PRICING", badge: "1 Member", sub1: "Bhoumik P.", sub2: "Commercial Pricing · DaaS" },
+  mkt:   { icon: "📢", short: "IOT MARKETING", badge: "1 Member", sub1: "Sanatan C.", sub2: "Collaterals · Lead Pipeline" }
+};
+
+let currentMode = 'clusters'; // 'clusters' or 'members'
+let N = 9, STEP = 360 / N, SPEED = 360 / 28;
+let angle = 0, last = performance.now(), hoverPause = false, panelOpen = false, isSpinning = true, tween = null, selected = -1;
+
+const ring = document.getElementById('ring');
+const panel = document.getElementById('panel');
+const svg = document.getElementById('wheel-svg');
+const tilt = document.getElementById('tilt');
+const stage = document.getElementById('stage');
+
+function polarToCartesian(r, angleRad) {
+  return { x: r * Math.sin(angleRad), y: -r * Math.cos(angleRad) };
+}
+
+function sectorPath(r1, r2, a1, a2) {
+  const p1 = polarToCartesian(r2, a1);
+  const p2 = polarToCartesian(r2, a2);
+  const p3 = polarToCartesian(r1, a2);
+  const p4 = polarToCartesian(r1, a1);
+  const largeArc = (a2 - a1) > Math.PI ? 1 : 0;
+  return M   A   0  1   L   A   0  0   Z;
+}
+
+function getItemsForMode() {
+  if (currentMode === 'clusters') {
+    return CLUSTERS.map((c, i) => {
+      const meta = CLUSTER_META[c.id] || { icon: "🎯", short: c.name, badge: "Team", sub1: "", sub2: "" };
+      const members = MEMBERS.filter(m => m.cluster === c.id);
+      return {
+        id: c.id,
+        name: c.name,
+        short: meta.short,
+        icon: meta.icon,
+        color: c.color,
+        badge: members.length + (members.length > 1 ? " Members" : " Member"),
+        sub1: members.map(m => m.name.split(" ")[0]).join(" · "),
+        sub2: meta.sub2,
+        members: members,
+        index: i
+      };
+    });
+  } else {
+    return MEMBERS.map((m, i) => {
+      const cl = CLUSTERS.find(c => c.id === m.cluster) || { name: m.cluster, color: "#0ea5e9" };
+      return {
+        id: m.id,
+        name: m.name,
+        short: m.name.toUpperCase(),
+        icon: "👤",
+        color: cl.color,
+        badge: cl.name.split(" ")[0],
+        sub1: cl.name,
+        sub2: m.role.split(":")[0].split("—")[0],
+        members: [m],
+        index: i
+      };
+    });
+  }
+}
+
+function renderWheel() {
+  const items = getItemsForMode();
+  N = items.length;
+  STEP = 360 / N;
+  selected = -1;
+
+  const R_OUTER_2 = 475, R_OUTER_1 = 300;
+  const R_INNER_2 = 292, R_INNER_1 = 185;
+  const stepRad = (2 * Math.PI) / N;
+  const gapRad = (N === 9 ? 1.8 : 1.2) * Math.PI / 180;
+
+  let defs = <defs>
+    <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>;
+
+  items.forEach((item, i) => {
+    defs += 
+      <linearGradient id="grad-outer-" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="" stop-opacity="0.88" />
+        <stop offset="100%" stop-color="#0a2547" stop-opacity="0.95" />
+      </linearGradient>
+      <linearGradient id="grad-inner-" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="" stop-opacity="0.45" />
+        <stop offset="100%" stop-color="#061a38" stop-opacity="0.8" />
+      </linearGradient>;
+  });
+  defs += </defs>;
+
+  let content = defs;
+
+  // Background guide rings
+  content += 
+    <circle cx="0" cy="0" r="478" fill="none" stroke="rgba(120, 190, 240, 0.15)" stroke-width="1.5" stroke-dasharray="4 6" />
+    <circle cx="0" cy="0" r="296" fill="none" stroke="rgba(120, 190, 240, 0.25)" stroke-width="1" />
+    <circle cx="0" cy="0" r="180" fill="none" stroke="rgba(120, 190, 240, 0.35)" stroke-width="1.5" />
+  ;
+
+  // Sectors
+  items.forEach((item, i) => {
+    const mid = i * stepRad;
+    const a1 = mid - (stepRad / 2) + (gapRad / 2);
+    const a2 = mid + (stepRad / 2) - (gapRad / 2);
+    const deg = (i * STEP).toFixed(3);
+
+    const dOuter = sectorPath(R_OUTER_1, R_OUTER_2, a1, a2);
+    const dInner = sectorPath(R_INNER_1, R_INNER_2, a1, a2);
+
+    const fontSizeTitle = N === 9 ? 12 : 10;
+    const fontSizeSub = N === 9 ? 10.5 : 9;
+
+    content += 
+      <g class="wheel-sector" id="sector-" data-i="" style="--glow: ;">
+        <!-- Outer Segment -->
+        <path d="" fill="url(#grad-outer-)" stroke="" stroke-width="2" />
+        <!-- Inner Segment -->
+        <path d="" fill="url(#grad-inner-)" stroke="" stroke-width="1" stroke-opacity="0.7" />
+
+        <!-- Labels oriented relative to sector angle -->
+        <g transform="rotate()">
+          <!-- Outer Label Content (at r ~ 395) -->
+          <text x="0" y="-420" text-anchor="middle" font-size="15" fill="#ffffff"></text>
+          <text x="0" y="-396" text-anchor="middle" font-size="" font-weight="900" fill="#ffffff" letter-spacing="0.04em"></text>
+          <rect x="-42" y="-380" width="84" height="17" rx="8.5" fill="33" stroke="88" stroke-width="1" />
+          <text x="0" y="-368" text-anchor="middle" font-size="9.5" font-weight="800" fill="#e0f2fe"></text>
+
+          <!-- Inner Label Content (at r ~ 238) -->
+          <text x="0" y="-246" text-anchor="middle" font-size="" font-weight="800" fill="#f8fafc"></text>
+          <text x="0" y="-228" text-anchor="middle" font-size="9" font-weight="600" fill="#94a3b8"></text>
+        </g>
+      </g>
+    ;
+  });
+
+  svg.innerHTML = content;
+
+  // Re-attach sector interaction events
+  document.querySelectorAll('.wheel-sector').forEach(sec => {
+    const i = +sec.dataset.i;
+    sec.addEventListener('mouseenter', () => { hoverPause = true; hover(i, true); });
+    sec.addEventListener('mouseleave', () => { hoverPause = false; hover(i, false); });
+    sec.addEventListener('click', () => show(i));
+  });
+}
+
+/* Rotation Engine */
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000);
+  last = now;
+  if (tween) {
+    const t = Math.min(1, (now - tween.t0) / tween.dur);
+    const e = 1 - Math.pow(1 - t, 3); // cubic ease-out
+    angle = tween.from + tween.delta * e;
+    if (t >= 1) tween = null;
+  } else if (!hoverPause && !panelOpen && isSpinning) {
+    angle = (angle + SPEED * dt) % 360;
+  }
+  ring.style.transform = otate(deg);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+function spinTo(i) {
+  const target = ((-i * STEP) % 360 + 360) % 360; // brings sector i to 12 o'clock
+  let delta = ((target - angle) % 360 + 360) % 360;
+  if (delta < 25) delta += 360; // ensure smooth forward rotation
+  tween = { from: angle, delta, t0: performance.now(), dur: 900 + delta * 3.5 };
+}
+
+function setOn(i, on) {
+  const el = document.getElementById(sector-);
+  if (el) el.classList.toggle('on', on);
+}
+
+function hover(i, on) {
+  if (i === selected) { setOn(i, true); return; }
+  setOn(i, on);
+  if (on) {
+    const items = getItemsForMode();
+    const it = items[i];
+    if (it) {
+      document.getElementById('hub-kicker').textContent = it.icon + " " + it.id.toUpperCase();
+      document.getElementById('hub-title').textContent = it.name.split("—")[0].split(":")[0];
+      document.getElementById('hub-badge').textContent = it.badge;
+    }
+  } else {
+    resetHubText();
+  }
+}
+
+function resetHubText() {
+  document.getElementById('hub-kicker').textContent = "JIO DEVICES";
+  document.getElementById('hub-title').textContent = "Gulprit S.";
+  document.getElementById('hub-sub').textContent = "IoT & New Energy";
+  document.getElementById('hub-badge').textContent = currentMode === 'clusters' ? "14 Members · 9 Focus Areas" : "14 Team Members Portfolio";
+}
+
+function resetView() {
+  hide();
+  resetHubText();
+}
+
+const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+function show(i) {
+  if (selected >= 0 && selected !== i) setOn(selected, false);
+  selected = i;
+  setOn(i, true);
+  panelOpen = true;
+  spinTo(i);
+
+  const items = getItemsForMode();
+  const item = items[i];
+  if (!item) return;
+
+  let html = <button class="close-btn" aria-label="Close" onclick="hide()">&times;</button>;
+
+  if (currentMode === 'clusters') {
+    html += 
+      <div class="panel-header">
+        <span class="panel-cluster-chip" style="background:26;color:;border:1px solid 55;">
+           
+        </span>
+        <h2></h2>
+        <div class="tag"> Team Members &middot; </div>
+      </div>
+    ;
+
+    // Team Members
+    html += <div class="panel-sec"><h3>Team Members ()</h3>;
+    item.members.forEach(m => {
+      html += 
+        <div class="member-card">
+          <div class="m-name">
+            <span></span>
+            <span class="m-period"></span>
+          </div>
+          <div class="m-role"></div>
+          <div class="m-stake"><b>Key Stakeholders:</b> </div>
+        </div>
+      ;
+    });
+    html += </div>;
+
+    // Solutions
+    html += <div class="panel-sec"><h3>Key Solutions &amp; Platforms</h3><ul class="item-list solutions">;
+    item.members.forEach(m => {
+      (m.sol || []).forEach(s => {
+        const parts = s.split(":");
+        if (parts.length > 1) {
+          html += <li style="--item-accent: "><b></b></li>;
+        } else {
+          html += <li style="--item-accent: "></li>;
+        }
+      });
+    });
+    html += </ul></div>;
+
+    // Activities
+    html += <div class="panel-sec"><h3>Strategic Activities &amp; Governance</h3><ul class="item-list activities">;
+    item.members.forEach(m => {
+      (m.act || []).forEach(a => {
+        html += <li style="--item-accent: "></li>;
+      });
+    });
+    html += </ul></div>;
+
+  } else {
+    // Individual Member Mode
+    const m = item.members[0];
+    const cl = CLUSTERS.find(c => c.id === m.cluster) || { name: m.cluster, color: "#0ea5e9" };
+
+    html += 
+      <div class="panel-header">
+        <span class="panel-cluster-chip" style="background:26;color:;border:1px solid 55;">
+          
+        </span>
+        <h2></h2>
+        <div class="tag"></div>
+      </div>
+    ;
+
+    // Overview Card
+    html += 
+      <div class="member-card" style="margin-top:12px;">
+        <div class="m-name"><span>Period</span><span class="m-period"></span></div>
+        <div class="m-stake" style="margin-top:8px;"><b>Key Stakeholders:</b> </div>
+      </div>
+    ;
+
+    // Solutions
+    html += <div class="panel-sec"><h3>Structured Solutions ()</h3><ul class="item-list solutions">;
+    (m.sol || []).forEach(s => {
+      const parts = s.split(":");
+      if (parts.length > 1) {
+        html += <li style="--item-accent: "><b></b></li>;
+      } else {
+        html += <li style="--item-accent: "></li>;
+      }
+    });
+    html += </ul></div>;
+
+    // Activities
+    html += <div class="panel-sec"><h3>Strategic Activities ()</h3><ul class="item-list activities">;
+    (m.act || []).forEach(a => {
+      html += <li style="--item-accent: "></li>;
+    });
+    html += </ul></div>;
+  }
+
+  panel.innerHTML = html;
+  panel.classList.add('show');
+  panel.scrollTop = 0;
+}
+
+function hide() {
+  panel.classList.remove('show');
+  panelOpen = false;
+  if (selected >= 0) {
+    setOn(selected, false);
+    selected = -1;
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+
+function switchMode(mode) {
+  if (currentMode === mode) return;
+  currentMode = mode;
+  document.getElementById('btn-mode-clusters').classList.toggle('active', mode === 'clusters');
+  document.getElementById('btn-mode-members').classList.toggle('active', mode === 'members');
+  hide();
+  resetHubText();
+  renderWheel();
+}
+
+function toggleSpin() {
+  isSpinning = !isSpinning;
+  document.getElementById('btn-spin-toggle').textContent = isSpinning ? "⏸" : "▶";
+  document.getElementById('btn-spin-toggle').title = isSpinning ? "Pause Rotation" : "Resume Rotation";
+}
+
+/* 3D Tilt Interaction */
+stage.addEventListener('mousemove', e => {
+  const r = stage.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5;
+  const y = (e.clientY - r.top) / r.height - 0.5;
+  tilt.style.transform = otateX(deg) rotateY(deg) scale(1.03);
+});
+stage.addEventListener('mouseleave', () => {
+  tilt.style.transform = '';
+});
+
+// Initialize
+renderWheel();
+resetHubText();
+</script>
+</body>
+</html>
