@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -827,7 +827,7 @@ const CLUSTER_META = {
   mkt:   { icon: "📢", short: "IOT MARKETING", badge: "1 Member", sub1: "Sanatan C.", sub2: "Collaterals · Lead Pipeline" }
 };
 
-let currentMode = 'clusters'; // 'clusters' or 'members'
+let currentMode = 'clusters';
 let N = 9, STEP = 360 / N, SPEED = 360 / 28;
 let angle = 0, last = performance.now(), hoverPause = false, panelOpen = false, isSpinning = true, tween = null, selected = -1;
 
@@ -847,7 +847,11 @@ function sectorPath(r1, r2, a1, a2) {
   const p3 = polarToCartesian(r1, a2);
   const p4 = polarToCartesian(r1, a1);
   const largeArc = (a2 - a1) > Math.PI ? 1 : 0;
-  return M   A   0  1   L   A   0  0   Z;
+  return 'M ' + p1.x.toFixed(2) + ' ' + p1.y.toFixed(2) +
+         ' A ' + r2 + ' ' + r2 + ' 0 ' + largeArc + ' 1 ' + p2.x.toFixed(2) + ' ' + p2.y.toFixed(2) +
+         ' L ' + p3.x.toFixed(2) + ' ' + p3.y.toFixed(2) +
+         ' A ' + r1 + ' ' + r1 + ' 0 ' + largeArc + ' 0 ' + p4.x.toFixed(2) + ' ' + p4.y.toFixed(2) +
+         ' Z';
 }
 
 function getItemsForMode() {
@@ -898,33 +902,32 @@ function renderWheel() {
   const stepRad = (2 * Math.PI) / N;
   const gapRad = (N === 9 ? 1.8 : 1.2) * Math.PI / 180;
 
-  let defs = <defs>
-    <filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="8" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>;
+  let defs = '<defs>' +
+    '<filter id="glow-filter" x="-20%" y="-20%" width="140%" height="140%">' +
+      '<feGaussianBlur stdDeviation="8" result="blur" />' +
+      '<feComposite in="SourceGraphic" in2="blur" operator="over" />' +
+    '</filter>';
 
   items.forEach((item, i) => {
     defs += 
-      <linearGradient id="grad-outer-" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="" stop-opacity="0.88" />
-        <stop offset="100%" stop-color="#0a2547" stop-opacity="0.95" />
-      </linearGradient>
-      <linearGradient id="grad-inner-" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="" stop-opacity="0.45" />
-        <stop offset="100%" stop-color="#061a38" stop-opacity="0.8" />
-      </linearGradient>;
+      '<linearGradient id="grad-outer-' + i + '" x1="0%" y1="0%" x2="100%" y2="100%">' +
+        '<stop offset="0%" stop-color="' + item.color + '" stop-opacity="0.88" />' +
+        '<stop offset="100%" stop-color="#0a2547" stop-opacity="0.95" />' +
+      '</linearGradient>' +
+      '<linearGradient id="grad-inner-' + i + '" x1="0%" y1="0%" x2="100%" y2="100%">' +
+        '<stop offset="0%" stop-color="' + item.color + '" stop-opacity="0.45" />' +
+        '<stop offset="100%" stop-color="#061a38" stop-opacity="0.8" />' +
+      '</linearGradient>';
   });
-  defs += </defs>;
+  defs += '</defs>';
 
   let content = defs;
 
   // Background guide rings
   content += 
-    <circle cx="0" cy="0" r="478" fill="none" stroke="rgba(120, 190, 240, 0.15)" stroke-width="1.5" stroke-dasharray="4 6" />
-    <circle cx="0" cy="0" r="296" fill="none" stroke="rgba(120, 190, 240, 0.25)" stroke-width="1" />
-    <circle cx="0" cy="0" r="180" fill="none" stroke="rgba(120, 190, 240, 0.35)" stroke-width="1.5" />
-  ;
+    '<circle cx="0" cy="0" r="478" fill="none" stroke="rgba(120, 190, 240, 0.15)" stroke-width="1.5" stroke-dasharray="4 6" />' +
+    '<circle cx="0" cy="0" r="296" fill="none" stroke="rgba(120, 190, 240, 0.25)" stroke-width="1" />' +
+    '<circle cx="0" cy="0" r="180" fill="none" stroke="rgba(120, 190, 240, 0.35)" stroke-width="1.5" />';
 
   // Sectors
   items.forEach((item, i) => {
@@ -940,26 +943,21 @@ function renderWheel() {
     const fontSizeSub = N === 9 ? 10.5 : 9;
 
     content += 
-      <g class="wheel-sector" id="sector-" data-i="" style="--glow: ;">
-        <!-- Outer Segment -->
-        <path d="" fill="url(#grad-outer-)" stroke="" stroke-width="2" />
-        <!-- Inner Segment -->
-        <path d="" fill="url(#grad-inner-)" stroke="" stroke-width="1" stroke-opacity="0.7" />
-
-        <!-- Labels oriented relative to sector angle -->
-        <g transform="rotate()">
-          <!-- Outer Label Content (at r ~ 395) -->
-          <text x="0" y="-420" text-anchor="middle" font-size="15" fill="#ffffff"></text>
-          <text x="0" y="-396" text-anchor="middle" font-size="" font-weight="900" fill="#ffffff" letter-spacing="0.04em"></text>
-          <rect x="-42" y="-380" width="84" height="17" rx="8.5" fill="33" stroke="88" stroke-width="1" />
-          <text x="0" y="-368" text-anchor="middle" font-size="9.5" font-weight="800" fill="#e0f2fe"></text>
-
-          <!-- Inner Label Content (at r ~ 238) -->
-          <text x="0" y="-246" text-anchor="middle" font-size="" font-weight="800" fill="#f8fafc"></text>
-          <text x="0" y="-228" text-anchor="middle" font-size="9" font-weight="600" fill="#94a3b8"></text>
-        </g>
-      </g>
-    ;
+      '<g class="wheel-sector" id="sector-' + i + '" data-i="' + i + '" style="--glow: ' + item.color + ';">' +
+        '<!-- Outer Segment -->' +
+        '<path d="' + dOuter + '" fill="url(#grad-outer-' + i + ')" stroke="' + item.color + '" stroke-width="2" />' +
+        '<!-- Inner Segment -->' +
+        '<path d="' + dInner + '" fill="url(#grad-inner-' + i + ')" stroke="' + item.color + '" stroke-width="1" stroke-opacity="0.7" />' +
+        '<!-- Labels oriented relative to sector angle -->' +
+        '<g transform="rotate(' + deg + ')">' +
+          '<text x="0" y="-420" text-anchor="middle" font-size="15" fill="#ffffff">' + item.icon + '</text>' +
+          '<text x="0" y="-396" text-anchor="middle" font-size="' + fontSizeTitle + '" font-weight="900" fill="#ffffff" letter-spacing="0.04em">' + item.short + '</text>' +
+          '<rect x="-42" y="-380" width="84" height="17" rx="8.5" fill="' + item.color + '33" stroke="' + item.color + '88" stroke-width="1" />' +
+          '<text x="0" y="-368" text-anchor="middle" font-size="9.5" font-weight="800" fill="#e0f2fe">' + item.badge + '</text>' +
+          '<text x="0" y="-246" text-anchor="middle" font-size="' + fontSizeSub + '" font-weight="800" fill="#f8fafc">' + item.sub1 + '</text>' +
+          '<text x="0" y="-228" text-anchor="middle" font-size="9" font-weight="600" fill="#94a3b8">' + item.sub2 + '</text>' +
+        '</g>' +
+      '</g>';
   });
 
   svg.innerHTML = content;
@@ -979,26 +977,26 @@ function frame(now) {
   last = now;
   if (tween) {
     const t = Math.min(1, (now - tween.t0) / tween.dur);
-    const e = 1 - Math.pow(1 - t, 3); // cubic ease-out
+    const e = 1 - Math.pow(1 - t, 3);
     angle = tween.from + tween.delta * e;
     if (t >= 1) tween = null;
   } else if (!hoverPause && !panelOpen && isSpinning) {
     angle = (angle + SPEED * dt) % 360;
   }
-  ring.style.transform = otate(deg);
+  ring.style.transform = 'rotate(' + angle.toFixed(3) + 'deg)';
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
 
 function spinTo(i) {
-  const target = ((-i * STEP) % 360 + 360) % 360; // brings sector i to 12 o'clock
+  const target = ((-i * STEP) % 360 + 360) % 360;
   let delta = ((target - angle) % 360 + 360) % 360;
-  if (delta < 25) delta += 360; // ensure smooth forward rotation
-  tween = { from: angle, delta, t0: performance.now(), dur: 900 + delta * 3.5 };
+  if (delta < 25) delta += 360;
+  tween = { from: angle, delta: delta, t0: performance.now(), dur: 900 + delta * 3.5 };
 }
 
 function setOn(i, on) {
-  const el = document.getElementById(sector-);
+  const el = document.getElementById('sector-' + i);
   if (el) el.classList.toggle('on', on);
 }
 
@@ -1009,8 +1007,8 @@ function hover(i, on) {
     const items = getItemsForMode();
     const it = items[i];
     if (it) {
-      document.getElementById('hub-kicker').textContent = it.icon + " " + it.id.toUpperCase();
-      document.getElementById('hub-title').textContent = it.name.split("—")[0].split(":")[0];
+      document.getElementById('hub-kicker').textContent = it.icon + ' ' + it.id.toUpperCase();
+      document.getElementById('hub-title').textContent = it.name.split('—')[0].split(':')[0];
       document.getElementById('hub-badge').textContent = it.badge;
     }
   } else {
@@ -1019,10 +1017,10 @@ function hover(i, on) {
 }
 
 function resetHubText() {
-  document.getElementById('hub-kicker').textContent = "JIO DEVICES";
-  document.getElementById('hub-title').textContent = "Gulprit S.";
-  document.getElementById('hub-sub').textContent = "IoT & New Energy";
-  document.getElementById('hub-badge').textContent = currentMode === 'clusters' ? "14 Members · 9 Focus Areas" : "14 Team Members Portfolio";
+  document.getElementById('hub-kicker').textContent = 'JIO DEVICES';
+  document.getElementById('hub-title').textContent = 'Gulprit S.';
+  document.getElementById('hub-sub').textContent = 'IoT & New Energy';
+  document.getElementById('hub-badge').textContent = currentMode === 'clusters' ? '14 Members · 9 Focus Areas' : '14 Team Members Portfolio';
 }
 
 function resetView() {
@@ -1043,57 +1041,55 @@ function show(i) {
   const item = items[i];
   if (!item) return;
 
-  let html = <button class="close-btn" aria-label="Close" onclick="hide()">&times;</button>;
+  let html = '<button class="close-btn" aria-label="Close" onclick="hide()">&times;</button>';
 
   if (currentMode === 'clusters') {
     html += 
-      <div class="panel-header">
-        <span class="panel-cluster-chip" style="background:26;color:;border:1px solid 55;">
-           
-        </span>
-        <h2></h2>
-        <div class="tag"> Team Members &middot; </div>
-      </div>
-    ;
+      '<div class="panel-header">' +
+        '<span class="panel-cluster-chip" style="background:' + item.color + '26;color:' + item.color + ';border:1px solid ' + item.color + '55;">' +
+          item.icon + ' ' + esc(item.name) +
+        '</span>' +
+        '<h2>' + esc(item.name) + '</h2>' +
+        '<div class="tag">' + item.members.length + ' Team Members &middot; ' + item.members.map(m=>esc(m.name)).join(', ') + '</div>' +
+      '</div>';
 
     // Team Members
-    html += <div class="panel-sec"><h3>Team Members ()</h3>;
+    html += '<div class="panel-sec"><h3>Team Members (' + item.members.length + ')</h3>';
     item.members.forEach(m => {
       html += 
-        <div class="member-card">
-          <div class="m-name">
-            <span></span>
-            <span class="m-period"></span>
-          </div>
-          <div class="m-role"></div>
-          <div class="m-stake"><b>Key Stakeholders:</b> </div>
-        </div>
-      ;
+        '<div class="member-card">' +
+          '<div class="m-name">' +
+            '<span>' + esc(m.name) + '</span>' +
+            '<span class="m-period">' + esc(m.period) + '</span>' +
+          '</div>' +
+          '<div class="m-role">' + esc(m.role) + '</div>' +
+          '<div class="m-stake"><b>Key Stakeholders:</b> ' + esc(m.stake) + '</div>' +
+        '</div>';
     });
-    html += </div>;
+    html += '</div>';
 
     // Solutions
-    html += <div class="panel-sec"><h3>Key Solutions &amp; Platforms</h3><ul class="item-list solutions">;
+    html += '<div class="panel-sec"><h3>Key Solutions &amp; Platforms</h3><ul class="item-list solutions">';
     item.members.forEach(m => {
       (m.sol || []).forEach(s => {
-        const parts = s.split(":");
+        const parts = s.split(':');
         if (parts.length > 1) {
-          html += <li style="--item-accent: "><b></b></li>;
+          html += '<li style="--item-accent: ' + item.color + '"><b>' + esc(parts[0].trim()) + '</b>' + esc(parts.slice(1).join(':').trim()) + '</li>';
         } else {
-          html += <li style="--item-accent: "></li>;
+          html += '<li style="--item-accent: ' + item.color + '">' + esc(s) + '</li>';
         }
       });
     });
-    html += </ul></div>;
+    html += '</ul></div>';
 
     // Activities
-    html += <div class="panel-sec"><h3>Strategic Activities &amp; Governance</h3><ul class="item-list activities">;
+    html += '<div class="panel-sec"><h3>Strategic Activities &amp; Governance</h3><ul class="item-list activities">';
     item.members.forEach(m => {
       (m.act || []).forEach(a => {
-        html += <li style="--item-accent: "></li>;
+        html += '<li style="--item-accent: ' + item.color + '">' + esc(a) + '</li>';
       });
     });
-    html += </ul></div>;
+    html += '</ul></div>';
 
   } else {
     // Individual Member Mode
@@ -1101,41 +1097,39 @@ function show(i) {
     const cl = CLUSTERS.find(c => c.id === m.cluster) || { name: m.cluster, color: "#0ea5e9" };
 
     html += 
-      <div class="panel-header">
-        <span class="panel-cluster-chip" style="background:26;color:;border:1px solid 55;">
-          
-        </span>
-        <h2></h2>
-        <div class="tag"></div>
-      </div>
-    ;
+      '<div class="panel-header">' +
+        '<span class="panel-cluster-chip" style="background:' + cl.color + '26;color:' + cl.color + ';border:1px solid ' + cl.color + '55;">' +
+          esc(cl.name) +
+        '</span>' +
+        '<h2>' + esc(m.name) + '</h2>' +
+        '<div class="tag">' + esc(m.role) + '</div>' +
+      '</div>';
 
     // Overview Card
     html += 
-      <div class="member-card" style="margin-top:12px;">
-        <div class="m-name"><span>Period</span><span class="m-period"></span></div>
-        <div class="m-stake" style="margin-top:8px;"><b>Key Stakeholders:</b> </div>
-      </div>
-    ;
+      '<div class="member-card" style="margin-top:12px;">' +
+        '<div class="m-name"><span>Period</span><span class="m-period">' + esc(m.period) + '</span></div>' +
+        '<div class="m-stake" style="margin-top:8px;"><b>Key Stakeholders:</b> ' + esc(m.stake) + '</div>' +
+      '</div>';
 
     // Solutions
-    html += <div class="panel-sec"><h3>Structured Solutions ()</h3><ul class="item-list solutions">;
+    html += '<div class="panel-sec"><h3>Structured Solutions (' + (m.sol||[]).length + ')</h3><ul class="item-list solutions">';
     (m.sol || []).forEach(s => {
-      const parts = s.split(":");
+      const parts = s.split(':');
       if (parts.length > 1) {
-        html += <li style="--item-accent: "><b></b></li>;
+        html += '<li style="--item-accent: ' + cl.color + '"><b>' + esc(parts[0].trim()) + '</b>' + esc(parts.slice(1).join(':').trim()) + '</li>';
       } else {
-        html += <li style="--item-accent: "></li>;
+        html += '<li style="--item-accent: ' + cl.color + '">' + esc(s) + '</li>';
       }
     });
-    html += </ul></div>;
+    html += '</ul></div>';
 
     // Activities
-    html += <div class="panel-sec"><h3>Strategic Activities ()</h3><ul class="item-list activities">;
+    html += '<div class="panel-sec"><h3>Strategic Activities (' + (m.act||[]).length + ')</h3><ul class="item-list activities">';
     (m.act || []).forEach(a => {
-      html += <li style="--item-accent: "></li>;
+      html += '<li style="--item-accent: ' + cl.color + '">' + esc(a) + '</li>';
     });
-    html += </ul></div>;
+    html += '</ul></div>';
   }
 
   panel.innerHTML = html;
@@ -1175,7 +1169,7 @@ stage.addEventListener('mousemove', e => {
   const r = stage.getBoundingClientRect();
   const x = (e.clientX - r.left) / r.width - 0.5;
   const y = (e.clientY - r.top) / r.height - 0.5;
-  tilt.style.transform = otateX(deg) rotateY(deg) scale(1.03);
+  tilt.style.transform = 'rotateX(' + (y * 14).toFixed(2) + 'deg) rotateY(' + (-x * 14).toFixed(2) + 'deg) scale(1.03)';
 });
 stage.addEventListener('mouseleave', () => {
   tilt.style.transform = '';
